@@ -4,9 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import '../model/airline_info_model.dart';
 import 'edit_airline list.dart';
-
 
 class AirlineListScreen extends StatefulWidget {
   const AirlineListScreen({super.key});
@@ -76,7 +76,7 @@ class _AirlineListScreenState extends State<AirlineListScreen> {
                                     color: Colors.black.withOpacity(0.5)),
                                 border: InputBorder.none,
                               ),
-                              style: GoogleFonts.poppins(
+                              style: GoogleFonts.ubuntu(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,
                                 color: Colors.black87,
@@ -164,159 +164,178 @@ class _AirlineListScreenState extends State<AirlineListScreen> {
                           Map<String, dynamic> data =
                               document.data() as Map<String, dynamic>;
                           return Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.0),
                                 color: Colors.white,
                               ),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Column(children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            child: Image.network(
-                                              data['imgUrl'] ?? '',
-                                              width: 60,
-                                              height: 60,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                      ]),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  '${data['airline']}',
-                                                  style: GoogleFonts.ubuntu(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                                const SizedBox(width: 8),
-                                                const Icon(
-                                                  Icons.circle,
-                                                  size: 5,
-                                                ),
-                                                const SizedBox(width: 8),
-                                                Text(
-                                                  '${data['airplaneModel']}',
-                                                  style: GoogleFonts.ubuntu(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                const Icon(
-                                                  Icons.location_on_rounded,
-                                                  size: 12,
-                                                ),
-                                                Text(
-                                                  '${data['address']}',
-                                                  style: GoogleFonts.ubuntu(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Text(
-                                              '${data['routes']}',
-                                              style: GoogleFonts.ubuntu(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                '${data['airline']}',
+                                                style: GoogleFonts.ubuntu(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              const Icon(
+                                                Icons.circle,
+                                                size: 5,
+                                              ),
+                                              const SizedBox(width: 5),
+                                              Text(
+                                                '${data['airplaneModel']}',
+                                                style: GoogleFonts.ubuntu(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                           IconButton(
                                             icon: const Icon(Icons.edit,
-                                                size: 15),
+                                                size: 14,
+                                                color: Colors.black87),
                                             onPressed: () {
-                                              // Navigator.push(
-                                              //   context,
-                                              //   MaterialPageRoute(
-                                              //     builder: (context) =>
-                                              //         EditAirlineForm(
-                                              //       airline: Airline(
-                                              //         id: data['id'],
-                                              //         airline: data['airline'],
-                                              //         address: data['address'],
-                                              //         airplaneModel: data['airplaneModel'],
-                                              //         facilities: data['facilities'],
-                                              //         imgUrl: data['imgUrl'],
-                                              //         routes: List<String>.from(data['routes'] ?? []),
-                                              //         refundable: data['refundable'],
-                                              //         insurance: data['insurance'],
-                                              //       ),
-                                              //     ),
-                                              //   ),
-                                              // );
+                                              Get.to(EditAirlineForm(
+                                                airline: Airline(
+                                                    id: document.id,
+                                                    airline: data['airline'],
+                                                    address: data['address'],
+                                                    airplaneModel: data['airplaneModel'],
+                                                    facilities: data['facilities'],
+                                                    imgUrl: data['imgUrl'],
+                                                    routes: [],
+                                                    refundable: data['refundable'],
+                                                    insurance: data['insurance']),
+                                              ));
                                             },
                                           ),
                                         ],
                                       ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Text(
-                                        data['refundable']
-                                            ? 'Refundable'
-                                            : 'Non-refundable',
-                                        style: GoogleFonts.ubuntu(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      Text(
-                                        data['insurance']
-                                            ? '70%-insurance'
-                                            : 'No-insurance',
-                                        style: GoogleFonts.ubuntu(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      Text(
-                                        '${data['facilities']}'.toUpperCase(),
-                                        style: GoogleFonts.ubuntu(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
 
-                                    ],
-                                  ),
-                                  const SizedBox(height: 8,)
-                                ],
+                                        ///image
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  color: Colors.white,
+                                                ),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.network(
+                                                    data['imgUrl'] ?? '',
+                                                    height: 50,
+                                                    width: 80,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 18,
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      const Icon(
+                                                          Icons
+                                                              .location_on_rounded,
+                                                          size: 14),
+                                                      Text(
+                                                        '${data['address']}',
+                                                        style:
+                                                            GoogleFonts.ubuntu(
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w300),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Text(
+                                                    '${data['routes']}',
+                                                    style: GoogleFonts.ubuntu(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w300),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 4,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            '${data['facilities']}',
+                                            style: GoogleFonts.ubuntu(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300),
+                                          ),
+                                          Text(
+                                            data['refundable']
+                                                ? 'Refundable'
+                                                : 'Non-refundable',
+                                            style: GoogleFonts.ubuntu(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                          ),
+                                          Text(
+                                            data['insurance']
+                                                ? 'Insurance-Yes'
+                                                : 'Insurance-No',
+                                            style: GoogleFonts.ubuntu(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           );

@@ -175,7 +175,9 @@ class _EditFlightFormState extends State<EditFlightForm> {
           child: Form(
             key: _formKey,
             child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
               Text(
                 "Edit Flight Details",
                 style: GoogleFonts.poppins(

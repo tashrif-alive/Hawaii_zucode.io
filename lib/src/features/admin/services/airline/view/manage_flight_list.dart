@@ -4,23 +4,19 @@ import 'package:google_fonts/google_fonts.dart';
 import '../model/add_flight_model.dart';
 import 'edit_flight_list.dart';
 
-
 class ManageFlightListScreen extends StatefulWidget {
   const ManageFlightListScreen({super.key});
-
   @override
   State<ManageFlightListScreen> createState() => _ManageFlightListScreenState();
 }
 
 class _ManageFlightListScreenState extends State<ManageFlightListScreen> {
   late TextEditingController _searchController;
-
   @override
   void initState() {
     super.initState();
     _searchController = TextEditingController();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

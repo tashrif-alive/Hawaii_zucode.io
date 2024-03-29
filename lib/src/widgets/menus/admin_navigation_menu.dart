@@ -34,44 +34,44 @@ class _AdminBottomBarState extends State<AdminBottomBar> {
             NavigationDestination(
               icon: SvgPicture.asset(
                 'assets/icons/dashboard.svg',
-                height: 41, // Replace with the desired height
+                height: 35, // Replace with the desired height
               ),
               selectedIcon: SvgPicture.asset(
                 'assets/icons/dashboard_active.svg',
-                height: 41, // Replace with the desired height
+                height: 35, // Replace with the desired height
               ),
               label: 'Dashboard',
             ),
             NavigationDestination(
               icon: SvgPicture.asset(
                 'assets/icons/services.svg',
-                height: 41, // Replace with the desired height
+                height: 35, // Replace with the desired height
               ),
               selectedIcon: SvgPicture.asset(
                 'assets/icons/services_active.svg',
-                height: 42, // Replace with the desired height
+                height: 35, // Replace with the desired height
               ),
               label: 'Services',
             ),
              NavigationDestination(
               icon: SvgPicture.asset(
                 'assets/icons/controls.svg',
-                height: 41,
+                height: 35,
               ),
               selectedIcon: SvgPicture.asset(
                 'assets/icons/controls.svg',
-                height: 41,
+                height: 35,
               ),
               label: 'Controls',
             ),
             NavigationDestination(
               icon: SvgPicture.asset(
                 'assets/icons/more.svg',
-                height: 41,
+                height: 35,
               ),
               selectedIcon: SvgPicture.asset(
                 'assets/icons/more_active.svg',
-                height: 41,
+                height: 35,
               ),
               label: 'More',
             ),

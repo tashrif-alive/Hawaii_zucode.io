@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hawaii_beta/src/features/admin/services/airline/view/check_box_list_widget.dart';
 import '../../../../../widgets/image_picker/image_view.dart';
 import '../../../widgets/admin_textform_field.dart';
 import '../controller/airline_info_controller.dart';
@@ -42,50 +43,6 @@ class _AirlineInfoUploadState extends State<AirlineInfoUpload> {
     }
   }
 
-  Widget _buildCheckboxList(
-    String title,
-    List<String> options,
-    List<String> selectedList,
-  ) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: GoogleFonts.ubuntu(
-            fontSize: 12,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        const SizedBox(height: 5),
-        Wrap(
-          spacing: 6,
-          runSpacing: 1,
-          children: options
-              .map((option) => FilterChip(
-                    label: Text(
-                      option,
-                      style: GoogleFonts.ubuntu(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 10,
-                      ),
-                    ),
-                    selected: selectedList.contains(option),
-                    onSelected: (isSelected) {
-                      setState(() {
-                        if (isSelected) {
-                          selectedList.add(option);
-                        } else {
-                          selectedList.remove(option);
-                        }
-                      });
-                    },
-                  ))
-              .toList(),
-        ),
-      ],
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -203,75 +160,19 @@ class _AirlineInfoUploadState extends State<AirlineInfoUpload> {
                   horizontal: 10.0,
                   vertical: 5,
                 ),
-                child: _buildCheckboxList(
-                  'Routes',
-                  [
-                    'Dhaka',
-                    'Chittagong',
-                    'Rajshahi',
-                    'Khulna',
-                    'Barisal',
-                    'Sylhet',
-                    'Rangpur',
-                    'Mymensingh',
-                    'Comilla',
-                    'Noakhali',
-                    'Jessore',
-                    'Feni',
-                    'Bogura',
-                    'Narayanganj',
-                    'Dinajpur',
-                    'Tangail',
-                    'Jamalpur',
-                    'Pabna',
-                    'Gazipur',
-                    'Kushtia',
-                    'Faridpur',
-                    'Brahmanbaria',
-                    'Cumilla',
-                    'Coxs Bazaar',
-                    'Pirojpur',
-                    'Patuakhali',
-                    'Bhola',
-                    'Joypurhat',
-                    'Naogaon',
-                    'Magura',
-                    'Chuadanga',
-                    'Satkhira',
-                    'Jhenaidah',
-                    'Narsingdi',
-                    'Chandpur',
-                    'Manikganj',
-                    'Sunamganj',
-                    'Habiganj',
-                    'Moulvibazar',
-                    'Kurigram',
-                    'Lalmonirhat',
-                    'Nilphamari',
-                    'Thakurgaon',
-                    'Gaibandha',
-                    'Meherpur',
-                    'Narail',
-                    'Gopalganj',
-                    'Shariatpur',
-                    'Madaripur',
-                    'Rajbari',
-                    'Munshiganj',
-                    'Sherpur',
-                    'Netrakona',
-                    'Sunamganj',
-                    'Habiganj',
-                    'Moulvibazar',
-                    'Kurigram',
-                    'Lalmonirhat',
-                    'Nilphamari',
-                    'Thakurgaon',
-                    'Gaibandha',
-                    'Meherpur',
-                    'Narail',
-                    'Gopalganj'
-                  ],
-                  _routes,
+                child: CheckBoxListWidget(
+                  title: 'Routes',
+                  options: AppCities.routes,
+                  selectedList: _routes,
+                  onSelected: (isSelected, option) {
+                    setState(() {
+                      if (isSelected) {
+                        _routes.add(option);
+                      } else {
+                        _routes.remove(option);
+                      }
+                    });
+                  },
                 ),
               ),
 
