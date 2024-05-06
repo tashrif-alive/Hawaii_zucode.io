@@ -49,20 +49,40 @@ class _PlaneTicketState extends State<PlaneTicket> {
     // setState(() {
     //   seatInfo[row][column]=2;
     // });
-    print('seatopTap$row$column ${seatInfo[row][column]}');
+    print('seatonTap$row$column ${seatInfo[row][column]}');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: ElevatedButton(
-        child: Text("Continiue"),
-        onPressed: () => Get.to(TicketConfirmationScreen(
-          flightData: widget.flightdata,
-          seatInfo:seatInfo,
-          seatBookText:seatBookText
-        )),
+      bottomNavigationBar:
+      SizedBox(
+        height: 45,
+        width: 100,
+        child: ElevatedButton(
+          onPressed: () => Get.to(TicketConfirmationScreen(
+              flightData: widget.flightdata,
+              seatInfo:seatInfo,
+              seatBookText:seatBookText
+          )),
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                side: const BorderSide(color: Colors.black),
+              ),
+            ),
+            backgroundColor:
+            MaterialStateProperty.all<Color>(Colors.black),
+          ),
+          child:  Text('Next',style: GoogleFonts.ubuntu(
+            fontSize: 15,
+            fontWeight: FontWeight.w500,
+            color: Colors.white
+          ),),
+        ),
       ),
+
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -74,233 +94,262 @@ class _PlaneTicketState extends State<PlaneTicket> {
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4),
-              child: Text(
-                'Choose Your Favourite Seat',
-                style: GoogleFonts.ubuntu(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4),
+                child: Text(
+                  'Choose Your Favourite Seat',
+                  style: GoogleFonts.ubuntu(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.black, // Border color
-                            width: 1, // Border width
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.black, // Border color
+                              width: 1, // Border width
+                            ),
+                            borderRadius:
+                                BorderRadius.circular(6.0), // Border radius
                           ),
-                          borderRadius:
-                              BorderRadius.circular(6.0), // Border radius
+                          child: Container(
+                            color: Colors.black26,
+                            height: 18,
+                            width: 18,
+                          ),
                         ),
-                        child: Container(
-                          color: Colors.black26,
-                          height: 18,
-                          width: 18,
+                        const SizedBox(
+                          width: 3,
                         ),
-                      ),
-                      const SizedBox(
-                        width: 3,
-                      ),
-                      Text(
-                        'Available',
-                        style: GoogleFonts.ubuntu(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.black, // Border color
-                            width: 1.5, // Border width
-                          ),
-                          borderRadius:
-                              BorderRadius.circular(6.0), // Border radius
+                        Text(
+                          'Available',
+                          style: GoogleFonts.ubuntu(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black),
                         ),
-                        child: Container(
-                          color: Colors.black,
-                          height: 18,
-                          width: 18,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 3,
-                      ),
-                      Text(
-                        'Selected',
-                        style: GoogleFonts.ubuntu(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6.0),
-                          color: Colors.black12,
-                        ),
-                        height: 20,
-                        width: 20,
-                      ),
-                      const SizedBox(
-                        width: 3,
-                      ),
-                      Text(
-                        'Unavailable',
-                        style: GoogleFonts.ubuntu(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Material(
-                elevation: 2,
-                borderRadius: BorderRadius.circular(6.0),
-                color: Colors.grey.shade50,
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6.0),
-                    color: Colors.grey.shade50,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6.0),
-                              color: Colors.grey.shade50,
-                            ),
-                            height: 40,
-                            width: 40,
-                            child: Center(
-                              child: Text('A',
-                                  style: GoogleFonts.ubuntu(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black)),
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6.0),
-                              color: Colors.grey.shade50,
-                            ),
-                            height: 40,
-                            width: 40,
-                            child: Center(
-                              child: Text('B',
-                                  style: GoogleFonts.ubuntu(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black)),
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6.0),
-                              color: Colors.grey.shade50,
-                            ),
-                            height: 40,
-                            width: 40,
-                            child: Center(
-                              child: Text('',
-                                  style: GoogleFonts.ubuntu(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black)),
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6.0),
-                              color: Colors.grey.shade50,
-                            ),
-                            height: 40,
-                            width: 40,
-                            child: Center(
-                              child: Text('C',
-                                  style: GoogleFonts.ubuntu(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black)),
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6.0),
-                              color: Colors.grey.shade50,
-                            ),
-                            height: 40,
-                            width: 40,
-                            child: Center(
-                              child: Text('D',
-                                  style: GoogleFonts.ubuntu(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black)),
-                            ),
-                          ),
-                        ],
-                      ),
-                      for (int i = 0; i < seatInfo.length; i++) ...[
-                        Seat(sL: i, info: seatInfo[i], seaTonTap: seaTonTap),
-                        const SizedBox(height: 8),
                       ],
-                    ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.black, // Border color
+                              width: 1.5, // Border width
+                            ),
+                            borderRadius:
+                                BorderRadius.circular(6.0), // Border radius
+                          ),
+                          child: Container(
+                            color: Colors.black,
+                            height: 18,
+                            width: 18,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 3,
+                        ),
+                        Text(
+                          'Selected',
+                          style: GoogleFonts.ubuntu(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6.0),
+                            color: Colors.black12,
+                          ),
+                          height: 20,
+                          width: 20,
+                        ),
+                        const SizedBox(
+                          width: 3,
+                        ),
+                        Text(
+                          'Unavailable',
+                          style: GoogleFonts.ubuntu(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Material(
+                  elevation: 2,
+                  borderRadius: BorderRadius.circular(6.0),
+                  color: Colors.grey.shade50,
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6.0),
+                      color: Colors.grey.shade50,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6.0),
+                                color: Colors.grey.shade50,
+                              ),
+                              height: 40,
+                              width: 40,
+                              child: Center(
+                                child: Text('A',
+                                    style: GoogleFonts.ubuntu(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.black)),
+                              ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6.0),
+                                color: Colors.grey.shade50,
+                              ),
+                              height: 40,
+                              width: 40,
+                              child: Center(
+                                child: Text('B',
+                                    style: GoogleFonts.ubuntu(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.black)),
+                              ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6.0),
+                                color: Colors.grey.shade50,
+                              ),
+                              height: 40,
+                              width: 40,
+                              child: Center(
+                                child: Text('',
+                                    style: GoogleFonts.ubuntu(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.black)),
+                              ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6.0),
+                                color: Colors.grey.shade50,
+                              ),
+                              height: 40,
+                              width: 40,
+                              child: Center(
+                                child: Text('C',
+                                    style: GoogleFonts.ubuntu(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.black)),
+                              ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6.0),
+                                color: Colors.grey.shade50,
+                              ),
+                              height: 40,
+                              width: 40,
+                              child: Center(
+                                child: Text('D',
+                                    style: GoogleFonts.ubuntu(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.black)),
+                              ),
+                            ),
+                          ],
+                        ),
+                        for (int i = 0; i < seatInfo.length; i++) ...[
+                          Seat(sL: i, info: seatInfo[i], seaTonTap: seaTonTap),
+                          const SizedBox(height: 8),
+                        ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Text("Your Seat: ${seatBookText}"),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text("total"),
-                    ],
+              Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Material(
+                  elevation: 2,
+                  borderRadius: BorderRadius.circular(6.0),
+                  color: Colors.grey.shade50,
+                  child: Padding(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    child: SizedBox(
+                      child: Column(
+                        children: [
+                          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Your Seat' ,
+                                style: GoogleFonts.ubuntu(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Text('$seatBookText'),
+                            ],
+                          ),
+                          const SizedBox(height: 5,),
+                          Row(
+                            children: [
+                              Text(
+                                'Total' ,
+                                style: GoogleFonts.ubuntu(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
                   )
-                ],
+                ),
               ),
-            )
-          ],
+
+            ],
+          ),
         ),
       ),
     );

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hawaii_beta/src/features/user/components/flight/review_flight.dart';
 import 'package:intl/intl.dart';
+
+import '../../../admin/services/airline/view/flight_details_screen.dart';
 
 class FlightSearchResults extends StatelessWidget {
   final Map<String, String> searchData;
@@ -71,14 +74,14 @@ class FlightSearchResults extends StatelessWidget {
                         document.data() as Map<String, dynamic>;
                     return GestureDetector(
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => FlightDetailScreen(
-                        //       flightData: data,
-                        //     ),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FlightReviewScreen(
+                              flightData: data,
+                            ),
+                          ),
+                        );
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(4.0),
