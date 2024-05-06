@@ -109,15 +109,15 @@ class _AdminDashboardState extends State<AdminDashboard> {
               },
               child: const Text('View driver list'),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const PlaneTicket()),
-                );
-              },
-              child: const Text('carousel'),
-            ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => const PlaneTicket(flightdata: flightdata,)),
+            //     );
+            //   },
+            //   child: const Text('carousel'),
+            // ),
 
           ],
         ),

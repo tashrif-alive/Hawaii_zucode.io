@@ -1,23 +1,37 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hawaii_beta/src/features/user/components/ticket/view/plane_ticket.dart';
+import 'package:hawaii_beta/src/features/user/views/home/user_dashboard.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../user/components/ticket/view/plane_ticket.dart';
-
-class FlightDetailScreen extends StatelessWidget {
+class TicketConfirmationScreen extends StatelessWidget {
   final Map<String, dynamic> flightData;
+  final List<List<int>> seatInfo;
+  final List<String> seatBookText;
 
-  const FlightDetailScreen({super.key, required this.flightData});
+  const TicketConfirmationScreen(
+      {super.key,
+      required this.flightData,
+      required this.seatInfo,
+      required this.seatBookText});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: ElevatedButton(
-        child: Text("Select Seat"),
-        onPressed: ()=>Get.to(PlaneTicket(flightdata:flightData)),
+        child: Text("Pay Now"),
+        onPressed: () async{
+          showProcessing();
+          await insertBookingInfo();
+          // go to home
+          Get.offAll(UserDashboard()); // TODO: go to home
+          Get.snackbar("Success", "Payment Completed, Your Seat is Reserved");
+
+        },
       ),
       appBar: AppBar(
         centerTitle: true,
@@ -245,6 +259,9 @@ class FlightDetailScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                  Text("   Seat Selected: ${seatBookText}"),
+                  Text("   Price: ${seatBookText.length} X 1200 = ${seatBookText.length * 1200}"), // 1200 is seatprice replce with actual data
+
                 ],
               ),
             ),
@@ -253,4 +270,41 @@ class FlightDetailScreen extends StatelessWidget {
       ),
     );
   }
+
+  void showProcessing() {
+    Get.dialog(
+        const AlertDialog(
+          title: Text("Payment Screen"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(child: CircularProgressIndicator()),
+            ],
+          ),
+        )
+    );
+  }
+
+    insertBookingInfo() async{
+      final CollectionReference flights =
+      FirebaseFirestore.instance.collection('flights');
+
+      final CollectionReference booking =
+      FirebaseFirestore.instance.collection('booking');
+
+      final CollectionReference users =
+      FirebaseFirestore.instance.collection('users');
+
+        final user = FirebaseAuth.instance.currentUser;
+        // Step 2: Insert into booking collection
+        DocumentReference bookingRef = await booking.add({
+          'flightDataId': flightData,
+          'seatBookText': seatBookText,
+          'price': seatBookText.length * 1200, // 1200 is demo price
+          'bookedByName': user?.displayName ?? "User",
+          'userID' : user?.uid,
+        });
+
+
+    }
 }

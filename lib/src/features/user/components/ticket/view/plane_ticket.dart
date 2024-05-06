@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../widgets/buttons/seat_widget.dart';
+import '../ticket_confirmation.dart';
 
 class PlaneTicket extends StatefulWidget {
-  const PlaneTicket({super.key});
+  const PlaneTicket({super.key, required , required this.flightdata});
+
+  final Map<String, dynamic> flightdata;
 
   @override
   State<PlaneTicket> createState() => _PlaneTicketState();
 }
 
 class _PlaneTicketState extends State<PlaneTicket> {
+  List<String> seatBookText = [];
+
   var seatInfo = [
-    [0, 1, 2, 0],
+    [0, 1, 1, 0],
     [0, 0, 0, 0],
     [0, 0, 0, 0],
     [1, 1, 1, 1],
@@ -24,31 +31,38 @@ class _PlaneTicketState extends State<PlaneTicket> {
     [1, 0, 0, 1],
   ];
 
-  seaTonTap (int row,int column){
-    print('seatopTap$row$column ${seatInfo[row] [column]}');
-    if(
-    seatInfo[row][column]==1
-    ){
+  seaTonTap(int row, int column) {
+    List<String> seatAlpha = ['A', 'B', 'C', 'D'];
+    String seatLabel = "${seatAlpha[column]}${row + 1}";
+    print('seatopTap$row$column ${seatInfo[row][column]}');
+    if (seatInfo[row][column] == 1) {
       setState(() {
-        seatInfo[row][column]=2;
+        seatBookText.add(seatLabel);
+        seatInfo[row][column] = 2;
       });
-    }
-   else if (
-    seatInfo[row][column]==2
-    ){
+    } else if (seatInfo[row][column] == 2) {
       setState(() {
-        seatInfo[row][column]=1;
+        seatBookText.remove(seatLabel);
+        seatInfo[row][column] = 1;
       });
     }
     // setState(() {
     //   seatInfo[row][column]=2;
     // });
-    print('seatopTap$row$column ${seatInfo[row] [column]}');
+    print('seatopTap$row$column ${seatInfo[row][column]}');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: ElevatedButton(
+        child: Text("Continiue"),
+        onPressed: () => Get.to(TicketConfirmationScreen(
+          flightData: widget.flightdata,
+          seatInfo:seatInfo,
+          seatBookText:seatBookText
+        )),
+      ),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -262,12 +276,28 @@ class _PlaneTicketState extends State<PlaneTicket> {
                         ],
                       ),
                       for (int i = 0; i < seatInfo.length; i++) ...[
-                        Seat(sL: i, info:seatInfo[i],seaTonTap:seaTonTap),
+                        Seat(sL: i, info: seatInfo[i], seaTonTap: seaTonTap),
                         const SizedBox(height: 8),
                       ],
                     ],
                   ),
                 ),
+              ),
+            ),
+            Container(
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text("Your Seat: ${seatBookText}"),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text("total"),
+                    ],
+                  )
+                ],
               ),
             )
           ],
