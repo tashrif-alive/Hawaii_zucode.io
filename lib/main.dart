@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hawaii_beta/firebase_options.dart';
 import 'package:hawaii_beta/src/widgets/menus/admin_navigation_menu.dart';
+import 'package:hawaii_beta/src/widgets/menus/user_navigation_menu.dart';
 
 
 void main() async {
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: blackSwatch,
       ),
-      home: const AdminBottomBar(),
+      home: const NavigationMenu(),
     );
   }
 }

@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hawaii_beta/src/features/user/views/home/user_dashboard.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../widgets/menus/user_navigation_menu.dart';
+
 class TicketConfirmationScreen extends StatelessWidget {
   final Map<String, dynamic> flightData;
   final List<List<int>> seatInfo;
@@ -48,7 +50,8 @@ class TicketConfirmationScreen extends StatelessWidget {
                 const SizedBox(
                   height: 2,
                 ),
-                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
                       decoration: BoxDecoration(
@@ -75,44 +78,48 @@ class TicketConfirmationScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Column(crossAxisAlignment: CrossAxisAlignment.end,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                      Text(
-                        'Balance',
-                        style: GoogleFonts.ubuntu(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black,
+                        Text(
+                          'Balance',
+                          style: GoogleFonts.ubuntu(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'USD ${flightData['ourPrice']}',
-                        style: GoogleFonts.ubuntu(
-                            fontSize: 14, fontWeight: FontWeight.w500),
-                      ),
-                    ],)
+                        Text(
+                          'USD ${flightData['ourPrice']}',
+                          style: GoogleFonts.ubuntu(
+                              fontSize: 14, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    )
                   ],
                 ),
                 FractionallySizedBox(
-                  widthFactor: 1,  // 80% of the parent's width
+                  widthFactor: 1,
                   child: ElevatedButton(
                     onPressed: () async {
                       showProcessing();
                       await insertBookingInfo();
-                      Get.offAll(() => const UserDashboard());
-                      Get.snackbar("Success", "Payment Completed, Your Seat is Reserved");
+                      Get.offAll(() => const NavigationMenu());
+                      Get.snackbar("Success",
+                          "Payment Completed, Your Seat is Reserved");
                     },
-                    child: Text("Pay Now", style: GoogleFonts.ubuntu()),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.black, // Button color
-                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 10),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),  // Sets a border radius of 20
-                      ),// Button padding
+                        borderRadius: BorderRadius.circular(
+                            10), // Sets a border radius of 20
+                      ), // Button padding
                     ),
+                    child: Text("Pay Now", style: GoogleFonts.ubuntu()),
                   ),
                 ),
-
               ],
             ),
           ),
@@ -142,50 +149,55 @@ class TicketConfirmationScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding:  const EdgeInsets.symmetric(horizontal: 16.0,vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
           child: Column(
             children: [
-               SvgPicture.asset(
+              SvgPicture.asset(
                 'assets/icons/route.svg',
-                 width: 320,
+                width: 320,
               ),
-              SizedBox(height: 5,),
+              const SizedBox(
+                height: 5,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                  Text(
-                    '${flightData['fromPlace']}',
-                    style: GoogleFonts.ubuntu(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400),
-                  ),
-                  Text(
-                    '${flightData['toPlace']}',
-                    style: GoogleFonts.ubuntu(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ],),
+                    Text(
+                      '${flightData['fromPlace']}',
+                      style: GoogleFonts.ubuntu(
+                          fontSize: 13, fontWeight: FontWeight.w400),
+                    ),
+                    Text(
+                      '${flightData['toPlace']}',
+                      style: GoogleFonts.ubuntu(
+                          fontSize: 13, fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
               ),
-              SizedBox(height: 15,),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Flight Details',
                     style: GoogleFonts.ubuntu(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500),
+                        fontSize: 15, fontWeight: FontWeight.w500),
                   ),
                   Text(
                     '',
                     style: GoogleFonts.ubuntu(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500),
+                        fontSize: 15, fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
-              SizedBox(height: 15,),
+              const SizedBox(
+                height: 15,
+              ),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
@@ -262,8 +274,7 @@ class TicketConfirmationScreen extends StatelessWidget {
                                         color: Colors.grey.withOpacity(0.5),
                                         spreadRadius: 3,
                                         blurRadius: 3,
-                                        offset: const Offset(
-                                            0, 3),
+                                        offset: const Offset(0, 3),
                                       ),
                                     ],
                                   ),
@@ -304,17 +315,20 @@ class TicketConfirmationScreen extends StatelessWidget {
                                 Text(
                                   '${flightData['duration']}',
                                   style: GoogleFonts.ubuntu(
-                                      fontSize: 12, fontWeight: FontWeight.w300),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w300),
                                 ),
                                 SizedBox(
-                                  width: MediaQuery.of(context).size.width * 0.15,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.15,
                                   height: 5,
                                   child: const Divider(thickness: 1),
                                 ),
                                 Text(
                                   '${flightData['stoppage']}',
                                   style: GoogleFonts.ubuntu(
-                                      fontSize: 12, fontWeight: FontWeight.w300),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w300),
                                 ),
                               ],
                             ),
@@ -323,42 +337,48 @@ class TicketConfirmationScreen extends StatelessWidget {
                                 Text(
                                   '${flightData['toTime']}',
                                   style: GoogleFonts.ubuntu(
-                                      fontSize: 15, fontWeight: FontWeight.w300),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w300),
                                 ),
                                 Text(
                                   '${flightData['toPlace']}',
                                   style: GoogleFonts.ubuntu(
-                                      fontSize: 12, fontWeight: FontWeight.w300),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w300),
                                 ),
-
                               ],
                             ),
                           ],
                         ),
                       ),
-                      SizedBox(height: 6,)
+                      const SizedBox(
+                        height: 6,
+                      )
                     ],
                   ),
                 ),
               ),
-              SizedBox(height: 15,),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Flight Facilities',
                     style: GoogleFonts.ubuntu(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500),
+                        fontSize: 15, fontWeight: FontWeight.w500),
                   ),
                   Text(
                     '',
                     style: GoogleFonts.ubuntu(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500),
+                        fontSize: 15, fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
-              SizedBox(height: 15,),
+              const SizedBox(
+                height: 15,
+              ),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
@@ -378,11 +398,13 @@ class TicketConfirmationScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 4),
-                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6.0, vertical: 4),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Refundable:' ,
+                              'Refundable:',
                               style: GoogleFonts.ubuntu(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,
@@ -392,20 +414,23 @@ class TicketConfirmationScreen extends StatelessWidget {
                               flightData['refundable'] ? 'Yes' : 'No',
                               style: GoogleFonts.ubuntu(
                                 fontSize: 13,
-                                fontWeight: FontWeight.w400,color: flightData['refundable'] ? Colors.green : Colors.red,
+                                fontWeight: FontWeight.w400,
+                                color: flightData['refundable']
+                                    ? Colors.green
+                                    : Colors.red,
                               ),
                             ),
-
                           ],
                         ),
                       ),
-
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 4),
-                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6.0, vertical: 4),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Insurance:' ,
+                              'Insurance:',
                               style: GoogleFonts.ubuntu(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,
@@ -415,19 +440,23 @@ class TicketConfirmationScreen extends StatelessWidget {
                               flightData['insurance'] ? 'Yes' : 'No',
                               style: GoogleFonts.ubuntu(
                                 fontSize: 13,
-                                fontWeight: FontWeight.w400,color: flightData['refundable'] ? Colors.green : Colors.red,
+                                fontWeight: FontWeight.w400,
+                                color: flightData['refundable']
+                                    ? Colors.green
+                                    : Colors.red,
                               ),
                             ),
                           ],
                         ),
                       ),
-
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 4),
-                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6.0, vertical: 4),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Check-in:' ,
+                              'Check-in:',
                               style: GoogleFonts.ubuntu(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,
@@ -445,25 +474,27 @@ class TicketConfirmationScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 15,),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Fare Details',
                     style: GoogleFonts.ubuntu(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500),
+                        fontSize: 15, fontWeight: FontWeight.w500),
                   ),
                   Text(
                     '',
                     style: GoogleFonts.ubuntu(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500),
+                        fontSize: 15, fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
-
-              SizedBox(height: 15,),
+              const SizedBox(
+                height: 15,
+              ),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
@@ -483,18 +514,20 @@ class TicketConfirmationScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 4),
-                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6.0, vertical: 4),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Seat' ,
+                              'Seat',
                               style: GoogleFonts.ubuntu(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
                             Text(
-                                "${seatBookText}",
+                              "$seatBookText",
                               style: GoogleFonts.ubuntu(
                                   fontSize: 13, fontWeight: FontWeight.w500),
                             ),
@@ -502,11 +535,13 @@ class TicketConfirmationScreen extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 4),
-                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6.0, vertical: 4),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Traveller' ,
+                              'Traveller',
                               style: GoogleFonts.ubuntu(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,
@@ -521,11 +556,13 @@ class TicketConfirmationScreen extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 4),
-                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6.0, vertical: 4),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Fare Price' ,
+                              'Fare Price',
                               style: GoogleFonts.ubuntu(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,
@@ -540,11 +577,13 @@ class TicketConfirmationScreen extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 4),
-                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6.0, vertical: 4),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Tax' ,
+                              'Tax',
                               style: GoogleFonts.ubuntu(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,
@@ -560,17 +599,21 @@ class TicketConfirmationScreen extends StatelessWidget {
                       ),
                       Center(
                         child: SizedBox(
-                          width: MediaQuery.of(context).size.width *1,
+                          width: MediaQuery.of(context).size.width * 1,
                           child: const Divider(thickness: 1),
                         ),
                       ),
-                      SizedBox(height: 5,),
+                      const SizedBox(
+                        height: 5,
+                      ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 4),
-                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6.0, vertical: 4),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Total' ,
+                              'Total',
                               style: GoogleFonts.ubuntu(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,

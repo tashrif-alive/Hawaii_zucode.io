@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../../signup/view/signup_screen.dart';
 import '../../authentications/forget_pass/views/forget_pass_screen.dart';
 import '../widgets/admin_signin_footer_widgets.dart';
