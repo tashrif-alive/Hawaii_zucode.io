@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import '../controller/add_bus_controller.dart';
 
 class AddBusView extends StatefulWidget {
@@ -11,7 +13,7 @@ class _AddBusViewState extends State<AddBusView> {
   final _formKey = GlobalKey<FormState>();
 
   String _busCompany = '';
-  late String _date = '';
+  DateTime _selectedDate = DateTime.now();
   String _departureTime = '';
   String _arrivalTime = '';
    String _duration = '';
@@ -27,7 +29,7 @@ class _AddBusViewState extends State<AddBusView> {
       // Call the addBus method from the controller
       await _busController.addBus(
         _busCompany,
-        _date,
+          _selectedDate.toString(),
         _departureTime,
         _arrivalTime,
         _duration,
@@ -40,6 +42,21 @@ class _AddBusViewState extends State<AddBusView> {
     }
   }
 
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+      initialDatePickerMode: DatePickerMode.day,
+    );
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked; // Store the selected date
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,30 +98,39 @@ class _AddBusViewState extends State<AddBusView> {
               ),
 
               ///Date
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.calendar_month),
-                    iconColor: Colors.grey,
-                    hintText: "Date",
-                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    // Adjusting the vertical padding
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide.none,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: () => _selectDate(context),
+                    child: InputDecorator(
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.date_range),
+                        labelText: 'Arrival Date',
+                        labelStyle: GoogleFonts.poppins(
+                            fontSize: 14, fontWeight: FontWeight.w400),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey.shade50,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            //DateFormat('yyyy-MM-dd').format(_selectedDate),
+                            DateFormat("E,dMMM").format(_selectedDate),
+                            style: GoogleFonts.poppins(
+                                fontSize: 14, fontWeight: FontWeight.w400),
+                          ),
+                          const Icon(Icons.arrow_drop_down),
+                        ],
+                      ),
                     ),
-                    fillColor: Colors.grey.shade50,
-                    filled: true,
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter date';
-                    }
-                    return null;
-                  },
-                  onSaved: (newValue) => _date = newValue!,
-                ),
+                ],
               ),
               ///Type
               Padding(

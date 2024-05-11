@@ -25,50 +25,49 @@ class _AdminDashboardState extends State<AdminDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 14),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const AdminTabBar(),
-            const Text(
+            const SizedBox(height: 12,),
+            Text(
               'User Statistics',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: GoogleFonts.ubuntu(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                onTap: () {
-                   Get.to(const UserList());
-                  print("Card tapped!");
-                },
-                child: Card(
-                  elevation: 1,
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/users.svg',
-                        width: MediaQuery.of(context).size.width * 0.05,
-                        height: MediaQuery.of(context).size.height * 0.08,
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            "15",
-                            style: GoogleFonts.roboto(
-                                fontSize: 30, fontWeight: FontWeight.w700),
-                          ),
-                          Text(
-                            "Users",
-                            style: GoogleFonts.roboto(
-                                fontSize: 16, fontWeight: FontWeight.w500),
-                          ),
+            const Divider(),
+            GestureDetector(
+              onTap: () {
+                 Get.to(const UserList());
+                print("Card tapped!");
+              },
+              child: Card(
+                elevation: 1,
+                child: Row(
+                  children: [
+                    SvgPicture.asset(
+                      'assets/icons/users.svg',
+                      width: MediaQuery.of(context).size.width * 0.05,
+                      height: MediaQuery.of(context).size.height * 0.08,
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          "15",
+                          style: GoogleFonts.roboto(
+                              fontSize: 30, fontWeight: FontWeight.w700),
+                        ),
+                        Text(
+                          "Users",
+                          style: GoogleFonts.roboto(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
 
-                        ],
+                      ],
 
-                      ),
-                    ],
+                    ),
+                  ],
 
-                  ),
                 ),
               ),
             ),
@@ -91,79 +90,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
               },
               child: const Text('View hotel list'),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const BusListScreen()),
-                );
-              },
-              child: const Text('View buses list'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DriverListScreen()),
-                );
-              },
-              child: const Text('View driver list'),
-            ),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(builder: (context) => const PlaneTicket(flightdata: flightdata,)),
-            //     );
-            //   },
-            //   child: const Text('carousel'),
-            // ),
 
           ],
         ),
-      ),
-    );
-  }
-}
-///TabBar
-class AdminTabBar extends StatelessWidget {
-  const AdminTabBar({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Image.asset(
-            'assets/icons/logos/hawaii_logo.png',
-            height: 50,
-            width: MediaQuery.of(context).size.width * 0.22,
-          ),
-          Row(crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              IconButton(
-                icon: const Icon(
-                  Icons.message,
-                  color: Colors.black87,
-                ),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(
-                  Icons.person,
-                  color: Colors.black87,
-                ),
-                onPressed: () {
-                  Get.to(() => const LoginScreen());
-                },
-              ),
-            ],
-          )
-        ],
       ),
     );
   }

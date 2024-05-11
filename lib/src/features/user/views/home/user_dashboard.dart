@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hawaii_beta/src/features/user/views/home/user_buses_tabs.dart';
 import 'package:hawaii_beta/src/features/user/views/home/user_flight_tabs.dart';
 import 'package:hawaii_beta/src/features/user/views/home/user_hotels_tabs.dart';
 import '../../../../widgets/tabs/user_tab_bar.dart';
@@ -47,7 +48,7 @@ class _UserDashboardState extends State<UserDashboard> {
     List<Widget> tabContent = [
       const UserFlightTab(),
       const UserHotelTab(),
-      const BusListScreen(),
+      const UserBusTab(),
        const HotelInformationForm()
     ];
 
