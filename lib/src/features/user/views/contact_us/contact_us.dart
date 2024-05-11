@@ -11,21 +11,21 @@ class ContactUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        title: Text("Contact Us",
-            style:
-                GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 16,color: Colors.black)),
-        centerTitle: true,
-      ),
       backgroundColor: Colors.white,
       body: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: ListView(
           children: [
-            const Padding(
-              padding: EdgeInsets.all(15),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: Text(
+                'Contact us',
+                style: GoogleFonts.ubuntu(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                ),
+              ),
             ),
             ListTile(
               leading: const CircleAvatar(

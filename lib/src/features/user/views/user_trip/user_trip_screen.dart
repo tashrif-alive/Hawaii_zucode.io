@@ -35,16 +35,7 @@ class UserTripScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Text(
-          "My Trip",
-          style: GoogleFonts.poppins(
-              fontSize: 16, fontWeight: FontWeight.w700, color: Colors.black),
-        ),
-        centerTitle: true,
-      ),
+
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
@@ -52,9 +43,17 @@ class UserTripScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 12,
+              Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: Text(
+                'My Trip',
+                style: GoogleFonts.ubuntu(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black,
+                ),
               ),
+            ),
               GridView.builder(
                 shrinkWrap: true,
                 gridDelegate:

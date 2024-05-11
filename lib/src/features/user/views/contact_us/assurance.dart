@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Assurance extends StatefulWidget {
@@ -19,29 +21,28 @@ class _AssuranceState extends State<Assurance> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("airVenture assured",
-            style: GoogleFonts.poppins(
-                fontWeight: FontWeight.bold,
-                fontSize: 17,
-                color: Colors.white)),
-        centerTitle: true,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: <Color>[Color(0xFFfc8a28), Color(0xFFc55c00)],
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
             ),
-          ),
-        ),
+            onPressed: () => Get.back()),
+        title: Text("hawaii assured",
+            style: GoogleFonts.ubuntu(
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black)),
+        centerTitle: true,
       ),
       body: ListView.builder(
-        padding: EdgeInsets.symmetric(vertical: 20),
+        padding: const EdgeInsets.symmetric(vertical: 20),
         itemCount: faqData.length,
         itemBuilder: (context, index) {
           return ExpansionPanelList(
             elevation: 1,
-            expandedHeaderPadding: EdgeInsets.all(5),
+            expandedHeaderPadding: const EdgeInsets.all(5),
             expansionCallback: (panelIndex, isExpanded) {
               setState(() {
                 _isExpandedList[index] = !isExpanded;
@@ -99,6 +100,7 @@ List<Map<String, String>> faqData = [
   },
   {
     'question': 'Terms and Conditions of airVenture assured',
-    'answer': 'Please visit the airVenture assured page for detailed information on the Terms and Conditions. To know more: \n Visit : https://www.airventure.com/airventure-assured \n Contact : tashrifalive@gmail.com'
+    'answer':
+        'Please visit the airVenture assured page for detailed information on the Terms and Conditions. To know more: \n Visit : https://www.airventure.com/airventure-assured \n Contact : tashrifalive@gmail.com'
   }
 ];

@@ -20,35 +20,14 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
     if (user == null) {
       // User is not logged in
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Profile'),
-        ),
-        body: const Center(
+      return const Scaffold(
+        body: Center(
           child: Text('No user logged in'),
         ),
       );
     } else {
       return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Profile',
-            style: GoogleFonts.poppins(
-                fontSize: 16, fontWeight: FontWeight.w700, color: Colors.black),
-          ),
-          elevation: 0,
-          centerTitle: true,
-          actions: [
-            IconButton(
-              onPressed: () {
-                Get.to(const UserSettings());
-              },
-              icon: const Icon(Icons.settings, color: Colors.black),
-            ),
-          ],
-          backgroundColor: Colors.blueGrey.shade50,
-        ),
-        backgroundColor: Colors.blueGrey.shade50,
+        backgroundColor: Colors.grey.shade50,
         body: Container(
           child: SingleChildScrollView(
             child: Column(

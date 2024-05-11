@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Covid extends StatefulWidget {
@@ -21,9 +23,16 @@ class _CovidState extends State<Covid> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+            onPressed: () => Get.back()),
+        elevation: 0,
         title: Text("Covid-19 FAQs",
             style: GoogleFonts.poppins(
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w700,
                 fontSize: 16,
                 color: Colors.black)),
         centerTitle: true,
@@ -47,7 +56,6 @@ class _CovidState extends State<Covid> {
                       style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
-
                       )),
                 );
               },
@@ -69,10 +77,13 @@ class _CovidState extends State<Covid> {
 List<Map<String, String>> faqData = [
   {
     'question': 'How to reschedule my booking due to COVID-19?',
-    'answer': 'To reschedule your booking, please visit the "My Trip" section on our website and select your booking to initiate a reschedule request. For further assistance, contact our customer support.',
+    'answer':
+        'To reschedule your booking, please visit the "My Trip" section on our website and select your booking to initiate a reschedule request. For further assistance, contact our customer support.',
   },
   {
-    'question': 'What are the travel guidelines for international passengers arriving in Bangladesh?',
-    'answer': 'All international passengers arriving in Bangladesh must adhere to the latest travel guidelines issued by the government. Please check the official website for the most up-to-date information or contact our support.',
+    'question':
+        'What are the travel guidelines for international passengers arriving in Bangladesh?',
+    'answer':
+        'All international passengers arriving in Bangladesh must adhere to the latest travel guidelines issued by the government. Please check the official website for the most up-to-date information or contact our support.',
   },
 ];

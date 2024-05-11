@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hawaii_beta/src/features/user/views/contact_us/pre_booking_qs_hotel.dart';
 import 'package:hawaii_beta/src/features/user/views/contact_us/pre_booking_qs_packages.dart';
@@ -13,27 +15,35 @@ class PrebookingTabBar extends StatelessWidget {
       length: 3, // Number of tabs
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Pre-booking Queries', style: GoogleFonts.poppins(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              color: Colors.black)),
+          backgroundColor: Colors.white,
+          leading:
+              IconButton(icon: Icon(Icons.arrow_back,color: Colors.black,), onPressed:()=> Get.back()),
+          title: Text('Pre-booking Queries',
+              style: GoogleFonts.ubuntu(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16,
+                  color: Colors.black)),
           centerTitle: true,
-          flexibleSpace: Container(
-          ),
+          flexibleSpace: Container(),
           bottom: const TabBar(
+            labelColor: Colors.black,
+            unselectedLabelColor: Colors.grey,
+            indicatorColor: Colors.black,
             tabs: [
-              Tab(text: 'Flights',),
-              Tab( text: 'Hotels',),
-              Tab(text: 'Packages',),
+              Tab(
+                text: 'Flights',
+              ),
+              Tab(
+                text: 'Hotels',
+              ),
+              Tab(
+                text: 'Packages',
+              ),
             ],
           ),
         ),
-        body:  const TabBarView(
-          children: [
-            PreBookQus(),
-            PreBookQusHotel(),
-            PreBookQusPack()
-          ],
+        body: const TabBarView(
+          children: [PreBookQus(), PreBookQusHotel(), PreBookQusPack()],
         ),
       ),
     );

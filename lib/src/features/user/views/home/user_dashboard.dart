@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hawaii_beta/src/features/user/views/home/user_buses_tabs.dart';
 import 'package:hawaii_beta/src/features/user/views/home/user_flight_tabs.dart';
 import 'package:hawaii_beta/src/features/user/views/home/user_hotels_tabs.dart';
-import '../../../../widgets/tabs/user_tab_bar.dart';
-import '../../../admin/services/bus/view/bus_list.dart';
 import '../../../admin/services/hotel/view/hotel_info_form.dart';
-
 
 class UserDashboard extends StatefulWidget {
   const UserDashboard({super.key});
@@ -49,7 +46,7 @@ class _UserDashboardState extends State<UserDashboard> {
       const UserFlightTab(),
       const UserHotelTab(),
       const UserBusTab(),
-       const HotelInformationForm()
+      const HotelInformationForm()
     ];
 
     return Scaffold(
@@ -89,8 +86,7 @@ class _UserDashboardState extends State<UserDashboard> {
                                 ? BorderRadius.circular(12)
                                 : BorderRadius.circular(12),
                             border: current == index
-                                ? Border.all(
-                                color: Colors.black, width: 2.5)
+                                ? Border.all(color: Colors.black, width: 2.5)
                                 : null,
                           ),
                           child: Center(
@@ -123,19 +119,6 @@ class _UserDashboardState extends State<UserDashboard> {
                 ),
               ],
             ),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 12),
-            //   child: Text(
-            //     'Why Book hawaii?',
-            //     style: GoogleFonts.poppins(
-            //       fontSize: 16,
-            //       fontWeight: FontWeight.w700,
-            //       color: Colors.black,
-            //     ),
-            //   ),
-            // ),
-            // const AliancesBannerCarousel(),
-
           ],
         ),
       ),
