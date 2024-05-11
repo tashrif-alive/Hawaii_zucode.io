@@ -54,10 +54,6 @@ class _UserDashboardState extends State<UserDashboard> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: UserAppBar(
-        onPressed: () {},
-        image: 'assets/icons/logos/hawaii_logo.png',
-      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

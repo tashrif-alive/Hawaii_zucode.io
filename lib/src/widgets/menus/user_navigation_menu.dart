@@ -20,6 +20,43 @@ class _NavigationMenuState extends State<NavigationMenu> {
     final controller = Get.put(NavigationController());
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            GestureDetector(
+              onTap: () {
+                // Handle logo click action
+              },
+              child: SvgPicture.asset("assets/icons/Logo_svg.svg", width: 90),
+            ),
+            Row(
+              children: [
+                IconButton(
+                    onPressed: () {
+                      print("Add icon tapped");
+                    },
+                    splashRadius: 5,
+                    icon: const Icon(
+                      Icons.notifications,
+                      color: Colors.black,
+                    )),
+                IconButton(
+                    onPressed: () {
+                    },
+                    splashRadius: 5,
+                    icon: const Icon(
+                      Icons.messenger_rounded,
+                      color: Colors.black,
+                    )),
+              ],
+            )
+          ],
+        ),
+      ),
       bottomNavigationBar: Obx(
         () => NavigationBar(
           height: 65,
