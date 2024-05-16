@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -6,18 +7,31 @@ import 'package:intl/intl.dart';
 
 import '../../../../user/components/ticket/view/plane_ticket.dart';
 
-class FlightDetailScreen extends StatelessWidget {
+class FlightDetailScreen extends StatefulWidget {
   final Map<String, dynamic> flightData;
 
   const FlightDetailScreen({super.key, required this.flightData});
+  @override
+  State<FlightDetailScreen> createState() => _FlightDetailScreenState();
+}
 
+class _FlightDetailScreenState extends State<FlightDetailScreen> {
+
+   Map<String, dynamic>? airlineData;
+  bool isLoading=false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    getAeroplaneByModel(widget.flightData['planeModel']);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: ElevatedButton(
         child: Text("Select Seat"),
-        onPressed: ()=>Get.to(PlaneTicket(flightdata:flightData)),
+        onPressed: ()=>Get.to(PlaneTicket(flightdata:widget.flightData)),
       ),
       appBar: AppBar(
         centerTitle: true,
@@ -70,7 +84,7 @@ class FlightDetailScreen extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              '${flightData['airlineName']}',
+                              '${widget.flightData['airlineName']}',
                               style: GoogleFonts.poppins(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,
@@ -83,7 +97,7 @@ class FlightDetailScreen extends StatelessWidget {
                             ),
                             const SizedBox(width: 5),
                             Text(
-                              '${flightData['planeModel']}',
+                              '${widget.flightData['planeModel']}',
                               style: GoogleFonts.poppins(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,
@@ -93,7 +107,7 @@ class FlightDetailScreen extends StatelessWidget {
                         ),
                         Text(
                           DateFormat('E,dMMM')
-                              .format(DateTime.parse(flightData['date'])),
+                              .format(DateTime.parse(widget.flightData['date'])),
                           style: GoogleFonts.poppins(
                             fontSize: 12,
                             fontWeight: FontWeight.w300,
@@ -128,7 +142,7 @@ class FlightDetailScreen extends StatelessWidget {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
                                 child: Image.network(
-                                  flightData['imgUrl'] ?? '',
+                                  widget.flightData['imgUrl'] ?? '',
                                   height: 50,
                                   width: 50,
                                   fit: BoxFit.fill,
@@ -142,13 +156,13 @@ class FlightDetailScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  '${flightData['fromTime']}',
+                                  '${widget.flightData['fromTime']}',
                                   style: GoogleFonts.poppins(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w300),
                                 ),
                                 Text(
-                                  '${flightData['fromPlace']}',
+                                  '${widget.flightData['fromPlace']}',
                                   style: GoogleFonts.poppins(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w300),
@@ -160,7 +174,7 @@ class FlightDetailScreen extends StatelessWidget {
                         Column(
                           children: [
                             Text(
-                              '${flightData['duration']}',
+                              '${widget.flightData['duration']}',
                               style: GoogleFonts.poppins(
                                   fontSize: 12, fontWeight: FontWeight.w300),
                             ),
@@ -170,7 +184,7 @@ class FlightDetailScreen extends StatelessWidget {
                               child: const Divider(thickness: 1),
                             ),
                             Text(
-                              '${flightData['stoppage']}',
+                              '${widget.flightData['stoppage']}',
                               style: GoogleFonts.poppins(
                                   fontSize: 12, fontWeight: FontWeight.w300),
                             ),
@@ -179,12 +193,12 @@ class FlightDetailScreen extends StatelessWidget {
                         Column(
                           children: [
                             Text(
-                              '${flightData['toTime']}',
+                              '${widget.flightData['toTime']}',
                               style: GoogleFonts.poppins(
                                   fontSize: 15, fontWeight: FontWeight.w300),
                             ),
                             Text(
-                              '${flightData['toPlace']}',
+                              '${widget.flightData['toPlace']}',
                               style: GoogleFonts.poppins(
                                   fontSize: 12, fontWeight: FontWeight.w300),
                             ),
@@ -209,19 +223,19 @@ class FlightDetailScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          '${flightData['flightClass']}',
+                          '${widget.flightData['flightClass']}',
                           style: GoogleFonts.poppins(
                               fontSize: 12, fontWeight: FontWeight.w300),
                         ),
                         Text(
-                          flightData['refundable'] ? 'Yes' : 'No',
+                          widget.flightData['refundable'] ? 'Yes' : 'No',
                           style: GoogleFonts.poppins(
                             fontSize: 12,
                             fontWeight: FontWeight.w300,
                           ),
                         ),
                         Text(
-                          flightData['insurance'] ? 'Yes' : 'No',
+                          widget.flightData['insurance'] ? 'Yes' : 'No',
                           style: GoogleFonts.poppins(
                             fontSize: 12,
                             fontWeight: FontWeight.w300,
@@ -231,12 +245,12 @@ class FlightDetailScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              '${flightData['regularPrice']}',
+                              '${widget.flightData['regularPrice']}',
                               style: GoogleFonts.poppins(
                                   fontSize: 12, fontWeight: FontWeight.w300),
                             ),
                             Text(
-                              '${flightData['ourPrice']}',
+                              '${widget.flightData['ourPrice']}',
                               style: GoogleFonts.poppins(
                                   fontSize: 12, fontWeight: FontWeight.w300),
                             ),
@@ -245,6 +259,11 @@ class FlightDetailScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                  Text(
+                    '${airlineData?['facilities']} $isLoading' ,    
+                    style: GoogleFonts.poppins(
+                        fontSize: 12, fontWeight: FontWeight.w300),
+                  ),
                 ],
               ),
             ),
@@ -252,5 +271,33 @@ class FlightDetailScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+  Future<void> getAeroplaneByModel(String model) async {
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('airlines')
+          .where('airplaneModel', isEqualTo: model)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        DocumentSnapshot doc = querySnapshot.docs.first;
+        setState(() {
+          isLoading = false;
+          airlineData = doc.data()as Map<String, dynamic>;
+        });
+      } else {
+        setState(() {
+          isLoading= false;
+        });
+        print('No aeroplane found with model: $model');
+        return null;
+      }
+    } catch (e) {
+      setState(() {
+        isLoading= false;
+      });
+      print('Error getting aeroplane details: $e');
+      return null;
+    }
   }
 }
