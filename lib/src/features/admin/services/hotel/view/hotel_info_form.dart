@@ -17,6 +17,7 @@ class _HotelInformationFormState extends State<HotelInformationForm> {
   final _formKey = GlobalKey<FormState>();
   String _name = '';
   late  String _location = '';
+
   final double _rating = 0;
   final List<String> _rooms = [];
   final List<String> _facilities = [];
@@ -32,6 +33,7 @@ class _HotelInformationFormState extends State<HotelInformationForm> {
   final List<String> _meds = [];
   final List<String> _languages = [];
   String _imgUrl = '';
+  late  String _address = '';
 
   void _submitForm(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
@@ -55,6 +57,7 @@ class _HotelInformationFormState extends State<HotelInformationForm> {
         _meds,
         _languages,
         _imgUrl,
+        _address,
       );
       Navigator.pop(context);
     }
@@ -154,7 +157,7 @@ class _HotelInformationFormState extends State<HotelInformationForm> {
                 Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: AdminTextFormField(
-                    hintText: 'Address',
+                    hintText: 'location',
                     prefixIcon: Icons.location_on_rounded,
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
@@ -163,6 +166,20 @@ class _HotelInformationFormState extends State<HotelInformationForm> {
                       return null;
                     },
                     onSaved: (value) => _location = value!,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: AdminTextFormField(
+                    hintText: 'Address',
+                    prefixIcon: Icons.location_on_rounded,
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return 'Please enter the hotel name';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) => _address = value!,
                   ),
                 ),
                 const SizedBox(

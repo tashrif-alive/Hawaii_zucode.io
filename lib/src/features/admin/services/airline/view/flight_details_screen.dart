@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-
 import '../../../../user/components/ticket/view/plane_ticket.dart';
 
 class FlightDetailScreen extends StatefulWidget {
@@ -17,7 +16,7 @@ class FlightDetailScreen extends StatefulWidget {
 
 class _FlightDetailScreenState extends State<FlightDetailScreen> {
 
-   Map<String, dynamic>? airlineData;
+  Map<String, dynamic>? airlineData;
   bool isLoading=false;
   @override
   void initState() {

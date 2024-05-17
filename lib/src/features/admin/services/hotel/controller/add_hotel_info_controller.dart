@@ -24,6 +24,7 @@ class HotelInformationController {
     List<String> meds,
     List<String> languages,
     String imgUrl,
+    String address,
   ) async {
     try {
       String id = _generateRandomId();
@@ -46,7 +47,9 @@ class HotelInformationController {
                     servicesAndConveniences: servicesAndConveniences,
                     meds: meds,
                     languages: languages,
-                    imgUrl: imgUrl)
+                    imgUrl: imgUrl,
+                address: address
+            )
                 .toMap(),
           );
     } catch (e) {

@@ -17,6 +17,7 @@ class HotelInformation {
   final List<String> meds;
   final List<String> languages;
   final String imgUrl;
+  final String address;
 
   HotelInformation({
     required this.id,
@@ -37,6 +38,7 @@ class HotelInformation {
     required this.meds,
     required this.languages,
     required this.imgUrl,
+    required this.address,
   });
 
   Map<String, dynamic> toMap() {
@@ -58,31 +60,33 @@ class HotelInformation {
       'servicesAndConveniences': servicesAndConveniences,
       'meds': meds,
       'languages': languages,
-      'imgUrl': imgUrl
+      'imgUrl': imgUrl,
+      'address': address
     };
   }
 
   factory HotelInformation.fromMap(Map<String, dynamic> map) {
     return HotelInformation(
-      id: map['id'],
-      name: map['name'],
-      location: map['location'],
-      rating: map['rating'].toDouble(),
-      facilities: List<String>.from(map['facilities'] ?? []),
-      rooms: List<String>.from(map['rooms'] ?? []),
-      access: List<String>.from(map['access'] ?? []),
-      roomAmenities: List<String>.from(map['roomAmenities'] ?? []),
-      safetySecurity: List<String>.from(map['safetySecurity'] ?? []),
-      bathRoom: List<String>.from(map['bathRoom'] ?? []),
-      family: List<String>.from(map['family'] ?? []),
-      transport: List<String>.from(map['transport'] ?? []),
-      internetServices: List<String>.from(map['internetServices'] ?? []),
-      sports: List<String>.from(map['sports'] ?? []),
-      servicesAndConveniences:
-          List<String>.from(map['servicesAndConveniences'] ?? []),
-      meds: List<String>.from(map['meds'] ?? []),
-      languages: List<String>.from(map['languages'] ?? []),
-      imgUrl: map['imgUrl']
+        id: map['id'],
+        name: map['name'],
+        location: map['location'],
+        rating: map['rating'].toDouble(),
+        facilities: List<String>.from(map['facilities'] ?? []),
+        rooms: List<String>.from(map['rooms'] ?? []),
+        access: List<String>.from(map['access'] ?? []),
+        roomAmenities: List<String>.from(map['roomAmenities'] ?? []),
+        safetySecurity: List<String>.from(map['safetySecurity'] ?? []),
+        bathRoom: List<String>.from(map['bathRoom'] ?? []),
+        family: List<String>.from(map['family'] ?? []),
+        transport: List<String>.from(map['transport'] ?? []),
+        internetServices: List<String>.from(map['internetServices'] ?? []),
+        sports: List<String>.from(map['sports'] ?? []),
+        servicesAndConveniences:
+            List<String>.from(map['servicesAndConveniences'] ?? []),
+        meds: List<String>.from(map['meds'] ?? []),
+        languages: List<String>.from(map['languages'] ?? []),
+        imgUrl: map['imgUrl'],
+        address: map['address']
     );
   }
 }
