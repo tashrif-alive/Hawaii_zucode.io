@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: blackSwatch,
       ),
-      home: const NavigationMenu(),
+      home: const AdminBottomBar(),
     );
   }
 }

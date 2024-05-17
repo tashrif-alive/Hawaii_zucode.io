@@ -15,10 +15,13 @@ class AirlineInfoUpload extends StatefulWidget {
 class _AirlineInfoUploadState extends State<AirlineInfoUpload> {
   final _airlineController = AirlineController();
   final _formKey = GlobalKey<FormState>();
-
+  final TextEditingController _air = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _airPlaneModelController = TextEditingController();
+  final TextEditingController _bagController = TextEditingController();
   String _airline = '';
   String _address = '';
-  String _airPlaneModel = '';
+  late String _airPlaneModel = '';
   String _imgUrl = '';
   String _facilities = '';
   final List<String> _routes = [];
@@ -30,11 +33,15 @@ class _AirlineInfoUploadState extends State<AirlineInfoUpload> {
       _formKey.currentState!.save();
 
       await _airlineController.addAirline(
-        _airline,
-        _address,
-        _airPlaneModel,
+        _air.text,
+        _addressController.text,
+        _airPlaneModelController.text,
+        // _airline,
+        // _address,
+        // _airPlaneModel,
         _imgUrl,
-        _facilities,
+        _bagController.text,
+        // _facilities,
         _routes,
         _refundable,
         _insurance,
@@ -42,7 +49,6 @@ class _AirlineInfoUploadState extends State<AirlineInfoUpload> {
       Navigator.pop(context);
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +80,7 @@ class _AirlineInfoUploadState extends State<AirlineInfoUpload> {
                   children: [
                     Expanded(
                       child: AdminTextFormField(
+                        controller: _air,
                         hintText: 'Airline',
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -89,6 +96,7 @@ class _AirlineInfoUploadState extends State<AirlineInfoUpload> {
                     Expanded(
                       child: AdminTextFormField(
                         hintText: 'Plane Model',
+                        controller: _airPlaneModelController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter plane model';
@@ -105,6 +113,7 @@ class _AirlineInfoUploadState extends State<AirlineInfoUpload> {
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: AdminTextFormField(
+                  controller: _addressController,
                   hintText: 'Address',
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -143,6 +152,7 @@ class _AirlineInfoUploadState extends State<AirlineInfoUpload> {
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: AdminTextFormField(
+                  controller: _bagController,
                   hintText: 'Baggage',
                   validator: (value) {
                     if (value == null || value.isEmpty) {

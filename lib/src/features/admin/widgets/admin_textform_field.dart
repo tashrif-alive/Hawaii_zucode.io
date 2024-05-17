@@ -5,19 +5,22 @@ class AdminTextFormField extends StatelessWidget {
   final String hintText;
   final IconData prefixIcon;
   final String? Function(String?)? validator;
+  TextEditingController? controller;
   final void Function(String?)? onSaved;
 
-  const AdminTextFormField({
+  AdminTextFormField({
     Key? key,
     required this.hintText,
     required this.prefixIcon,
     this.validator,
+    this.controller,
     this.onSaved,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         prefixIcon: Icon(prefixIcon),
         iconColor: Colors.grey,
