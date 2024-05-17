@@ -16,6 +16,7 @@ class HotelInformation {
   final List<String> servicesAndConveniences;
   final List<String> meds;
   final List<String> languages;
+  final String imgUrl;
 
   HotelInformation({
     required this.id,
@@ -35,6 +36,7 @@ class HotelInformation {
     required this.servicesAndConveniences,
     required this.meds,
     required this.languages,
+    required this.imgUrl,
   });
 
   Map<String, dynamic> toMap() {
@@ -43,7 +45,7 @@ class HotelInformation {
       'name': name,
       'location': location,
       'rating': rating,
-      'rooms' : rooms,
+      'rooms': rooms,
       'facilities': facilities,
       'access': access,
       'roomAmenities': roomAmenities,
@@ -56,6 +58,7 @@ class HotelInformation {
       'servicesAndConveniences': servicesAndConveniences,
       'meds': meds,
       'languages': languages,
+      'imgUrl': imgUrl
     };
   }
 
@@ -79,6 +82,7 @@ class HotelInformation {
           List<String>.from(map['servicesAndConveniences'] ?? []),
       meds: List<String>.from(map['meds'] ?? []),
       languages: List<String>.from(map['languages'] ?? []),
+      imgUrl: map['imgUrl']
     );
   }
 }

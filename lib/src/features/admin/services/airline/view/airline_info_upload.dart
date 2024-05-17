@@ -17,7 +17,8 @@ class _AirlineInfoUploadState extends State<AirlineInfoUpload> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _air = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
-  final TextEditingController _airPlaneModelController = TextEditingController();
+  final TextEditingController _airPlaneModelController =
+      TextEditingController();
   final TextEditingController _bagController = TextEditingController();
   String _airline = '';
   String _address = '';

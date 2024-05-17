@@ -23,29 +23,31 @@ class HotelInformationController {
     List<String> servicesAndConveniences,
     List<String> meds,
     List<String> languages,
+    String imgUrl,
   ) async {
     try {
       String id = _generateRandomId();
       await hotelInformation.doc(id).set(
             HotelInformation(
-              id: id,
-              name: name,
-              location: location,
-              rating: rating,
-              rooms: rooms,
-              facilities: facilities,
-              access: access,
-              roomAmenities: roomAmenities,
-              safetySecurity: safetySecurity,
-              bathRoom: bathRoom,
-              family: family,
-              transport: transport,
-              internetServices: internetServices,
-              sports: sports,
-              servicesAndConveniences: servicesAndConveniences,
-              meds: meds,
-              languages: languages,
-            ).toMap(),
+                    id: id,
+                    name: name,
+                    location: location,
+                    rating: rating,
+                    rooms: rooms,
+                    facilities: facilities,
+                    access: access,
+                    roomAmenities: roomAmenities,
+                    safetySecurity: safetySecurity,
+                    bathRoom: bathRoom,
+                    family: family,
+                    transport: transport,
+                    internetServices: internetServices,
+                    sports: sports,
+                    servicesAndConveniences: servicesAndConveniences,
+                    meds: meds,
+                    languages: languages,
+                    imgUrl: imgUrl)
+                .toMap(),
           );
     } catch (e) {
       print("Error adding Hotel: $e");

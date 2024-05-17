@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../../../widgets/image_picker/image_view.dart';
 import '../../../widgets/admin_textform_field.dart';
 import '../controller/add_hotel_info_controller.dart';
 
@@ -14,7 +15,6 @@ class HotelInformationForm extends StatefulWidget {
 class _HotelInformationFormState extends State<HotelInformationForm> {
   final _hotelInfoController = HotelInformationController();
   final _formKey = GlobalKey<FormState>();
-
   String _name = '';
   late  String _location = '';
   final double _rating = 0;
@@ -31,6 +31,7 @@ class _HotelInformationFormState extends State<HotelInformationForm> {
   final List<String> _servicesAndConveniences = [];
   final List<String> _meds = [];
   final List<String> _languages = [];
+  String _imgUrl = '';
 
   void _submitForm(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
@@ -53,6 +54,7 @@ class _HotelInformationFormState extends State<HotelInformationForm> {
         _servicesAndConveniences,
         _meds,
         _languages,
+        _imgUrl,
       );
       Navigator.pop(context);
     }
@@ -166,7 +168,12 @@ class _HotelInformationFormState extends State<HotelInformationForm> {
                 const SizedBox(
                   height: 8,
                 ),
-
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: ImageView(onUploadSuccess: (String url) {
+                    _imgUrl = url;
+                  }),
+                ),
                 ///Rooms
                 Padding(
                   padding:
@@ -175,34 +182,10 @@ class _HotelInformationFormState extends State<HotelInformationForm> {
                     'Rooms',
                     [
                       'Standard Room',
-                      'Standard Room',
-                      'Standard Room',
-                      'Standard Room',
-                      'Standard Room',
-                      'One King Standard',
-                      'One King Standard',
-                      'One King Standard',
-                      'One King Standard',
                       'One King Standard',
                       '2 Single Standard',
-                      '2 Single Standard',
-                      '2 Single Standard',
-                      '2 Single Standard',
-                      '2 Single Standard',
-                      '2 Single Bed Standard Highway view',
-                      '2 Single Bed Standard Highway view',
-                      '2 Single Bed Standard Highway view',
-                      '2 Single Bed Standard Highway view',
                       '2 Single Bed Standard Highway view',
                       '1 king Bed Standard Highway view',
-                      '1 king Bed Standard Highway view',
-                      '1 king Bed Standard Highway view',
-                      '1 king Bed Standard Highway view',
-                      '1 king Bed Standard Highway view',
-                      '1 king Bed Premium',
-                      '1 king Bed Premium',
-                      '1 king Bed Premium',
-                      '1 king Bed Premium',
                       '1 king Bed Premium',
                     ],
                     _facilities,
