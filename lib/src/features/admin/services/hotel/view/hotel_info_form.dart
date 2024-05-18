@@ -205,7 +205,7 @@ class _HotelInformationFormState extends State<HotelInformationForm> {
                       '1 king Bed Standard Highway view',
                       '1 king Bed Premium',
                     ],
-                    _facilities,
+                    _rooms,
                   ),
                 ),
                 ///Facilities

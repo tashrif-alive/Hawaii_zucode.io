@@ -217,42 +217,82 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                     ),
                   ),
                   Container(height: 5, color: Colors.blueGrey.shade50),
-                  Container(padding: const EdgeInsets.only(top: 12, left: 12, right: 12,bottom: 12),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                  Container(
+                    padding: const EdgeInsets.only(
+                        top: 12, left: 12, right: 12, bottom: 12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Booking Details',
+                          'Travel Details',
                           style: GoogleFonts.ubuntu(
                               fontSize: 16, fontWeight: FontWeight.w500),
                         ),
-                        SizedBox(height: 5,),
+                        SizedBox(
+                          height: 5,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                          Text(
-                            'Date',
-                            style: GoogleFonts.ubuntu(
-                                fontSize: 16, fontWeight: FontWeight.w500),
-                          ),
-                          Text(
-                            'Guests',
-                            style: GoogleFonts.ubuntu(
-                                fontSize: 16, fontWeight: FontWeight.w500),
-                          ),
-                        ],)
+                            Text(
+                              'Date',
+                              style: GoogleFonts.ubuntu(
+                                  fontSize: 13, fontWeight: FontWeight.w400),
+                            ),
+                            Text(
+                              'Guests',
+                              style: GoogleFonts.ubuntu(
+                                  fontSize: 13, fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
                   Container(height: 5, color: Colors.blueGrey.shade50),
+                  Container(
+                    padding: const EdgeInsets.only(
+                        top: 12, left: 12, right: 12, bottom: 12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Facilities',
+                          style: GoogleFonts.ubuntu(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '${hotelData?['facilities'] ?? ''}',
+                              style: GoogleFonts.ubuntu(
+                                  fontSize: 12, fontWeight: FontWeight.w300),
+                            ),
+                          ],)
 
-                  
+                        // Column(
+                        //   crossAxisAlignment: CrossAxisAlignment.start,
+                        //   children: (hotelData?['facilities'] ?? '')
+                        //       .split(',')
+                        //       .map<Widget>((facility) => Text(
+                        //             facility.trim(),
+                        //             style: GoogleFonts.ubuntu(
+                        //                 fontSize: 12,
+                        //                 fontWeight: FontWeight.w300),
+                        //           ))
+                        //       .toList(),
+                        // ),
+                      ],
+                    ),
+                  ),
+
                   Text('Cost: \$${widget.data['offeredHotelCost']}'),
                   Text('ID: ${widget.data['id']}'),
-                  Text(
-                    'Languages: ${hotelData?['languages'] ?? ''}',
-                    style: GoogleFonts.ubuntu(
-                        fontSize: 12, fontWeight: FontWeight.w300),
-                  ),
+
                   // Add more fields as needed
                 ],
               ),
