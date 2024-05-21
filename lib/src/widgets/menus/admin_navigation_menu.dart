@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../features/admin/services/airline/view/add_flight_form.dart';
@@ -28,7 +29,7 @@ class _AdminBottomBarState extends State<AdminBottomBar> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey.shade50,
+        backgroundColor: Colors.white,
         elevation: 0,
         automaticallyImplyLeading: false,
         title: Row(
@@ -51,7 +52,7 @@ class _AdminBottomBarState extends State<AdminBottomBar> {
                     return [
                       PopupMenuItem(
                         child: ListTile(
-                          leading: const Icon(Icons.flight_sharp,
+                          leading: const Icon(FontAwesomeIcons.plane,
                               color: Colors.black),
                           title: Text(
                             'Flight',
