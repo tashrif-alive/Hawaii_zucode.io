@@ -71,7 +71,7 @@ class _AdminServicesScreenState extends State<AdminServicesScreen> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              const Divider(thickness: 1),
+
               const SizedBox(
                 height: 12,
               ),
