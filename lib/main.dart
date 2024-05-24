@@ -5,12 +5,9 @@ import 'package:hawaii_beta/firebase_options.dart';
 import 'package:hawaii_beta/src/widgets/menus/admin_navigation_menu.dart';
 import 'package:hawaii_beta/src/widgets/menus/user_navigation_menu.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -41,8 +38,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: blackSwatch,
       ),
-      home: const NavigationMenu(),
+      home: const AdminBottomBar(),
     );
   }
 }
-
