@@ -15,15 +15,12 @@ class SignUpHeaderWidgets extends StatelessWidget {
               height: 80,
               child: Image.asset("assets/icons/logos/hawaii_logo.png")),
         ),
-        Align(
-          alignment: Alignment.topLeft,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 13.0),
-            child: Text(
-              "Let's Create your account..",
-              style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.w700, fontSize: 20),
-            ),
+        Padding(
+          padding: const EdgeInsets.only(left: 13.0),
+          child: Text(
+            "Let's Create your account..",
+            style: GoogleFonts.poppins(
+                fontWeight: FontWeight.w700, fontSize: 20),
           ),
         ),
       ],

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hawaii_beta/src/features/admin/controls/upload_banners/upload_destination_banner_contoller.dart';
 
 class ManageDestinationBannerList extends StatelessWidget {
@@ -53,6 +56,24 @@ class ManageDestinationBannerList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+      backgroundColor: Colors.white,
+      elevation: 0,
+      title: Text(
+        "Manage Banner",
+        style: GoogleFonts.poppins(
+            fontSize: 16, fontWeight: FontWeight.w700, color: Colors.black),
+      ),
+      centerTitle: true,
+      leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: const Icon(
+            Icons.arrow_back_rounded,
+            color: Colors.black,
+          )),
+    ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('destinationBanner').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -98,13 +119,13 @@ class ManageDestinationBannerList extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.0),
             child: Image.network(
               data['imgUrl'] ?? '',
-              height: 120,
+              height: 140,
               width: double.infinity,
               fit: BoxFit.fill,
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.delete,color: Colors.red,),
+            icon: const Icon(Icons.delete,color: Colors.black,),
             onPressed: () => _showDeleteConfirmationDialog(context, id),
           ),
         ],

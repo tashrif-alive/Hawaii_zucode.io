@@ -38,7 +38,7 @@ class _DestinationBannerScreenState extends State<DestinationBannerScreen> {
         elevation: 0,
         title: Text(
           "Banners",
-          style: GoogleFonts.poppins(
+          style: GoogleFonts.ubuntu(
               fontSize: 16, fontWeight: FontWeight.w700, color: Colors.black),
         ),
         centerTitle: true,
@@ -60,7 +60,7 @@ class _DestinationBannerScreenState extends State<DestinationBannerScreen> {
             children: [
               Text(
                 "Upload Banners",
-                style: GoogleFonts.poppins(
+                style: GoogleFonts.ubuntu(
                     fontSize: 16, fontWeight: FontWeight.w700),
               ),
               const SizedBox(
@@ -94,7 +94,7 @@ class _DestinationBannerScreenState extends State<DestinationBannerScreen> {
                             ),
                             Text(
                               DestinationBannerScreen[index]['title'],
-                              style: GoogleFonts.poppins(
+                              style: GoogleFonts.ubuntu(
                                 fontWeight: FontWeight.w500,
                                 color: DestinationBannerScreen[index]['color'],
                                 fontSize: 11, // Adjust text size here
@@ -109,9 +109,10 @@ class _DestinationBannerScreenState extends State<DestinationBannerScreen> {
               ),
               const SizedBox(height: 12),
               const Divider(thickness: 1),
+              const SizedBox(height: 12),
               Text(
                   "All Banners",
-                  style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w700)),
+                  style: GoogleFonts.ubuntu(fontSize: 16, fontWeight: FontWeight.w700)),
               const SizedBox(height: 12),
               const DestinationBannerList(),
             ],

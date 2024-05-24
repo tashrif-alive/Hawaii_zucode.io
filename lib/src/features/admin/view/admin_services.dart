@@ -57,19 +57,6 @@ class _AdminServicesScreenState extends State<AdminServicesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Text(
-          "Services",
-          style: GoogleFonts.ubuntu(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: Colors.black,
-          ),
-        ),
-        centerTitle: true,
-      ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
@@ -80,13 +67,15 @@ class _AdminServicesScreenState extends State<AdminServicesScreen> {
               Text(
                 "Services",
                 style: GoogleFonts.ubuntu(
-                  fontSize: 15,
+                  fontSize: 17,
                   fontWeight: FontWeight.w700,
                 ),
               ),
+              const Divider(thickness: 1),
               const SizedBox(
                 height: 12,
               ),
+
               GridView.builder(
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -110,7 +99,7 @@ class _AdminServicesScreenState extends State<AdminServicesScreen> {
                         ),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(15),
                         child: Text(
                           services[index]['title'],
                           style: GoogleFonts.ubuntu(
@@ -124,8 +113,6 @@ class _AdminServicesScreenState extends State<AdminServicesScreen> {
                   );
                 },
               ),
-              const SizedBox(height: 12),
-              const Divider(thickness: 1),
               const SizedBox(height: 20),
               Text(
                 "Companies",

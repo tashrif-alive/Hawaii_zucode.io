@@ -9,8 +9,9 @@ class HotelFacilitiesScreen {
     return showModalBottomSheet(
         context: context,
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(12), topLeft: Radius.circular(12))),
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(12), topLeft: Radius.circular(12)),
+        ),
         isScrollControlled: true,
         useSafeArea: true,
         builder: (context) => DraggableScrollableSheet(
@@ -18,7 +19,8 @@ class HotelFacilitiesScreen {
               builder: (context, scrollController) => SingleChildScrollView(
                 controller: scrollController,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 30),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                   child: Column(
                     children: [
                       Text(
@@ -57,6 +59,7 @@ class HotelFacilitiesScreen {
                       const SizedBox(
                         height: 12,
                       ),
+
                       ///Access
                       Row(
                         children: [
@@ -81,6 +84,7 @@ class HotelFacilitiesScreen {
                       const SizedBox(
                         height: 12,
                       ),
+
                       ///safetySecurity
                       Row(
                         children: [
@@ -105,6 +109,7 @@ class HotelFacilitiesScreen {
                       const SizedBox(
                         height: 12,
                       ),
+
                       ///roomAmenities
                       Row(
                         children: [
@@ -129,6 +134,7 @@ class HotelFacilitiesScreen {
                       const SizedBox(
                         height: 12,
                       ),
+
                       ///bathRoom
                       Row(
                         children: [
@@ -148,11 +154,12 @@ class HotelFacilitiesScreen {
                       ),
                       HotelFacilitiesScreen().accessListView(
                           (hotelData['bathRoom'] as List<dynamic>?)
-                              ?.cast<String>() ??
+                                  ?.cast<String>() ??
                               []),
                       const SizedBox(
                         height: 12,
                       ),
+
                       ///family
                       Row(
                         children: [
@@ -172,11 +179,12 @@ class HotelFacilitiesScreen {
                       ),
                       HotelFacilitiesScreen().accessListView(
                           (hotelData['family'] as List<dynamic>?)
-                              ?.cast<String>() ??
+                                  ?.cast<String>() ??
                               []),
                       const SizedBox(
                         height: 12,
                       ),
+
                       ///transport
                       Row(
                         children: [
@@ -196,11 +204,12 @@ class HotelFacilitiesScreen {
                       ),
                       HotelFacilitiesScreen().accessListView(
                           (hotelData['transport'] as List<dynamic>?)
-                              ?.cast<String>() ??
+                                  ?.cast<String>() ??
                               []),
                       const SizedBox(
                         height: 12,
                       ),
+
                       ///internetServices
                       Row(
                         children: [
@@ -220,11 +229,12 @@ class HotelFacilitiesScreen {
                       ),
                       HotelFacilitiesScreen().accessListView(
                           (hotelData['internetServices'] as List<dynamic>?)
-                              ?.cast<String>() ??
+                                  ?.cast<String>() ??
                               []),
                       const SizedBox(
                         height: 12,
                       ),
+
                       ///sports
                       Row(
                         children: [
@@ -244,11 +254,12 @@ class HotelFacilitiesScreen {
                       ),
                       HotelFacilitiesScreen().accessListView(
                           (hotelData['sports'] as List<dynamic>?)
-                              ?.cast<String>() ??
+                                  ?.cast<String>() ??
                               []),
                       const SizedBox(
                         height: 12,
                       ),
+
                       ///servicesAndConveniences
                       Row(
                         children: [
@@ -267,12 +278,14 @@ class HotelFacilitiesScreen {
                         ],
                       ),
                       HotelFacilitiesScreen().accessListView(
-                          (hotelData['servicesAndConveniences'] as List<dynamic>?)
-                              ?.cast<String>() ??
+                          (hotelData['servicesAndConveniences']
+                                      as List<dynamic>?)
+                                  ?.cast<String>() ??
                               []),
                       const SizedBox(
                         height: 12,
                       ),
+
                       ///Safety & Cleanliness
                       Row(
                         children: [
@@ -292,15 +305,16 @@ class HotelFacilitiesScreen {
                       ),
                       HotelFacilitiesScreen().accessListView(
                           (hotelData['meds'] as List<dynamic>?)
-                              ?.cast<String>() ??
+                                  ?.cast<String>() ??
                               []),
                       const SizedBox(
                         height: 12,
                       ),
+
                       ///languages
                       Row(
                         children: [
-                         Icon(
+                          const Icon(
                             FontAwesomeIcons.language,
                             size: 15,
                           ),
@@ -316,7 +330,7 @@ class HotelFacilitiesScreen {
                       ),
                       HotelFacilitiesScreen().accessListView(
                           (hotelData['languages'] as List<dynamic>?)
-                              ?.cast<String>() ??
+                                  ?.cast<String>() ??
                               []),
                     ],
                   ),
@@ -343,6 +357,7 @@ class HotelFacilitiesScreen {
         return const Icon(Icons.help_outline);
     }
   }
+
   Widget facilityGridView(List<String> facilities) {
     final displayedFacilities =
         facilities.length > 6 ? facilities.sublist(0, 6) : facilities;
@@ -375,6 +390,7 @@ class HotelFacilitiesScreen {
       },
     );
   }
+
   Widget accessListView(List<String> access) {
     final displayedAccess = access.length > 50 ? access.sublist(0, 50) : access;
 
@@ -401,6 +417,7 @@ class HotelFacilitiesScreen {
       },
     );
   }
+
   Widget safetySecurityListView(List<String> safetySecurity) {
     final displayedSafetySecurity = safetySecurity.length > 50
         ? safetySecurity.sublist(0, 50)
@@ -429,6 +446,7 @@ class HotelFacilitiesScreen {
       },
     );
   }
+
   Widget roomAmenitiesListView(List<String> roomAmenities) {
     final displayedRoomAmenities = roomAmenities.length > 50
         ? roomAmenities.sublist(0, 50)
@@ -457,10 +475,10 @@ class HotelFacilitiesScreen {
       },
     );
   }
+
   Widget bathRoomListView(List<String> bathRoom) {
-    final displayedBathRoom = bathRoom.length > 50
-        ? bathRoom.sublist(0, 50)
-        : bathRoom;
+    final displayedBathRoom =
+        bathRoom.length > 50 ? bathRoom.sublist(0, 50) : bathRoom;
 
     return ListView.builder(
       shrinkWrap: true,
@@ -485,10 +503,9 @@ class HotelFacilitiesScreen {
       },
     );
   }
+
   Widget familyListView(List<String> family) {
-    final displayedFamily = family.length > 50
-        ? family.sublist(0, 50)
-        : family;
+    final displayedFamily = family.length > 50 ? family.sublist(0, 50) : family;
 
     return ListView.builder(
       shrinkWrap: true,
@@ -513,10 +530,10 @@ class HotelFacilitiesScreen {
       },
     );
   }
+
   Widget transportListView(List<String> transport) {
-    final displayedTransport = transport.length > 50
-        ? transport.sublist(0, 50)
-        : transport;
+    final displayedTransport =
+        transport.length > 50 ? transport.sublist(0, 50) : transport;
 
     return ListView.builder(
       shrinkWrap: true,
@@ -541,6 +558,7 @@ class HotelFacilitiesScreen {
       },
     );
   }
+
   Widget internetServicesListView(List<String> internetServices) {
     final displayedInternetServices = internetServices.length > 50
         ? internetServices.sublist(0, 50)
@@ -569,10 +587,9 @@ class HotelFacilitiesScreen {
       },
     );
   }
+
   Widget sportsListView(List<String> sports) {
-    final internetSports = sports.length > 50
-        ? sports.sublist(0, 50)
-        : sports;
+    final internetSports = sports.length > 50 ? sports.sublist(0, 50) : sports;
 
     return ListView.builder(
       shrinkWrap: true,
@@ -597,6 +614,7 @@ class HotelFacilitiesScreen {
       },
     );
   }
+
   Widget servicesAndConveniencesListView(List<String> servicesAndConveniences) {
     final displayedServicesAndConveniences = servicesAndConveniences.length > 50
         ? servicesAndConveniences.sublist(0, 50)
@@ -625,11 +643,9 @@ class HotelFacilitiesScreen {
       },
     );
   }
+
   Widget medsListView(List<String> meds) {
-    final displayedMeds
-    = meds.length > 50
-        ? meds.sublist(0, 50)
-        : meds;
+    final displayedMeds = meds.length > 50 ? meds.sublist(0, 50) : meds;
 
     return ListView.builder(
       shrinkWrap: true,
@@ -654,11 +670,10 @@ class HotelFacilitiesScreen {
       },
     );
   }
+
   Widget languagesListView(List<String> languages) {
-    final displayedLanguages
-    = languages.length > 50
-        ? languages.sublist(0, 50)
-        : languages;
+    final displayedLanguages =
+        languages.length > 50 ? languages.sublist(0, 50) : languages;
 
     return ListView.builder(
       shrinkWrap: true,

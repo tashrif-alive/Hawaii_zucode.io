@@ -43,8 +43,8 @@ class _AirLineServicesState extends State<AirLineServices> {
         elevation: 0,
         title: Text(
           "Airline Services",
-          style: GoogleFonts.poppins(
-              fontSize: 16, fontWeight: FontWeight.w700, color: Colors.black),
+          style: GoogleFonts.ubuntu(
+              fontSize: 17, fontWeight: FontWeight.w800, color: Colors.black),
         ),
         centerTitle: true,
         leading: IconButton(
@@ -65,7 +65,7 @@ class _AirLineServicesState extends State<AirLineServices> {
             children: [
               Text(
                 "Services",
-                style: GoogleFonts.poppins(
+                style: GoogleFonts.ubuntu(
                     fontSize: 16, fontWeight: FontWeight.w700),
               ),
               const SizedBox(
@@ -104,7 +104,7 @@ class _AirLineServicesState extends State<AirLineServices> {
 
                           Text(
                             airlineServices[index]['title'],
-                            style: GoogleFonts.poppins(
+                            style: GoogleFonts.ubuntu(
                               fontWeight: FontWeight.w500,
                               color: airlineServices[index]['color'],
                               fontSize: 11, // Adjust text size here
@@ -120,7 +120,7 @@ class _AirLineServicesState extends State<AirLineServices> {
               const Divider(thickness: 1),
               Text(
                 "Available Flights ",
-                style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w700)),
+                style: GoogleFonts.ubuntu(fontSize: 16, fontWeight: FontWeight.w700)),
               const SizedBox(height: 12),
               // AdminSearchBarWidget(hintText: 'Search flights', onSearch: (String value) {},),
               const FlightListScreen()

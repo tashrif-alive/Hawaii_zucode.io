@@ -110,28 +110,6 @@ class _AdminMoreScreenState extends State<AdminMoreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Text(
-          "More",
-          style: GoogleFonts.ubuntu(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: Colors.black,
-          ),
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: const Icon(
-            Icons.arrow_back_rounded,
-            color: Colors.black,
-          ),
-        ),
-      ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(

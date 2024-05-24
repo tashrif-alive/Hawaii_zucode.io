@@ -31,8 +31,8 @@ class _AliancesBannerScreenState extends State<AliancesBannerScreen> {
         elevation: 0,
         title: Text(
           "Airline ",
-          style: GoogleFonts.poppins(
-              fontSize: 16, fontWeight: FontWeight.w700, color: Colors.black),
+          style: GoogleFonts.ubuntu(
+              fontSize: 17, fontWeight: FontWeight.w700, color: Colors.black),
         ),
         centerTitle: true,
         leading: IconButton(
@@ -47,14 +47,14 @@ class _AliancesBannerScreenState extends State<AliancesBannerScreen> {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(17.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 "Upload Banner",
-                style: GoogleFonts.poppins(
-                    fontSize: 16, fontWeight: FontWeight.w700),
+                style: GoogleFonts.ubuntu(
+                    fontSize: 17, fontWeight: FontWeight.w700),
               ),
               const SizedBox(
                 height: 12,
@@ -86,7 +86,7 @@ class _AliancesBannerScreenState extends State<AliancesBannerScreen> {
                           ),
                           Text(
                             aliancesBannerScreen[index]['title'],
-                            style: GoogleFonts.poppins(
+                            style: GoogleFonts.ubuntu(
                               fontWeight: FontWeight.w500,
                               color: aliancesBannerScreen[index]['color'],
                               fontSize: 11, // Adjust text size here
@@ -102,7 +102,7 @@ class _AliancesBannerScreenState extends State<AliancesBannerScreen> {
               const Divider(thickness: 1),
               Text(
                   "All Banners",
-                  style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w700)),
+                  style: GoogleFonts.ubuntu(fontSize: 17, fontWeight: FontWeight.w700)),
               const SizedBox(height: 12),
               const AliancesBannerList(),
             ],

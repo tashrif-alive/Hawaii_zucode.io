@@ -66,24 +66,7 @@ class _AdminControlsScreenState extends State<AdminControlsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Text(
-          "Controls",
-          style: GoogleFonts.poppins(
-              fontSize: 16, fontWeight: FontWeight.w700, color: Colors.black),
-        ),
-        centerTitle: true,
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(
-              Icons.arrow_back_rounded,
-              color: Colors.black,
-            )),
-      ),
+
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
@@ -92,9 +75,9 @@ class _AdminControlsScreenState extends State<AdminControlsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Services",
-                style: GoogleFonts.poppins(
-                    fontSize: 18, fontWeight: FontWeight.w700),
+                "Controls",
+                style: GoogleFonts.ubuntu(
+                    fontSize: 18, fontWeight: FontWeight.w800),
               ),
               const SizedBox(
                 height: 12,

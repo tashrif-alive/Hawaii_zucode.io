@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class UserBookedCabsScreen extends StatelessWidget {
@@ -10,14 +12,18 @@ class UserBookedCabsScreen extends StatelessWidget {
       length: 3, // Number of tabs
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.white,
           title: Text(
             "Cab Bookings",
-            style: GoogleFonts.poppins(
+            style: GoogleFonts.ubuntu(
                 fontSize: 16, fontWeight: FontWeight.w700, color: Colors.black),
           ),
+          leading:
+          IconButton(icon: Icon(Icons.arrow_back,color: Colors.black,), onPressed:()=> Get.back()),
           centerTitle: true,
           flexibleSpace: Container(),
           bottom: const TabBar(
+            labelColor: Colors.black,
             tabs: [
               Tab(
                 text: 'Upcoming',
