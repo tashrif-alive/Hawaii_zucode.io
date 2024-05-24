@@ -667,7 +667,7 @@ class TicketConfirmationScreen extends StatelessWidget {
       'seatBookText': seatBookText,
       'price': seatBookText.length * 1200, // 1200 is demo price
       'bookedByName': user?.displayName ?? "User",
-      'userID': user?.uid,
+      'userID': user?.displayName,
     });
   }
 }
