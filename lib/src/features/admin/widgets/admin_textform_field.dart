@@ -4,9 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 class AdminTextFormField extends StatelessWidget {
   final String hintText;
   final IconData prefixIcon;
+  final TextInputType keyboardType;
   final String? Function(String?)? validator;
   TextEditingController? controller;
   final void Function(String?)? onSaved;
+
 
   AdminTextFormField({
     Key? key,
@@ -14,12 +16,14 @@ class AdminTextFormField extends StatelessWidget {
     required this.prefixIcon,
     this.validator,
     this.controller,
+    this.keyboardType=TextInputType.text,
     this.onSaved,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: keyboardType,
       controller: controller,
       decoration: InputDecoration(
         prefixIcon: Icon(prefixIcon),

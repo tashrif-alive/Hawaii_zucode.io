@@ -237,6 +237,7 @@ class _FlightFormViewState extends State<FlightFormView> {
                     const SizedBox(width: 8),
                     Expanded(
                         child: AdminTextFormField(
+                          keyboardType: TextInputType.number,
                       hintText: 'Arrival Terminal',
                       prefixIcon: Icons.transit_enterexit,
                       validator: (value) {
