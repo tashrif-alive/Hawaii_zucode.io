@@ -46,8 +46,7 @@ class _FlightBookedScreenState extends State<FlightBookedScreen> {
                               controller: _searchController,
                               decoration: InputDecoration(
                                 hintText: 'Search flights',
-                                hintStyle: TextStyle(
-                                    color: Colors.black.withOpacity(0.5)),
+                                hintStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
                                 border: InputBorder.none,
                               ),
                               style: GoogleFonts.ubuntu(
@@ -61,8 +60,7 @@ class _FlightBookedScreenState extends State<FlightBookedScreen> {
                             ),
                           ),
                           IconButton(
-                              icon: const Icon(Icons.search,
-                                  color: Colors.black87),
+                              icon: const Icon(Icons.search, color: Colors.black87),
                               onPressed: () {
                                 if (kDebugMode) {
                                   print(_searchController.text);
@@ -92,11 +90,8 @@ class _FlightBookedScreenState extends State<FlightBookedScreen> {
             ),
             Expanded(
               child: StreamBuilder(
-                stream: FirebaseFirestore.instance
-                    .collection('booking').doc('flightData')
-                    .snapshots(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                stream: FirebaseFirestore.instance.collection('booking').snapshots(),
+                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasError) {
                     return Center(
                       child: Text('Error: ${snapshot.error}'),
@@ -109,12 +104,10 @@ class _FlightBookedScreenState extends State<FlightBookedScreen> {
                     );
                   }
 
-                  List<DocumentSnapshot> filteredFlights =
-                  snapshot.data!.docs.where((document) {
-                    String airlineName =
-                    document['airlineName'].toString().toLowerCase();
+                  List<DocumentSnapshot> filteredFlights = snapshot.data!.docs.where((document) {
+                    String airlineName = document['flightDataId']['airlineName'].toString().toLowerCase();
                     String searchText = _searchController.text.toLowerCase();
-                    return airlineName.contains(searchText) ;
+                    return airlineName.contains(searchText);
                   }).toList();
 
                   return Column(
@@ -123,18 +116,16 @@ class _FlightBookedScreenState extends State<FlightBookedScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 18.0),
                         child: Text('My ticket (${filteredFlights.length})',
-                            style: GoogleFonts.ubuntu(
-                                fontSize: 12, fontWeight: FontWeight.w300)),
+                            style: GoogleFonts.ubuntu(fontSize: 12, fontWeight: FontWeight.w300)),
                       ),
                       ListView(
                         shrinkWrap: true,
-                        children:
-                        filteredFlights.map((DocumentSnapshot document) {
-                          Map<String, dynamic> data =
-                          document.data() as Map<String, dynamic>;
+                        children: filteredFlights.map((DocumentSnapshot document) {
+                          Map<String, dynamic> data = document.data() as Map<String, dynamic>;
                           return Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
+                              padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.0),
                                 color: Colors.white,
@@ -142,7 +133,7 @@ class _FlightBookedScreenState extends State<FlightBookedScreen> {
                               child: Row(
                                 children: [
                                   Text(
-                                    '${data['airlineName']}',
+                                    '${data['flightDataId']['airlineName']}',
                                     style: GoogleFonts.ubuntu(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400,
@@ -161,6 +152,13 @@ class _FlightBookedScreenState extends State<FlightBookedScreen> {
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
+                                  const Spacer(),
+                                  data['isApproved'] == true
+                                      ? const Text('Confimed')
+                                      : Chip(
+                                          backgroundColor: Colors.grey,
+                                          label: const Text('Panding'),
+                                        ),
                                 ],
                               ),
                             ),
