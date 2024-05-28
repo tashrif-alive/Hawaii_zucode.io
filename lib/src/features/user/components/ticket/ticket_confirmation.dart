@@ -615,6 +615,8 @@ class TicketConfirmationScreen extends StatelessWidget {
     DocumentReference bookingRef = await booking.add({
       'flightDataId': flightData,
       'seatBookText': seatBookText,
+      'paymentStatus': true,
+      'bookingStatus':false,
       'price': seatBookText.length * 1200, // 1200 is demo price
       'bookedByName': user?.displayName ?? "User",
       'bookedByEmail': user?.email,
