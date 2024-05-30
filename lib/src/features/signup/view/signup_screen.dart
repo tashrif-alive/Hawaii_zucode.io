@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../login/view/signin_screen.dart';
 import '../controllers/signup_controller.dart';
 import '../widgets/signup_footer_widgets.dart';
 import '../widgets/signup_header_widgets.dart';
@@ -159,6 +162,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 phoneNumber: phoneNumberController.text,
                                 isAdmin: isAdmin,
                               );
+                              Get.offAll (()=>  const LoginScreen());
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.black,

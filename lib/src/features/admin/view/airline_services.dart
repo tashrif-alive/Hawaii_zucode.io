@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../services/airline/view/add_flight_form.dart';
+import '../services/airline/view/check_all_flight.dart';
 import '../services/airline/view/flight_list_screen.dart';
+import '../services/airline/view/flight_request.dart';
 import '../services/airline/view/manage_flight_list.dart';
 
 
@@ -31,7 +33,7 @@ class _AirLineServicesState extends State<AirLineServices> {
       "image": "assets/icons/logos/flight_requ.png",
       "color": Colors.cyan,
       "title": "Flight Request",
-      "screen": (){}
+      "screen": const FlightCheckScreen()
     },
   ];
 

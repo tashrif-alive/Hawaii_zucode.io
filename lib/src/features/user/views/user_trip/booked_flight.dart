@@ -154,10 +154,10 @@ class _FlightBookedScreenState extends State<FlightBookedScreen> {
                                   ),
                                   const Spacer(),
                                   data['isApproved'] == true
-                                      ? const Text('Confimed')
-                                      : Chip(
+                                      ? const Text('Confirmed')
+                                      : const Chip(
                                           backgroundColor: Colors.grey,
-                                          label: const Text('Panding'),
+                                          label: Text('Pending'),
                                         ),
                                 ],
                               ),

@@ -9,9 +9,9 @@ class UserLoginModel {
         email: email,
         password: password,
       );
-      return null; // No error, successful login
+      return null;
     } catch (e) {
-      return e.toString(); // Return error message
+      return e.toString();
     }
   }
 }

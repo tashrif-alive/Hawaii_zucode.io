@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-
 import '../../signup/models/user_model.dart';
 
 class AuthRepository {
@@ -15,7 +13,13 @@ class AuthRepository {
         email: user.email!,
         password: user.password!,
       );
-      String uid = userCredential.user!.uid;
+      User firebaseUser = userCredential.user!;
+      String uid = firebaseUser.uid;
+
+      // Set display name
+      await firebaseUser.updateDisplayName(user.name);
+      await firebaseUser.reload();
+      firebaseUser = _firebaseAuth.currentUser!;
 
       // Determine the collection based on isAdmin value
       String collectionName = user.isAdmin == true ? 'admin' : 'users';
