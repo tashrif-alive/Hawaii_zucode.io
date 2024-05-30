@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../services/airline/view/flight_details_screen.dart';
 
 class UserList extends StatefulWidget {
-  const UserList({Key? key});
+  const UserList({Key? key}) : super(key: key);
 
   @override
   _UserListState createState() => _UserListState();
@@ -59,7 +59,7 @@ class _UserListState extends State<UserList> {
                             child: TextField(
                               controller: _searchController,
                               decoration: InputDecoration(
-                                hintText: 'Search flights',
+                                hintText: 'Search users',
                                 hintStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
                                 border: InputBorder.none,
                               ),
@@ -132,7 +132,6 @@ class _UserListState extends State<UserList> {
                           style: GoogleFonts.poppins(fontSize: 12, fontWeight: FontWeight.w300),
                         ),
                       ),
-
                       Expanded(
                         child: ListView.builder(
                           itemCount: filteredUsers.length,

@@ -16,6 +16,7 @@ class FlightCheckScreen extends StatelessWidget {
       length: 3, // Number of tabs
       child: Scaffold(
         appBar: AppBar(
+          elevation: 2,
           backgroundColor: Colors.white,
           leading: IconButton(
               icon: const Icon(
