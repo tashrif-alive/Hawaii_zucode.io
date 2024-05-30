@@ -322,8 +322,8 @@ class FlightReviewScreen extends StatelessWidget {
                     const SizedBox(height: 12),
                     Row(
                       children: [
-                        Icon(Icons.backpack,size: 16,),
-                        SizedBox(width: 6,),
+                        const Icon(Icons.backpack,size: 16,),
+                        const SizedBox(width: 6,),
                         Text(
                           'Cabin: ${flightData['baggage']}',
                           style: GoogleFonts.ubuntu(
@@ -334,8 +334,8 @@ class FlightReviewScreen extends StatelessWidget {
                     const SizedBox(height: 2),
                     Row(
                       children: [
-                        Icon(Icons.luggage,size: 16,),
-                        SizedBox(width: 6,),
+                        const Icon(Icons.luggage,size: 16,),
+                        const SizedBox(width: 6,),
                         Text(
                           'Check-in: ${flightData['baggage']}',
                           style: GoogleFonts.ubuntu(
@@ -363,7 +363,7 @@ class FlightReviewScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 2,),
+                    const SizedBox(height: 2,),
                     Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
@@ -382,7 +382,7 @@ class FlightReviewScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16,),
+            const SizedBox(height: 16,),
             Container(width: double.infinity,height: 12,color: Colors.blueGrey.shade50,),
 
             Padding(
@@ -394,7 +394,7 @@ class FlightReviewScreen extends StatelessWidget {
                   style: GoogleFonts.ubuntu(
                       fontSize: 16, fontWeight: FontWeight.w600),
                 ),
-                  SizedBox(height: 12,),
+                  const SizedBox(height: 12,),
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
@@ -414,7 +414,7 @@ class FlightReviewScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 5,),
+                  const SizedBox(height: 5,),
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
@@ -431,7 +431,7 @@ class FlightReviewScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 5,),
+                  const SizedBox(height: 5,),
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
@@ -477,7 +477,7 @@ class FlightReviewScreen extends StatelessWidget {
                       child: const Divider(thickness: 1),
                     ),
                   ),
-                  SizedBox(height: 5,),
+                  const SizedBox(height: 5,),
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(

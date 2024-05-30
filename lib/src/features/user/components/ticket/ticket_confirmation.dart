@@ -110,7 +110,7 @@ class TicketConfirmationScreen extends StatelessWidget {
                       await insertBookingInfo();
                       Get.offAll(() => const NavigationMenu());
                       Get.snackbar("Success",
-                          "Payment Completed, Your Seat is Reserved");
+                          "Payment Completed, Wait for a minute!");
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black, // Button color
