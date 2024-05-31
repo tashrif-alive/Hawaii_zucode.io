@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'flight_details_admin.dart';
 import 'flight_details_screen.dart';
 
 class FlightListScreen extends StatefulWidget {
@@ -136,7 +137,7 @@ class _FlightListScreenState extends State<FlightListScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => FlightDetailScreen(
+                              builder: (context) => FlightDetailScreenAdmin(
                                 flightData: data,
                               ),
                             ),

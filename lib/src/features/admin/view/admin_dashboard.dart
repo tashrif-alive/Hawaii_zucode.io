@@ -160,14 +160,23 @@ class _AdminDashboardState extends State<AdminDashboard> {
               ),
             ),
             const SizedBox(
-              height: 6,
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Services",
+                style: GoogleFonts.ubuntu(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500),
+              ),
             ),
             ///Flight&Hotels
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  padding: const EdgeInsets.symmetric(vertical: 5.0),
                   child: Expanded(
                     child: Material(
                       elevation: 2,
@@ -191,13 +200,13 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                   height: 12,
                                 ),
                                 Text(
-                                  "Flights", // Display the user count
+                                  "Flights",
                                   style: GoogleFonts.ubuntu(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 Text(
-                                  "$flightCount", // Display the user count
+                                  "$flightCount",
                                   style: GoogleFonts.ubuntu(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w700),
@@ -236,7 +245,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   width: 16,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  padding: const EdgeInsets.symmetric(vertical: 5.0),
                   child: Expanded(
                     child: Material(
                       elevation: 2,
@@ -307,7 +316,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 2.0),
+                  padding: const EdgeInsets.symmetric(vertical: 5.0),
                   child: Expanded(
                     child: Material(
                       elevation: 2,
@@ -376,7 +385,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   width: 16,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 2.0),
+                  padding: const EdgeInsets.symmetric(vertical: 5.0),
                   child: Expanded(
                     child: Material(
                       elevation: 2,
@@ -441,6 +450,18 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   ),
                 ),
               ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Sells",
+                style: GoogleFonts.ubuntu(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500),
+              ),
             ),
           ],
         ),

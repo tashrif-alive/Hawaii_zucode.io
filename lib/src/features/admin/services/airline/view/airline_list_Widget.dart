@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hawaii_beta/src/features/admin/services/airline/view/flight_details_admin.dart';
 import 'package:intl/intl.dart';
 import 'flight_details_screen.dart';
 
@@ -161,7 +162,7 @@ class _FlightListScreenWidgetState extends State<FlightListScreenWidget> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => FlightDetailScreen(
+                                  builder: (context) => FlightDetailScreenAdmin(
                                     flightData: data,
                                   ),
                                 ),
