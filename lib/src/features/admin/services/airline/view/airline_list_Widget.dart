@@ -7,7 +7,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hawaii_beta/src/features/admin/services/airline/view/flight_details_admin.dart';
 import 'package:intl/intl.dart';
-import 'flight_details_screen.dart';
+
 
 class FlightListScreenWidget extends StatefulWidget {
   const FlightListScreenWidget({super.key});

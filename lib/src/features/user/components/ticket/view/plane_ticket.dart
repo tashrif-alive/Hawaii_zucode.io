@@ -9,8 +9,7 @@ import '../../../../../widgets/buttons/seat_widget.dart';
 import '../ticket_confirmation.dart';
 
 class PlaneTicket extends StatefulWidget {
-  const PlaneTicket({super.key, required, required this.flightdata});
-
+  const PlaneTicket({super.key, required this.flightdata});
   final Map<String, dynamic> flightdata;
 
   @override
@@ -22,7 +21,7 @@ class _PlaneTicketState extends State<PlaneTicket> {
 
   var seatInfo = [
     [0, 1, 1, 0],
-    [0, 0, 0, 0],
+    [1, 1, 1, 1],
     [0, 0, 0, 0],
     [1, 1, 1, 1],
     [1, 1, 1, 1],
@@ -33,10 +32,9 @@ class _PlaneTicketState extends State<PlaneTicket> {
     [1, 0, 0, 1],
   ];
 
-  seaTonTap(int row, int column) {
+  void seatOnTap(int row, int column) {
     List<String> seatAlpha = ['A', 'B', 'C', 'D'];
     String seatLabel = "${seatAlpha[column]}${row + 1}";
-    print('seatopTap$row$column ${seatInfo[row][column]}');
     if (seatInfo[row][column] == 1) {
       setState(() {
         seatBookText.add(seatLabel);
@@ -48,42 +46,56 @@ class _PlaneTicketState extends State<PlaneTicket> {
         seatInfo[row][column] = 1;
       });
     }
-    // setState(() {
-    //   seatInfo[row][column]=2;
-    // });
-    print('seatonTap$row$column ${seatInfo[row][column]}');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: SizedBox(
-        height: 45,
-        width: 100,
-        child: ElevatedButton(
-          onPressed: () => Get.to(TicketConfirmationScreen(
-            flightData: widget.flightdata,
-            seatInfo: seatInfo,
-            seatBookText: seatBookText,
-            user: FirebaseAuth.instance.currentUser!,
-          )),
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                side: const BorderSide(color: Colors.black),
+        height: 55,
+        width: double.infinity,
+        child: Column(
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width*0.87,
+              child: ElevatedButton(
+                onPressed: () => Get.to(TicketConfirmationScreen(
+                  flightData: widget.flightdata,
+                  seatInfo: seatInfo,
+                  seatBookText: seatBookText,
+                  user: FirebaseAuth.instance.currentUser!,
+                )),
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      side: const BorderSide(color: Colors.black),
+                    ),
+                  ),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                ),
+                child: Text(
+                  'Next',
+                  style: GoogleFonts.ubuntu(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.white),
+                ),
               ),
             ),
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
-          ),
-          child: Text(
-            'Next',
-            style: GoogleFonts.ubuntu(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.white),
-          ),
+            SizedBox(height:4,),
+          ],
         ),
+
       ),
       appBar: AppBar(
         backgroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: const Icon(
+            Icons.arrow_back_rounded,
+            color: Colors.black,
+          ),
+        ),
         elevation: 0,
         title: Text(
           "Choose Ticket",
@@ -98,13 +110,6 @@ class _PlaneTicketState extends State<PlaneTicket> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4),
-                child: Text(
-                  'Choose Your Favourite Seat',
-                  style: GoogleFonts.ubuntu(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black),
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -201,75 +206,15 @@ class _PlaneTicketState extends State<PlaneTicket> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(6.0),
-                                color: Colors.grey.shade50,
-                              ),
-                              height: 40,
-                              width: 40,
-                              child: Center(
-                                child: Text('A',
-                                    style: GoogleFonts.ubuntu(
-                                        fontSize: 12, fontWeight: FontWeight.w400, color: Colors.black)),
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(6.0),
-                                color: Colors.grey.shade50,
-                              ),
-                              height: 40,
-                              width: 40,
-                              child: Center(
-                                child: Text('B',
-                                    style: GoogleFonts.ubuntu(
-                                        fontSize: 12, fontWeight: FontWeight.w400, color: Colors.black)),
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(6.0),
-                                color: Colors.grey.shade50,
-                              ),
-                              height: 40,
-                              width: 40,
-                              child: Center(
-                                child: Text('',
-                                    style: GoogleFonts.ubuntu(
-                                        fontSize: 12, fontWeight: FontWeight.w400, color: Colors.black)),
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(6.0),
-                                color: Colors.grey.shade50,
-                              ),
-                              height: 40,
-                              width: 40,
-                              child: Center(
-                                child: Text('C',
-                                    style: GoogleFonts.ubuntu(
-                                        fontSize: 12, fontWeight: FontWeight.w400, color: Colors.black)),
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(6.0),
-                                color: Colors.grey.shade50,
-                              ),
-                              height: 40,
-                              width: 40,
-                              child: Center(
-                                child: Text('D',
-                                    style: GoogleFonts.ubuntu(
-                                        fontSize: 12, fontWeight: FontWeight.w400, color: Colors.black)),
-                              ),
-                            ),
+                            seatLabel('A'),
+                            seatLabel('B'),
+                            seatLabel(''),
+                            seatLabel('C'),
+                            seatLabel('D'),
                           ],
                         ),
                         for (int i = 0; i < seatInfo.length; i++) ...[
-                          Seat(sL: i, info: seatInfo[i], seaTonTap: seaTonTap),
+                          Seat(sL: i, info: seatInfo[i], seaTonTap: seatOnTap),
                           const SizedBox(height: 8),
                         ],
                       ],
@@ -280,47 +225,75 @@ class _PlaneTicketState extends State<PlaneTicket> {
               Padding(
                 padding: const EdgeInsets.all(18.0),
                 child: Material(
-                    elevation: 2,
-                    borderRadius: BorderRadius.circular(6.0),
-                    color: Colors.grey.shade50,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                      child: SizedBox(
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Your Seat',
-                                  style: GoogleFonts.ubuntu(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                  elevation: 2,
+                  borderRadius: BorderRadius.circular(6.0),
+                  color: Colors.grey.shade50,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    child: SizedBox(
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Your Seat',
+                                style: GoogleFonts.ubuntu(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                                Text('$seatBookText'),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Total',
-                                  style: GoogleFonts.ubuntu(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                              ),
+                              Text('$seatBookText'),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Total: ',
+                                style: GoogleFonts.ubuntu(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                              ],
-                            )
-                          ],
-                        ),
+                              ),
+                              Text(
+                                '\$${(seatBookText.length * widget.flightdata['ourPrice']).toString()}',
+                                style: GoogleFonts.ubuntu(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
                       ),
-                    )),
+                    ),
+                  ),
+                ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+  Widget seatLabel(String label) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6.0),
+        color: Colors.grey.shade50,
+      ),
+      height: 40,
+      width: 40,
+      child: Center(
+        child: Text(
+          label,
+          style: GoogleFonts.ubuntu(
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+            color: Colors.black,
           ),
         ),
       ),

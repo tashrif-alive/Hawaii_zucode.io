@@ -1,17 +1,14 @@
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hawaii_beta/src/features/user/views/home/user_dashboard.dart';
 import 'package:intl/intl.dart';
-
 import '../../../../widgets/menus/user_navigation_menu.dart';
 
-class TicketConfirmationScreen extends StatelessWidget {
+class TicketConfirmationScreen extends StatefulWidget {
   final Map<String, dynamic> flightData;
   final List<List<int>> seatInfo;
   final List<String> seatBookText;
@@ -24,6 +21,11 @@ class TicketConfirmationScreen extends StatelessWidget {
       required this.seatBookText,
       required this.user});
 
+  @override
+  State<TicketConfirmationScreen> createState() => _TicketConfirmationScreenState();
+}
+
+class _TicketConfirmationScreenState extends State<TicketConfirmationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,7 +96,7 @@ class TicketConfirmationScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'USD ${flightData['ourPrice']}',
+                          'USD ${widget.flightData['ourPrice']}',
                           style: GoogleFonts.ubuntu(
                               fontSize: 14, fontWeight: FontWeight.w500),
                         ),
@@ -169,12 +171,12 @@ class TicketConfirmationScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${flightData['fromPlace']}',
+                      '${widget.flightData['fromPlace']}',
                       style: GoogleFonts.ubuntu(
                           fontSize: 13, fontWeight: FontWeight.w400),
                     ),
                     Text(
-                      '${flightData['toPlace']}',
+                      '${widget.flightData['toPlace']}',
                       style: GoogleFonts.ubuntu(
                           fontSize: 13, fontWeight: FontWeight.w400),
                     ),
@@ -228,7 +230,7 @@ class TicketConfirmationScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  '${flightData['airlineName']}',
+                                  '${widget.flightData['airlineName']}',
                                   style: GoogleFonts.ubuntu(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,
@@ -241,7 +243,7 @@ class TicketConfirmationScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 5),
                                 Text(
-                                  '${flightData['planeModel']}',
+                                  '${widget.flightData['planeModel']}',
                                   style: GoogleFonts.ubuntu(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,
@@ -251,7 +253,7 @@ class TicketConfirmationScreen extends StatelessWidget {
                             ),
                             Text(
                               DateFormat('E,dMMM')
-                                  .format(DateTime.parse(flightData['date'])),
+                                  .format(DateTime.parse(widget.flightData['date'])),
                               style: GoogleFonts.ubuntu(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w300,
@@ -285,7 +287,7 @@ class TicketConfirmationScreen extends StatelessWidget {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: Image.network(
-                                      flightData['imgUrl'] ?? '',
+                                      widget.flightData['imgUrl'] ?? '',
                                       height: 50,
                                       width: 50,
                                       fit: BoxFit.fill,
@@ -299,13 +301,13 @@ class TicketConfirmationScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '${flightData['fromTime']}',
+                                      '${widget.flightData['fromTime']}',
                                       style: GoogleFonts.ubuntu(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w300),
                                     ),
                                     Text(
-                                      '${flightData['fromPlace']}',
+                                      '${widget.flightData['fromPlace']}',
                                       style: GoogleFonts.ubuntu(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300),
@@ -317,7 +319,7 @@ class TicketConfirmationScreen extends StatelessWidget {
                             Column(
                               children: [
                                 Text(
-                                  '${flightData['duration']}',
+                                  '${widget.flightData['duration']}',
                                   style: GoogleFonts.ubuntu(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w300),
@@ -329,7 +331,7 @@ class TicketConfirmationScreen extends StatelessWidget {
                                   child: const Divider(thickness: 1),
                                 ),
                                 Text(
-                                  '${flightData['stoppage']}',
+                                  '${widget.flightData['stoppage']}',
                                   style: GoogleFonts.ubuntu(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w300),
@@ -339,13 +341,13 @@ class TicketConfirmationScreen extends StatelessWidget {
                             Column(
                               children: [
                                 Text(
-                                  '${flightData['toTime']}',
+                                  '${widget.flightData['toTime']}',
                                   style: GoogleFonts.ubuntu(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w300),
                                 ),
                                 Text(
-                                  '${flightData['toPlace']}',
+                                  '${widget.flightData['toPlace']}',
                                   style: GoogleFonts.ubuntu(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w300),
@@ -415,11 +417,11 @@ class TicketConfirmationScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              flightData['refundable'] ? 'Yes' : 'No',
+                              widget.flightData['refundable'] ? 'Yes' : 'No',
                               style: GoogleFonts.ubuntu(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,
-                                color: flightData['refundable']
+                                color: widget.flightData['refundable']
                                     ? Colors.green
                                     : Colors.red,
                               ),
@@ -441,11 +443,11 @@ class TicketConfirmationScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              flightData['insurance'] ? 'Yes' : 'No',
+                              widget.flightData['insurance'] ? 'Yes' : 'No',
                               style: GoogleFonts.ubuntu(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,
-                                color: flightData['refundable']
+                                color: widget.flightData['refundable']
                                     ? Colors.green
                                     : Colors.red,
                               ),
@@ -467,7 +469,7 @@ class TicketConfirmationScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '${flightData['baggage']}',
+                              '${widget.flightData['baggage']}',
                               style: GoogleFonts.ubuntu(
                                   fontSize: 13, fontWeight: FontWeight.w400),
                             ),
@@ -531,7 +533,7 @@ class TicketConfirmationScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "$seatBookText",
+                              "${widget.seatBookText}",
                               style: GoogleFonts.ubuntu(
                                   fontSize: 13, fontWeight: FontWeight.w500),
                             ),
@@ -552,7 +554,7 @@ class TicketConfirmationScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "${seatBookText.length}",
+                              "${widget.seatBookText.length}",
                               style: GoogleFonts.ubuntu(
                                   fontSize: 13, fontWeight: FontWeight.w500),
                             ),
@@ -573,7 +575,7 @@ class TicketConfirmationScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "${seatBookText.length} X 1200 = \$${seatBookText.length * 1200}",
+                              "${widget.seatBookText.length} X 1200 = \$${widget.seatBookText.length * 1200}",
                               style: GoogleFonts.ubuntu(
                                   fontSize: 13, fontWeight: FontWeight.w500),
                             ),
@@ -624,7 +626,7 @@ class TicketConfirmationScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '\$${flightData['ourPrice']}',
+                              '\$${widget.flightData['ourPrice']}',
                               style: GoogleFonts.ubuntu(
                                   fontSize: 13, fontWeight: FontWeight.w500),
                             ),
@@ -666,12 +668,13 @@ class TicketConfirmationScreen extends StatelessWidget {
 
     final user = FirebaseAuth.instance.currentUser;
     DocumentReference bookingRef = await booking.add({
-      'flightDataId': flightData,
-      'seatBookText': seatBookText,
+      'flightDataId': widget.flightData,
+      'seatBookText': widget.seatBookText,
       'paymentStatus': true,
       'bookingStatus': false,
-      // 'ticketID': _generateRandomId,
-      'price': seatBookText.length * 1200,
+      'bookingCancel': false,
+      'ticketID': _generateRandomId(),
+      'price': widget.seatBookText.length * widget.flightData['ourPrice'],
       'bookedByName': user?.displayName ?? "User",
       'bookedByEmail': user?.email,
       'userID': user?.email,
@@ -679,6 +682,7 @@ class TicketConfirmationScreen extends StatelessWidget {
   }
 
   String _generateRandomId() {
+    print('$_generateRandomId');
     Random random = Random();
     return random.nextInt(100000000).toString();
   }

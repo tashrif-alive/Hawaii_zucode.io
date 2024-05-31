@@ -22,30 +22,6 @@ class _FlightApprovedListState extends State<FlightApprovedList> {
     _searchController = TextEditingController();
   }
 
-  void _updateApprovalStatus(String documentId) async {
-    try {
-      await FirebaseFirestore.instance
-          .collection('booking')
-          .doc(documentId)
-          .update({
-        'isApproved': true,
-      });
-      await FirebaseFirestore.instance
-          .collection('booking')
-          .doc(documentId)
-          .update({
-        'bookingStatus': true,
-      });
-      if (kDebugMode) {
-        print('Document updated successfully');
-      }
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error updating document: $e');
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -43,6 +43,24 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
     }
   }
 
+  void _updateApprovalStatusCancel(String documentId) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('booking')
+          .doc(documentId)
+          .update({
+        'bookingCancel': true,
+      });
+      if (kDebugMode) {
+        print('Document updated successfully');
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error updating document: $e');
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -174,311 +192,317 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(8)),
-                              padding: const EdgeInsets.all(16.0),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      "Flight Details",
-                                      style: GoogleFonts.ubuntu(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Divider(thickness: 1,),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "${data['flightDataId']['fromPlace']}",
-                                          style: GoogleFonts.ubuntu(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                        const SizedBox(
-                                          width: 2,
-                                        ),
-                                        const Icon(
-                                          Icons.arrow_forward,
-                                          size: 16,
-                                        ),
-                                        const SizedBox(
-                                          width: 2,
-                                        ),
-                                        Text(
-                                          "${data['flightDataId']['toPlace']}",
-                                          style: GoogleFonts.ubuntu(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 5),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          DateFormat('E, d MMM').format(
-                                              DateTime.parse(
-                                                  data['flightDataId']['date'])),
-                                          style: GoogleFonts.ubuntu(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w300,
+                                    ExpansionTile(
+                                      title: Text(
+                                        "Flight Details",
+                                        style: GoogleFonts.ubuntu(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      subtitle: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "${data['flightDataId']['fromPlace']}",
+                                                style: GoogleFonts.ubuntu(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w600),
+                                              ),
+                                              const SizedBox(
+                                                width: 2,
+                                              ),
+                                              const Icon(
+                                                Icons.arrow_forward,
+                                                size: 16,
+                                              ),
+                                              const SizedBox(
+                                                width: 2,
+                                              ),
+                                              Text(
+                                                "${data['flightDataId']['toPlace']}",
+                                                style: GoogleFonts.ubuntu(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w600),
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                        const SizedBox(width: 5),
-                                        const Icon(Icons.circle, size: 5),
-                                        const SizedBox(width: 5),
-                                        Text(
-                                          '${data['flightDataId']['stoppage']}',
-                                          style: GoogleFonts.ubuntu(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w300,
-                                          ),
-                                        ),
-                                        const SizedBox(width: 5),
-                                        const Icon(Icons.circle, size: 5),
-                                        const SizedBox(width: 5),
-                                        Text(
-                                          '${data['flightDataId']['duration']}',
-                                          style: GoogleFonts.ubuntu(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w300,
-                                          ),
-                                        ),
-                                        const SizedBox(width: 5),
-                                        const Icon(Icons.circle, size: 5),
-                                        const SizedBox(width: 5),
-                                        Text(
-                                          '${data['flightDataId']['flightClass']}',
-                                          style: GoogleFonts.ubuntu(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w300,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 18,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            color: Colors.white,
-                                          ),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: Image.network(
-                                              data['flightDataId']['imgUrl'] ?? '',
-                                              height: 30,
-                                              width: 30,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          '${data['flightDataId']['airlineName']}',
-                                          style: GoogleFonts.ubuntu(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                        const SizedBox(width: 5),
-                                        const Icon(
-                                          Icons.circle,
-                                          size: 5,
-                                        ),
-                                        const SizedBox(width: 5),
-                                        Text(
-                                          '${data['flightDataId']['planeModel']}',
-                                          style: GoogleFonts.ubuntu(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          DateFormat('E, d MMM').format(
-                                              DateTime.parse(
-                                                  data['flightDataId']['date'])),
-                                          style: GoogleFonts.ubuntu(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w300,
-                                          ),
-                                        ),
-                                        Text(
-                                          DateFormat('E, d MMM').format(
-                                              DateTime.parse(
-                                                  data['flightDataId']['date'])),
-                                          style: GoogleFonts.ubuntu(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w300,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 1,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          '${data['flightDataId']['fromTime']}',
-                                          style: GoogleFonts.ubuntu(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        Column(
-                                          children: [
-                                            Text(
-                                              '${data['flightDataId']['duration']}',
-                                              style: GoogleFonts.ubuntu(
+                                          const SizedBox(height: 5),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                DateFormat('E, d MMM').format(
+                                                    DateTime.parse(
+                                                        data['flightDataId']
+                                                        ['date'])),
+                                                style: GoogleFonts.ubuntu(
                                                   fontSize: 12,
-                                                  fontWeight: FontWeight.w300),
+                                                  fontWeight: FontWeight.w300,
+                                                ),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              const Icon(Icons.circle, size: 5),
+                                              const SizedBox(width: 5),
+                                              Text(
+                                                '${data['flightDataId']['stoppage']}',
+                                                style: GoogleFonts.ubuntu(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w300,
+                                                ),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              const Icon(Icons.circle, size: 5),
+                                              const SizedBox(width: 5),
+                                              Text(
+                                                '${data['flightDataId']['duration']}',
+                                                style: GoogleFonts.ubuntu(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w300,
+                                                ),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              const Icon(Icons.circle, size: 5),
+                                              const SizedBox(width: 5),
+                                              Text(
+                                                '${data['flightDataId']['flightClass']}',
+                                                style: GoogleFonts.ubuntu(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w300,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      children: [
+                                        const SizedBox(
+                                          height: 18,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                BorderRadius.circular(8.0),
+                                                color: Colors.white,
+                                              ),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                BorderRadius.circular(8.0),
+                                                child: Image.network(
+                                                  data['flightDataId']['imgUrl'] ??
+                                                      '',
+                                                  height: 30,
+                                                  width: 30,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
                                             ),
-                                            Row(
-                                              children: [
-                                                const Icon(
-                                                  Icons.circle,
-                                                  size: 5,
-                                                ),
-                                                SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.15,
-                                                  height: 5,
-                                                  child:
-                                                      const Divider(thickness: 1.5),
-                                                ),
-                                                const Icon(
-                                                  Icons.circle,
-                                                  size: 5,
-                                                ),
-                                              ],
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              '${data['flightDataId']['airlineName']}',
+                                              style: GoogleFonts.ubuntu(
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                            const SizedBox(width: 5),
+                                            const Icon(
+                                              Icons.circle,
+                                              size: 5,
+                                            ),
+                                            const SizedBox(width: 5),
+                                            Text(
+                                              '${data['flightDataId']['planeModel']}',
+                                              style: GoogleFonts.ubuntu(
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w400,
+                                              ),
                                             ),
                                           ],
                                         ),
-                                        Text(
-                                          '${data['flightDataId']['toTime']}',
-                                          style: GoogleFonts.ubuntu(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500),
+                                        const SizedBox(
+                                          height: 10,
                                         ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Row(
-                                      mainAxisAlignment:
+                                        Row(
+                                          mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          '${data['flightDataId']['fromPlace']}',
-                                          style: GoogleFonts.ubuntu(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                        Text(
-                                          '${data['flightDataId']['toPlace']}',
-                                          style: GoogleFonts.ubuntu(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          '${data['flightDataId']['departureTerminal']}',
-                                          style: GoogleFonts.ubuntu(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                        Text(
-                                          '${data['flightDataId']['arrivalTerminal']}',
-                                          style: GoogleFonts.ubuntu(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Terminal ${data['flightDataId']['departureAirport']}',
-                                          style: GoogleFonts.ubuntu(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                        Text(
-                                          'Terminal ${data['flightDataId']['arrivalAirport']}',
-                                          style: GoogleFonts.ubuntu(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 12),
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.backpack,
-                                          size: 16,
+                                          children: [
+                                            Text(
+                                              DateFormat('E, d MMM').format(
+                                                  DateTime.parse(
+                                                      data['flightDataId']
+                                                      ['date'])),
+                                              style: GoogleFonts.ubuntu(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                            ),
+                                            Text(
+                                              DateFormat('E, d MMM').format(
+                                                  DateTime.parse(
+                                                      data['flightDataId']
+                                                      ['date'])),
+                                              style: GoogleFonts.ubuntu(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                         const SizedBox(
-                                          width: 6,
+                                          height: 1,
                                         ),
-                                        Text(
-                                          'Cabin: ${data['flightDataId']['baggage']}',
-                                          style: GoogleFonts.ubuntu(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w400),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              '${data['flightDataId']['fromTime']}',
+                                              style: GoogleFonts.ubuntu(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            Column(
+                                              children: [
+                                                Text(
+                                                  '${data['flightDataId']['duration']}',
+                                                  style: GoogleFonts.ubuntu(
+                                                      fontSize: 12,
+                                                      fontWeight: FontWeight.w300),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.circle,
+                                                      size: 5,
+                                                    ),
+                                                    SizedBox(
+                                                      width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                          0.15,
+                                                      height: 5,
+                                                      child: const Divider(
+                                                          thickness: 1.5),
+                                                    ),
+                                                    const Icon(
+                                                      Icons.circle,
+                                                      size: 5,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            Text(
+                                              '${data['flightDataId']['toTime']}',
+                                              style: GoogleFonts.ubuntu(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.luggage,
-                                          size: 16,
+                                        const SizedBox(height: 2),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              '${data['flightDataId']['fromPlace']}',
+                                              style: GoogleFonts.ubuntu(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                            Text(
+                                              '${data['flightDataId']['toPlace']}',
+                                              style: GoogleFonts.ubuntu(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ],
                                         ),
-                                        const SizedBox(
-                                          width: 6,
+                                        const SizedBox(height: 2),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              '${data['flightDataId']['departureTerminal']}',
+                                              style: GoogleFonts.ubuntu(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                            Text(
+                                              '${data['flightDataId']['arrivalTerminal']}',
+                                              style: GoogleFonts.ubuntu(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          'Check-in: ${data['flightDataId']['baggage']}',
-                                          style: GoogleFonts.ubuntu(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w400),
+                                        const SizedBox(height: 2),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              'Terminal ${data['flightDataId']['departureAirport']}',
+                                              style: GoogleFonts.ubuntu(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                            Text(
+                                              'Terminal ${data['flightDataId']['arrivalAirport']}',
+                                              style: GoogleFonts.ubuntu(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                    const Row(
-                                      children: [
-                                        Spacer(),
+                                        const SizedBox(height: 12),
+                                        Row(
+                                          children: [
+                                            const Icon(
+                                              Icons.backpack,
+                                              size: 16,
+                                            ),
+                                            const SizedBox(
+                                              width: 6,
+                                            ),
+                                            Text(
+                                              'Cabin: ${data['flightDataId']['baggage']}',
+                                              style: GoogleFonts.ubuntu(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 2),
+                                        Row(
+                                          children: [
+                                            const Icon(
+                                              Icons.luggage,
+                                              size: 16,
+                                            ),
+                                            const SizedBox(
+                                              width: 6,
+                                            ),
+                                            Text(
+                                              'Check-in: ${data['flightDataId']['baggage']}',
+                                              style: GoogleFonts.ubuntu(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                   ],
@@ -495,7 +519,8 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                               padding: const EdgeInsets.all(12.0),
                               width: double.infinity,
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -505,7 +530,9 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600),
                                     ),
-                                    Divider(thickness: 1,),
+                                    Divider(
+                                      thickness: 1,
+                                    ),
                                     Row(
                                       children: [
                                         SvgPicture.asset(
@@ -645,7 +672,9 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                           width: 8,
                                         ),
                                         Text(
-                                          data['paymentStatus'] ? 'Paid' : 'Due',
+                                          data['paymentStatus']
+                                              ? 'Paid'
+                                              : 'Due',
                                           style: GoogleFonts.ubuntu(
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500),
@@ -656,10 +685,11 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 5,),
+                            const SizedBox(
+                              height: 5,
+                            ),
                             Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 // data['isApproved'] == true
                                 //     ? const Text('Confirmed')
@@ -677,24 +707,30 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500),
                                     )),
-                                const SizedBox(width: 12,),
+                                const SizedBox(
+                                  width: 12,
+                                ),
                                 OutlinedButton(
                                   onPressed: () {
-                                    _updateApprovalStatus(item.id);
+                                    _updateApprovalStatusCancel(item.id);
                                   },
                                   style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.black),
                                   ),
                                   child: Text(
                                     'Decline',
                                     style: GoogleFonts.ubuntu(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.white, // Set text color to white for better visibility
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
-                                const SizedBox(width: 12,),
+                                const SizedBox(
+                                  width: 12,
+                                ),
                               ],
                             )
                           ],

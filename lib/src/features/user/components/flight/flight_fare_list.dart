@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hawaii_beta/src/features/user/components/flight/review_flight.dart';
 import 'package:intl/intl.dart';
 
 import '../../../admin/services/airline/view/flight_details_screen.dart';
@@ -66,7 +67,7 @@ class FlightFareList extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => FlightDetailScreen(
+                            builder: (context) => FlightReviewScreen(
                               flightData: data,
                             ),
                           ),

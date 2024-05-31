@@ -63,7 +63,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     ),
                     const SizedBox(height: 10),
                     Text('${user.email}'),
-                    Text('${user.displayName ?? 'No display name'}'),
+                    Text(user.displayName ?? 'No display name'),
                     const SizedBox(height: 12),
                     Container(
                       decoration: const BoxDecoration(
@@ -94,15 +94,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             child: ProfileWidget(
                               title: 'Location',
                               icon: Icons.location_on_sharp,
-                              subtitle: 'Uttara',
-                              onTap: () {},
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                            child: ProfileWidget(
-                              title: 'My Bookings',
-                              icon: Icons.card_travel_rounded,
                               subtitle: 'Uttara',
                               onTap: () {},
                             ),
