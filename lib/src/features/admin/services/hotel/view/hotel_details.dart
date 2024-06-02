@@ -187,12 +187,12 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                                 style: GoogleFonts.ubuntu(
                                     fontSize: 16, fontWeight: FontWeight.w700),
                               ),
-                              Row(
-                                children: [
-                                  for(int i = 0; i<((widget.data['rating'] ?? 0) as double).toInt(); i++)
-                                    Icon(Icons.star)
-                                ],
-                              )
+                              // Row(
+                              //   children: [
+                              //     for(int i = 0; i<((widget.data['rating'] ?? 0) as double).toInt(); i++)
+                              //       Icon(Icons.star)
+                              //   ],
+                              // )
                             ],
                           ),
                           const SizedBox(height: 1),
@@ -324,16 +324,13 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Expanded(
-                                child: GestureDetector(
-                                  onTap: () {},
-                                  child: _buildCalendarDialogButton(),
-                                ),
+                              GestureDetector(
+                                child: _buildCalendarDialogButton(),
                               ),
                               Expanded(
                                 child: ElevatedButton(
-                                  onPressed: () async{
-                                   showDialog(
+                                  onPressed: () async {
+                                    showDialog(
                                       context: context,
                                       builder: (BuildContext context) {
                                         return CustomAlertDialog();
@@ -343,7 +340,6 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                                         print('Returned values: $value');
                                         setState(() {
                                           roomNPersons = value;
-
                                         });
                                       }
                                     });
@@ -464,9 +460,6 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                         ],
                       ),
                     ),
-                    Text('ID: ${widget.data['id']}'),
-
-                    // Add more fields as needed
                   ],
                 ),
               ),
@@ -478,7 +471,7 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
     const dayTextStyle =
         TextStyle(color: Colors.black, fontWeight: FontWeight.w700);
     final weekendTextStyle =
-        TextStyle(color: Colors.grey[500], fontWeight: FontWeight.w600);
+        TextStyle(color: Colors.black, fontWeight: FontWeight.w600);
     final anniversaryTextStyle = TextStyle(
       color: Colors.red[400],
       fontWeight: FontWeight.w700,
@@ -597,7 +590,7 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
       },
     );
     return Padding(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -777,7 +770,7 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
   }
 
   String formatRoomNPersonText() {
-    if(roomNPersons==null) return "Select Rooms";
+    if (roomNPersons == null) return "Select Rooms";
     return " Room${roomNPersons![0]}, Guests${roomNPersons![1]}, Children${roomNPersons![2]}, ";
   }
 }

@@ -6,8 +6,8 @@ class CustomAlertDialog extends StatefulWidget {
 }
 
 class _CustomAlertDialogState extends State<CustomAlertDialog> {
-  int _roomCount = -1;
-  int _adultCount = -1;
+  int _roomCount = 1;
+  int _adultCount = 1;
   int _childCount = 0;
 
   void _increment(String field) {
@@ -37,7 +37,7 @@ class _CustomAlertDialogState extends State<CustomAlertDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Enter Details'),
+      title: const Text('Select Room & Guest'),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -54,7 +54,7 @@ class _CustomAlertDialogState extends State<CustomAlertDialog> {
             List<int> values = [_roomCount, _adultCount, _childCount];
             Navigator.of(context).pop(values);
           },
-          child: Text('Done'),
+          child: const Text('Done'),
         ),
       ],
     );
@@ -68,15 +68,15 @@ class _CustomAlertDialogState extends State<CustomAlertDialog> {
         Row(
           children: <Widget>[
             IconButton(
-              icon: Icon(Icons.remove),
+              icon: const Icon(Icons.remove),
               onPressed: () => _decrement(field),
             ),
             Text(
               count.toString(),
-              style: TextStyle(fontSize: 18.0),
+              style: const TextStyle(fontSize: 18.0),
             ),
             IconButton(
-              icon: Icon(Icons.add),
+              icon: const Icon(Icons.add),
               onPressed: () => _increment(field),
             ),
           ],

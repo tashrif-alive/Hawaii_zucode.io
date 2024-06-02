@@ -274,7 +274,7 @@ class _ManageHotelListScreenState extends State<ManageHotelListScreen> {
                                                       Navigator.pop(context);
                                                     }).catchError((error) {});
                                                   },
-                                                  child: Text('Delete'),
+                                                  child: const Text('Delete'),
                                                 ),
                                               ],
                                             );

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'hotel_detail_admin.dart';
 import 'hotel_details.dart';
 
 class HotelListScreen extends StatefulWidget {
@@ -131,7 +132,7 @@ class _HotelListScreenState extends State<HotelListScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  HotelDetailScreen(data: data),
+                                  HotelDetailAdmin(data: data),
                             ),
                           );
                         },
