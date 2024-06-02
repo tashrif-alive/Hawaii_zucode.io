@@ -1,10 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hawaii_beta/src/features/admin/services/hotel/view/select_room.dart';
 import 'package:intl/intl.dart';
-import 'hotel_facilities_veiw.dart';
 
 class HotelDetailAdmin extends StatefulWidget {
   final Map<String, dynamic> data;
@@ -20,7 +18,11 @@ class _HotelDetailAdminState extends State<HotelDetailAdmin> {
   bool isLoading = true;
 
   List<DateTime?> _dialogCalendarPickerValue = [];
-  List<int>? roomNPersons = [1, 1, 0]; // Default values: 1 room, 1 person, 0 children
+  List<int>? roomNPersons = [
+    1,
+    1,
+    0
+  ]; // Default values: 1 room, 1 person, 0 children
 
   @override
   void initState() {
@@ -64,98 +66,108 @@ class _HotelDetailAdminState extends State<HotelDetailAdmin> {
         body: isLoading
             ? const Center(child: CircularProgressIndicator())
             : SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(8),
-                      bottomRight: Radius.circular(8)),
-                  color: Colors.white,
-                ),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(8),
-                      bottomRight: Radius.circular(8)),
-                  child: Image.network(
-                    widget.data['imgUrl'] ?? '',
-                    height: 200,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              Container(
-                padding: const EdgeInsets.only(
-                    top: 12, left: 16, right: 16, bottom: 12),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Travel Details',
-                      style: GoogleFonts.ubuntu(
-                          fontSize: 16, fontWeight: FontWeight.w500),
+                    Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(8),
+                            bottomRight: Radius.circular(8)),
+                        color: Colors.white,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(8),
+                            bottomRight: Radius.circular(8)),
+                        child: Image.network(
+                          widget.data['imgUrl'] ?? '',
+                          height: 200,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                     const SizedBox(
-                      height: 5,
+                      height: 6,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          child: _buildCalendarDialogButton(),
-                        ),
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return CustomAlertDialog();
-                                },
-                              ).then((value) {
-                                if (value != null) {
-                                  print('Returned values: $value');
-                                  setState(() {
-                                    roomNPersons = value;
-                                  });
-                                }
-                              });
-                            },
-                            child: Text(formatRoomNPersonText()),
+                    Container(
+                      padding: const EdgeInsets.only(
+                          top: 12, left: 16, right: 16, bottom: 12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Travel Details',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w500),
                           ),
-                        ),
-                      ],
-                    )
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                child: _buildCalendarDialogButton(),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                child: Container(
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(
+                                      width: 1,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      foregroundColor: Colors.black,
+                                      backgroundColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                    ),
+                                    onPressed: () async {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return CustomAlertDialog();
+                                        },
+                                      ).then((value) {
+                                        if (value != null) {
+                                          print('Returned values: $value');
+                                          setState(() {
+                                            roomNPersons = value;
+                                          });
+                                        }
+                                      });
+                                    },
+                                    child: Text(formatRoomNPersonText()),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  _elevatedButtonStyle() {
-    return ElevatedButton.styleFrom(
-      foregroundColor: Colors.black, backgroundColor: Colors.white, // Text color
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8), // Rounded corners
       ),
     );
   }
 
   _buildCalendarDialogButton() {
     const dayTextStyle =
-    TextStyle(color: Colors.black, fontWeight: FontWeight.w700);
+        TextStyle(color: Colors.black, fontWeight: FontWeight.w700);
     const weekendTextStyle =
-    TextStyle(color: Colors.black, fontWeight: FontWeight.w600);
+        TextStyle(color: Colors.black, fontWeight: FontWeight.w600);
     final anniversaryTextStyle = TextStyle(
       color: Colors.red[400],
       fontWeight: FontWeight.w700,
@@ -280,14 +292,23 @@ class _HotelDetailAdminState extends State<HotelDetailAdmin> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Colors.grey[200], // Custom background color
-              borderRadius: BorderRadius.circular(12), // Custom border radius
-              border: Border.all(width: 2, color: Colors.black), // Custom border
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                width: 1,
+                color: Colors.black,
+              ),
             ),
             height: 50, // Custom height
             width: 150, // Custom width
             child: ElevatedButton(
-              style: _elevatedButtonStyle(),
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.white,
+                // Text color
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
               onPressed: () async {
                 final values = await showCalendarDatePicker2Dialog(
                   context: context,
@@ -337,9 +358,9 @@ class _HotelDetailAdminState extends State<HotelDetailAdmin> {
   }
 
   String _getValueText(
-      CalendarDatePicker2Type datePickerType,
-      List<DateTime?> values,
-      ) {
+    CalendarDatePicker2Type datePickerType,
+    List<DateTime?> values,
+  ) {
     values =
         values.map((e) => e != null ? DateUtils.dateOnly(e) : null).toList();
     var valueText = (values.isNotEmpty ? values[0] : null)
@@ -349,8 +370,8 @@ class _HotelDetailAdminState extends State<HotelDetailAdmin> {
     if (datePickerType == CalendarDatePicker2Type.multi) {
       valueText = values.isNotEmpty
           ? values
-          .map((v) => v.toString().replaceAll('00:00:00.000', ''))
-          .join(', ')
+              .map((v) => v.toString().replaceAll('00:00:00.000', ''))
+              .join(', ')
           : 'null';
     } else if (datePickerType == CalendarDatePicker2Type.range) {
       if (values.isNotEmpty) {
@@ -369,6 +390,19 @@ class _HotelDetailAdminState extends State<HotelDetailAdmin> {
 
   String formatRoomNPersonText() {
     if (roomNPersons == null) return "Select Rooms";
-    return " Room${roomNPersons![0]}, Guests${roomNPersons![1]}, Children${roomNPersons![2]}, ";
+
+    List<String> parts = [];
+
+    if (roomNPersons![0] > 0) {
+      parts.add("Room${roomNPersons![0]}");
+    }
+    if (roomNPersons![1] > 0) {
+      parts.add("Guests${roomNPersons![1]}");
+    }
+    if (roomNPersons![2] > 0) {
+      parts.add("Children${roomNPersons![2]}");
+    }
+
+    return parts.isNotEmpty ? parts.join(", ") : "Select Rooms";
   }
 }
