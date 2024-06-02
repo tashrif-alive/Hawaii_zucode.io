@@ -27,9 +27,9 @@ class _ManageHotelListScreenState extends State<ManageHotelListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(centerTitle: true,
-        title: Text('Manage List',style: GoogleFonts.poppins(
-            fontSize: 16, fontWeight: FontWeight.w600)),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Manage List', style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w600)),
       ),
       body: Column(
         children: [
@@ -51,8 +51,7 @@ class _ManageHotelListScreenState extends State<ManageHotelListScreen> {
                             controller: _searchController,
                             decoration: InputDecoration(
                               hintText: 'Search hotels',
-                              hintStyle: TextStyle(
-                                  color: Colors.black.withOpacity(0.5)),
+                              hintStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
                               border: InputBorder.none,
                             ),
                             style: GoogleFonts.poppins(
@@ -78,10 +77,8 @@ class _ManageHotelListScreenState extends State<ManageHotelListScreen> {
           ),
           Expanded(
             child: StreamBuilder(
-              stream:
-                  FirebaseFirestore.instance.collection('hotels').snapshots(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
+              stream: FirebaseFirestore.instance.collection('hotels').snapshots(),
+              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {
                   return Center(
                     child: Text('Error: ${snapshot.error}'),
@@ -94,27 +91,22 @@ class _ManageHotelListScreenState extends State<ManageHotelListScreen> {
                   );
                 }
 
-                List<DocumentSnapshot> filteredHotels =
-                    snapshot.data!.docs.where((document) {
-                  String hotelName =
-                      document['hotelName'].toString().toLowerCase();
-                  String location =
-                      document['location'].toString().toLowerCase();
+                List<DocumentSnapshot> filteredHotels = snapshot.data!.docs.where((document) {
+                  String hotelName = document['hotelName'].toString().toLowerCase();
+                  String location = document['location'].toString().toLowerCase();
                   String searchText = _searchController.text.toLowerCase();
-                  return hotelName.contains(searchText) ||
-                      location.contains(searchText);
+                  return hotelName.contains(searchText) || location.contains(searchText);
                 }).toList();
 
                 return ListView.builder(
                   itemCount: filteredHotels.length,
                   itemBuilder: (context, index) {
                     DocumentSnapshot document = filteredHotels[index];
-                    Map<String, dynamic> data =
-                        document.data() as Map<String, dynamic>;
+                    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
                     return InkWell(
                       onTap: () {},
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 18.0,vertical: 5),
+                        padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 5),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
@@ -133,19 +125,18 @@ class _ManageHotelListScreenState extends State<ManageHotelListScreen> {
                                     ),
                                     child: ClipRRect(
                                       borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                          bottomLeft: Radius.circular(8)),
+                                          topLeft: Radius.circular(8), bottomLeft: Radius.circular(8)),
                                       child: Image.network(
                                         data['imgUrl'] ?? '',
                                         height: 100,
-                                        width:
-                                            MediaQuery.of(context).size.width * .4,
+                                        width: MediaQuery.of(context).size.width * .4,
                                         fit: BoxFit.fill,
                                       ),
                                     ),
                                   ),
                                   const SizedBox(width: 8),
-                                  Align(alignment: AlignmentDirectional.topStart,
+                                  Align(
+                                    alignment: AlignmentDirectional.topStart,
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
@@ -160,8 +151,7 @@ class _ManageHotelListScreenState extends State<ManageHotelListScreen> {
                                           softWrap: true,
                                         ),
                                         Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             const Icon(
                                               Icons.location_on_rounded,
@@ -179,11 +169,9 @@ class _ManageHotelListScreenState extends State<ManageHotelListScreen> {
                                           ],
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0),
+                                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                           child: Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               Text(
                                                 '\$${data['regularHotelCost']}',
@@ -209,7 +197,6 @@ class _ManageHotelListScreenState extends State<ManageHotelListScreen> {
                                   ),
                                 ],
                               ),
-
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -221,65 +208,18 @@ class _ManageHotelListScreenState extends State<ManageHotelListScreen> {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) =>
-                                                    EditHotelForm(
+                                                builder: (context) => EditHotelForm(
                                                       hotel: Hotel(
                                                         id: document.id,
-                                                        hotelName:
-                                                            data['hotelName'],
-                                                        hotelType:
-                                                            data['hotelType'],
-                                                        location:
-                                                            data['location'],
+                                                        location: data['location'],
+                                                        hotelName: data['hotelName'],
                                                         imgUrl: data['imgUrl'],
-                                                        regularHotelCost: data[
-                                                            'regularHotelCost'],
-                                                        offeredHotelCost: data[
-                                                            'offeredHotelCost'],
-                                                        numberOfRooms:
-                                                            data['numberOfRooms'],
-                                                        occupancyRate:
-                                                            data['occupancyRate'],
-                                                        rating: data['rating'],
+                                                        regularHotelCost: data['regularHotelCost'],
+                                                        offeredHotelCost: data['offeredHotelCost'],
+                                                        numberOfRooms: data['numberOfRooms'],
+                                                        rating: double.parse(data['rating'].toString()),
                                                       ),
                                                     )));
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: const Icon(Icons.delete, size: 18),
-                                      onPressed: () {
-                                        // Perform delete operation
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title: const Text('Delete Hotel'),
-                                              content: const Text(
-                                                  'Are you sure you want to delete this hotel?'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: const Text('Cancel'),
-                                                ),
-                                                TextButton(
-                                                  onPressed: () {
-                                                    /// Delete the hotel data from Firestore
-                                                    FirebaseFirestore.instance
-                                                        .collection('hotels')
-                                                        .doc(document.id)
-                                                        .delete()
-                                                        .then((value) {
-                                                      Navigator.pop(context);
-                                                    }).catchError((error) {});
-                                                  },
-                                                  child: const Text('Delete'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
                                       },
                                     ),
                                   ],

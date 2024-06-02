@@ -143,8 +143,7 @@ class _HotelDetailAdminState extends State<HotelDetailAdmin> {
 
   _elevatedButtonStyle() {
     return ElevatedButton.styleFrom(
-      primary: Colors.white, // Background color
-      onPrimary: Colors.black, // Text color
+      foregroundColor: Colors.black, backgroundColor: Colors.white, // Text color
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8), // Rounded corners

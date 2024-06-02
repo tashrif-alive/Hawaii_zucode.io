@@ -11,16 +11,16 @@ class Hotel {
   final double rating;
 
   Hotel({
-    required this.id,
-    required this.hotelName,
-    required this.hotelType,
-    required this.location,
-    required this.imgUrl,
-    required this.regularHotelCost,
-    required this.offeredHotelCost,
-    required this.numberOfRooms,
-    required this.occupancyRate,
-    required this.rating,
+    this.id = '',
+    this.hotelName = '',
+    this.hotelType = '',
+    this.location = '',
+    this.imgUrl = '',
+    this.regularHotelCost = 0,
+    this.offeredHotelCost = 0,
+    this.numberOfRooms = 0,
+    this.occupancyRate = 0.0,
+    this.rating = 0.0,
   });
 
   Map<String, dynamic> toMap() {
