@@ -112,15 +112,7 @@ class _ManageHotelListScreenState extends State<ManageHotelListScreen> {
                     Map<String, dynamic> data =
                         document.data() as Map<String, dynamic>;
                     return InkWell(
-                      onTap: () {
-                        // Navigate to detailed hotel page
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HotelDetailScreen(data: data),
-                          ),
-                        );
-                      },
+                      onTap: () {},
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 18.0,vertical: 5),
                         child: Container(
@@ -157,32 +149,15 @@ class _ManageHotelListScreenState extends State<ManageHotelListScreen> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              data['hotelName'],
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            const SizedBox(width: 4),
-                                            const Icon(Icons.circle, size: 5),
-                                            const SizedBox(width: 4),
-                                            Text(
-                                              '${data['hotelType']}',
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w400,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                            Icon(
-                                              Icons.star,
-                                              size: 18,
-                                              color: Colors.amber.shade200,
-                                            ),
-                                          ],
+                                        Text(
+                                          data['hotelName'],
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                          softWrap: true,
                                         ),
                                         Row(
                                           mainAxisAlignment:
@@ -235,78 +210,80 @@ class _ManageHotelListScreenState extends State<ManageHotelListScreen> {
                                 ],
                               ),
 
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  IconButton(
-                                    icon: const Icon(Icons.edit, size: 18),
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  EditHotelForm(
-                                                    hotel: Hotel(
-                                                      id: document.id,
-                                                      hotelName:
-                                                          data['hotelName'],
-                                                      hotelType:
-                                                          data['hotelType'],
-                                                      location:
-                                                          data['location'],
-                                                      imgUrl: data['imgUrl'],
-                                                      regularHotelCost: data[
-                                                          'regularHotelCost'],
-                                                      offeredHotelCost: data[
-                                                          'offeredHotelCost'],
-                                                      numberOfRooms:
-                                                          data['numberOfRooms'],
-                                                      occupancyRate:
-                                                          data['occupancyRate'],
-                                                      rating: data['rating'],
-                                                    ),
-                                                  )));
-                                    },
-                                  ),
-                                  IconButton(
-                                    icon: const Icon(Icons.delete, size: 18),
-                                    onPressed: () {
-                                      // Perform delete operation
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: const Text('Delete Hotel'),
-                                            content: const Text(
-                                                'Are you sure you want to delete this hotel?'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                child: const Text('Cancel'),
-                                              ),
-                                              TextButton(
-                                                onPressed: () {
-                                                  /// Delete the hotel data from Firestore
-                                                  FirebaseFirestore.instance
-                                                      .collection('hotels')
-                                                      .doc(document.id)
-                                                      .delete()
-                                                      .then((value) {
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    IconButton(
+                                      icon: const Icon(Icons.edit, size: 18),
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EditHotelForm(
+                                                      hotel: Hotel(
+                                                        id: document.id,
+                                                        hotelName:
+                                                            data['hotelName'],
+                                                        hotelType:
+                                                            data['hotelType'],
+                                                        location:
+                                                            data['location'],
+                                                        imgUrl: data['imgUrl'],
+                                                        regularHotelCost: data[
+                                                            'regularHotelCost'],
+                                                        offeredHotelCost: data[
+                                                            'offeredHotelCost'],
+                                                        numberOfRooms:
+                                                            data['numberOfRooms'],
+                                                        occupancyRate:
+                                                            data['occupancyRate'],
+                                                        rating: data['rating'],
+                                                      ),
+                                                    )));
+                                      },
+                                    ),
+                                    IconButton(
+                                      icon: const Icon(Icons.delete, size: 18),
+                                      onPressed: () {
+                                        // Perform delete operation
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: const Text('Delete Hotel'),
+                                              content: const Text(
+                                                  'Are you sure you want to delete this hotel?'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () {
                                                     Navigator.pop(context);
-                                                  }).catchError((error) {});
-                                                },
-                                                child: Text('Delete'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    },
-                                  ),
-                                ],
+                                                  },
+                                                  child: const Text('Cancel'),
+                                                ),
+                                                TextButton(
+                                                  onPressed: () {
+                                                    /// Delete the hotel data from Firestore
+                                                    FirebaseFirestore.instance
+                                                        .collection('hotels')
+                                                        .doc(document.id)
+                                                        .delete()
+                                                        .then((value) {
+                                                      Navigator.pop(context);
+                                                    }).catchError((error) {});
+                                                  },
+                                                  child: Text('Delete'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),

@@ -127,7 +127,6 @@ class _HotelListScreenState extends State<HotelListScreen> {
                           document.data() as Map<String, dynamic>;
                       return InkWell(
                         onTap: () {
-                          // Navigate to detailed hotel page
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -220,25 +219,10 @@ class _HotelListScreenState extends State<HotelListScreen> {
                                               color: Colors.black,
                                             ),
                                           ),
-                                          const SizedBox(width: 4),
-                                          const Icon(Icons.circle, size: 5),
-                                          const SizedBox(width: 4),
-                                          Text(
-                                            '${data['hotelType']}',
-                                            style: GoogleFonts.poppins(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w400,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.star,
-                                            size: 18,
-                                            color: Colors.amber.shade200,
-                                          ),
+
                                         ],
                                       ),
-                                      Column(
+                                      Row(
                                         children: [
                                           Text(
                                             '\$${data['regularHotelCost']}',
