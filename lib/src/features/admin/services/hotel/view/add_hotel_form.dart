@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../widgets/image_picker/image_view.dart';
@@ -15,7 +16,7 @@ class AddHotelForm extends StatefulWidget {
 class _AddHotelFormState extends State<AddHotelForm> {
   final _hotelController = HotelController();
   final _formKey = GlobalKey<FormState>();
-
+  double _userRating = 3.0;
   String _hotelName = '';
   String _hotelType = '';
   String _hotelLocation = '';
@@ -92,6 +93,22 @@ class _AddHotelFormState extends State<AddHotelForm> {
                   onSaved: (value) => _hotelName = value!,
                 ),
                 const SizedBox(height: 10),
+            RatingBar(
+              initialRating: 0,
+              direction: Axis.horizontal,
+              allowHalfRating: true,
+              itemCount: 5,
+              ratingWidget: RatingWidget(
+                full: Icon(Icons.star),
+                half: Icon(Icons.star),
+                empty: Icon(Icons.star_border),
+              ),
+              itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+              onRatingUpdate: (rating) {
+                _rating = rating;
+                print(_rating);
+              },
+            ),
                 AdminTextFormField(
                   hintText: 'Hotel Type',
                   prefixIcon: Icons.reviews_outlined,
@@ -164,17 +181,7 @@ class _AddHotelFormState extends State<AddHotelForm> {
                   onSaved: (value) => _occupancyRate = double.parse(value!),
                 ),
                 const SizedBox(height: 10),
-                AdminTextFormField(
-                  hintText: 'Rating',
-                  prefixIcon: Icons.star_border_outlined,
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return 'Please enter Rating';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) => _rating = double.parse(value!),
-                ),
+
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),

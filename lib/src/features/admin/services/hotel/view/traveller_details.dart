@@ -1,16 +1,26 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import '../../../admin/services/hotel/view/traveller_details.dart';
-import '../ticket/view/plane_ticket.dart';
+import '../../../../user/components/ticket/view/plane_ticket.dart';
+import '../../../widgets/admin_textform_field.dart';
 
-class FlightReviewScreen extends StatelessWidget {
+class TravellerDetails extends StatefulWidget {
   final Map<String, dynamic> flightData;
 
-  const FlightReviewScreen({super.key, required this.flightData});
+  const TravellerDetails({super.key, required this.flightData});
+
+  @override
+  State<TravellerDetails> createState() => _TravellerDetailsState();
+}
+
+class _TravellerDetailsState extends State<TravellerDetails> {
+  TextEditingController nidController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +35,7 @@ class FlightReviewScreen extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  '\$${flightData['regularPrice']}',
+                  '\$${widget.flightData['regularPrice']}',
                   style: GoogleFonts.ubuntu(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
@@ -37,7 +47,7 @@ class FlightReviewScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 5),
                 Text(
-                  '\$${flightData['ourPrice']}',
+                  '\$${widget.flightData['ourPrice']}',
                   style: GoogleFonts.ubuntu(
                       fontSize: 14, fontWeight: FontWeight.w500),
                 ),
@@ -45,7 +55,7 @@ class FlightReviewScreen extends StatelessWidget {
             ),
             ElevatedButton(
               child: Text(
-                "Continue",
+                "Select Seat",
                 style: GoogleFonts.ubuntu(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
@@ -53,16 +63,13 @@ class FlightReviewScreen extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                User? user = FirebaseAuth.instance.currentUser;
-                final updatedFlightData = {
-                  ...flightData,
-                  "userID": user?.email,
-                  'bookedByName': user?.displayName ?? "User",
-                  'bookedByEmail': user?.email,
+                final updatedData = {
+                  ...widget.flightData,
+                  "nid": nidController.text,
+                  "phone": phoneController.text,
+                  "address": addressController.text
                 };
-
-                Get.to(TravellerDetails(flightData: updatedFlightData));
-
+                Get.to(PlaneTicket(flightdata: updatedData));
               },
             ),
           ],
@@ -101,7 +108,7 @@ class FlightReviewScreen extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          '${flightData['fromPlace']}',
+                          '${widget.flightData['fromPlace']}',
                           style: GoogleFonts.ubuntu(
                               fontSize: 15, fontWeight: FontWeight.w600),
                         ),
@@ -116,7 +123,7 @@ class FlightReviewScreen extends StatelessWidget {
                           width: 2,
                         ),
                         Text(
-                          '${flightData['toPlace']}',
+                          '${widget.flightData['toPlace']}',
                           style: GoogleFonts.ubuntu(
                               fontSize: 15, fontWeight: FontWeight.w600),
                         ),
@@ -128,8 +135,8 @@ class FlightReviewScreen extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          DateFormat('E, d MMM')
-                              .format(DateTime.parse(flightData['date'])),
+                          DateFormat('E, d MMM').format(
+                              DateTime.parse(widget.flightData['date'])),
                           style: GoogleFonts.ubuntu(
                             fontSize: 12,
                             fontWeight: FontWeight.w300,
@@ -142,7 +149,7 @@ class FlightReviewScreen extends StatelessWidget {
                         ),
                         const SizedBox(width: 5),
                         Text(
-                          '${flightData['stoppage']}',
+                          '${widget.flightData['stoppage']}',
                           style: GoogleFonts.ubuntu(
                               fontSize: 12, fontWeight: FontWeight.w300),
                         ),
@@ -153,7 +160,7 @@ class FlightReviewScreen extends StatelessWidget {
                         ),
                         const SizedBox(width: 5),
                         Text(
-                          '${flightData['duration']}',
+                          '${widget.flightData['duration']}',
                           style: GoogleFonts.ubuntu(
                               fontSize: 12, fontWeight: FontWeight.w300),
                         ),
@@ -164,7 +171,7 @@ class FlightReviewScreen extends StatelessWidget {
                         ),
                         const SizedBox(width: 5),
                         Text(
-                          '${flightData['flightClass']}',
+                          '${widget.flightData['flightClass']}',
                           style: GoogleFonts.ubuntu(
                               fontSize: 12, fontWeight: FontWeight.w300),
                         ),
@@ -183,7 +190,7 @@ class FlightReviewScreen extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: Image.network(
-                              flightData['imgUrl'] ?? '',
+                              widget.flightData['imgUrl'] ?? '',
                               height: 40,
                               width: 40,
                               fit: BoxFit.fill,
@@ -194,7 +201,7 @@ class FlightReviewScreen extends StatelessWidget {
                           width: 10,
                         ),
                         Text(
-                          '${flightData['airlineName']}',
+                          '${widget.flightData['airlineName']}',
                           style: GoogleFonts.ubuntu(
                             fontSize: 13,
                             fontWeight: FontWeight.w400,
@@ -207,7 +214,7 @@ class FlightReviewScreen extends StatelessWidget {
                         ),
                         const SizedBox(width: 5),
                         Text(
-                          '${flightData['planeModel']}',
+                          '${widget.flightData['planeModel']}',
                           style: GoogleFonts.ubuntu(
                             fontSize: 13,
                             fontWeight: FontWeight.w400,
@@ -222,16 +229,16 @@ class FlightReviewScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          DateFormat('E, d MMM')
-                              .format(DateTime.parse(flightData['date'])),
+                          DateFormat('E, d MMM').format(
+                              DateTime.parse(widget.flightData['date'])),
                           style: GoogleFonts.ubuntu(
                             fontSize: 12,
                             fontWeight: FontWeight.w300,
                           ),
                         ),
                         Text(
-                          DateFormat('E, d MMM')
-                              .format(DateTime.parse(flightData['date'])),
+                          DateFormat('E, d MMM').format(
+                              DateTime.parse(widget.flightData['date'])),
                           style: GoogleFonts.ubuntu(
                             fontSize: 12,
                             fontWeight: FontWeight.w300,
@@ -246,14 +253,14 @@ class FlightReviewScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${flightData['fromTime']}',
+                          '${widget.flightData['fromTime']}',
                           style: GoogleFonts.ubuntu(
                               fontSize: 15, fontWeight: FontWeight.w500),
                         ),
                         Column(
                           children: [
                             Text(
-                              '${flightData['duration']}',
+                              '${widget.flightData['duration']}',
                               style: GoogleFonts.ubuntu(
                                   fontSize: 12, fontWeight: FontWeight.w300),
                             ),
@@ -278,7 +285,7 @@ class FlightReviewScreen extends StatelessWidget {
                           ],
                         ),
                         Text(
-                          '${flightData['toTime']}',
+                          '${widget.flightData['toTime']}',
                           style: GoogleFonts.ubuntu(
                               fontSize: 15, fontWeight: FontWeight.w500),
                         ),
@@ -289,28 +296,12 @@ class FlightReviewScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${flightData['fromPlace']}',
+                          '${widget.flightData['fromPlace']}',
                           style: GoogleFonts.ubuntu(
                               fontSize: 13, fontWeight: FontWeight.w400),
                         ),
                         Text(
-                          '${flightData['toPlace']}',
-                          style: GoogleFonts.ubuntu(
-                              fontSize: 13, fontWeight: FontWeight.w400),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '${flightData['departureTerminal']}',
-                          style: GoogleFonts.ubuntu(
-                              fontSize: 13, fontWeight: FontWeight.w400),
-                        ),
-                        Text(
-                          '${flightData['arrivalTerminal']}',
+                          '${widget.flightData['toPlace']}',
                           style: GoogleFonts.ubuntu(
                               fontSize: 13, fontWeight: FontWeight.w400),
                         ),
@@ -321,12 +312,28 @@ class FlightReviewScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Terminal ${flightData['departureAirport']}',
+                          '${widget.flightData['departureTerminal']}',
                           style: GoogleFonts.ubuntu(
                               fontSize: 13, fontWeight: FontWeight.w400),
                         ),
                         Text(
-                          'Terminal ${flightData['arrivalAirport']}',
+                          '${widget.flightData['arrivalTerminal']}',
+                          style: GoogleFonts.ubuntu(
+                              fontSize: 13, fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 2),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Terminal ${widget.flightData['departureAirport']}',
+                          style: GoogleFonts.ubuntu(
+                              fontSize: 13, fontWeight: FontWeight.w400),
+                        ),
+                        Text(
+                          'Terminal ${widget.flightData['arrivalAirport']}',
                           style: GoogleFonts.ubuntu(
                               fontSize: 13, fontWeight: FontWeight.w400),
                         ),
@@ -343,7 +350,7 @@ class FlightReviewScreen extends StatelessWidget {
                           width: 6,
                         ),
                         Text(
-                          'Cabin: ${flightData['baggage']}',
+                          'Cabin: ${widget.flightData['baggage']}',
                           style: GoogleFonts.ubuntu(
                               fontSize: 13, fontWeight: FontWeight.w400),
                         ),
@@ -360,200 +367,126 @@ class FlightReviewScreen extends StatelessWidget {
                           width: 6,
                         ),
                         Text(
-                          'Check-in: ${flightData['baggage']}',
+                          'Check-in: ${widget.flightData['baggage']}',
                           style: GoogleFonts.ubuntu(
                               fontSize: 13, fontWeight: FontWeight.w400),
                         ),
                       ],
                     ),
-                    Center(
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 1,
-                        child: const Divider(thickness: 1),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Refundable',
-                          style: GoogleFonts.ubuntu(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        Icon(
-                          flightData['refundable']
-                              ? Icons.check_circle_outline
-                              : Icons.not_interested,
-                          size: 17,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 2,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Insurance',
-                          style: GoogleFonts.ubuntu(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        Icon(
-                          flightData['insurance']
-                              ? Icons.check_circle_outline
-                              : Icons.not_interested,
-                          size: 17,
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
             ),
-            const SizedBox(
-              height: 16,
-            ),
-            Container(
-              width: double.infinity,
-              height: 12,
-              color: Colors.blueGrey.shade50,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 16, top: 16),
-              child: SizedBox(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Fare Summary',
-                      style: GoogleFonts.ubuntu(
-                          fontSize: 16, fontWeight: FontWeight.w600),
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Fare Type',
-                          style: GoogleFonts.ubuntu(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        Text(
-                          flightData['refundable']
-                              ? 'Refundable'
-                              : 'Partially Refundable',
-                          style: GoogleFonts.ubuntu(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w400,
-                            color: flightData['refundable']
-                                ? Colors.green
-                                : Colors.red,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Base Fare',
-                          style: GoogleFonts.ubuntu(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        Text(
-                          '\$${flightData['ourPrice']}',
-                          style: GoogleFonts.ubuntu(
-                              fontSize: 13, fontWeight: FontWeight.w500),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Taxes & Fees',
-                          style: GoogleFonts.ubuntu(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        Text(
-                          '\$00',
-                          style: GoogleFonts.ubuntu(
-                              fontSize: 13, fontWeight: FontWeight.w500),
-                        ),
-                      ],
-                    ),
-                    Center(
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 1,
-                        child: const Divider(thickness: 1),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Instant Off',
-                          style: GoogleFonts.ubuntu(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        Text(
-                          '\$00',
-                          style: GoogleFonts.ubuntu(
-                              fontSize: 13, fontWeight: FontWeight.w500),
-                        ),
-                      ],
-                    ),
-                    Center(
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 1,
-                        child: const Divider(thickness: 1),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Total Amount',
-                          style: GoogleFonts.ubuntu(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Text(
-                          '\$${flightData['ourPrice']}',
-                          style: GoogleFonts.ubuntu(
-                              fontSize: 13, fontWeight: FontWeight.w500),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+            ExpansionTile(
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "Traveller Details",
+                    style: GoogleFonts.ubuntu(
+                        fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                  const Divider()
+                ],
               ),
-            )
+              subtitle: Row(
+                children: [
+                  SvgPicture.asset(
+                    'assets/icons/user.svg',
+                    height: 22,
+                  ),
+                  const SizedBox(
+                    width: 6,
+                  ),
+                  Text(
+                    '${widget.flightData['bookedByName']}',
+                    style: GoogleFonts.ubuntu(
+                        fontSize: 14, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(width: 5),
+                  const Icon(Icons.circle, size: 5),
+                  const SizedBox(width: 5),
+                  Text(
+                    '${widget.flightData['bookedByEmail']}',
+                    style: GoogleFonts.ubuntu(
+                        fontSize: 14, fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    children: [
+                      const Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 4.0, horizontal: 3),
+                            child: Icon(
+                              FontAwesomeIcons.map,
+                              size: 14,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 12,
+                          ),
+                        ],
+                      ),
+                      const Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 4.0, horizontal: 3),
+                            child: Icon(
+                              FontAwesomeIcons.idCard,
+                              size: 14,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 12,
+                          ),
+                        ],
+                      ),
+                      AdminTextFormField(
+                        controller: nidController,
+                        hintText: 'NID no.',
+                        prefixIcon: FontAwesomeIcons.idCard,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter Departure Terminal';
+                          }
+                          return null;
+                        },
+                      ),
+                      AdminTextFormField(
+                        hintText: 'Phone no.',
+                        controller: phoneController,
+                        prefixIcon: FontAwesomeIcons.idCard,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter Departure Terminal';
+                          }
+                          return null;
+                        },
+                      ),
+                      AdminTextFormField(
+                        hintText: 'Address',
+                        controller: addressController,
+                        prefixIcon: FontAwesomeIcons.idCard,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter Departure Terminal';
+                          }
+                          return null;
+                        },
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ],
         ),
       ),

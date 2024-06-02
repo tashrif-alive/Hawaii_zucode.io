@@ -8,6 +8,7 @@ class AdminTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   TextEditingController? controller;
   final void Function(String?)? onSaved;
+  final void Function(String?)? onChange;
 
 
   AdminTextFormField({
@@ -18,6 +19,7 @@ class AdminTextFormField extends StatelessWidget {
     this.controller,
     this.keyboardType=TextInputType.text,
     this.onSaved,
+    this.onChange
   }) : super(key: key);
 
   @override

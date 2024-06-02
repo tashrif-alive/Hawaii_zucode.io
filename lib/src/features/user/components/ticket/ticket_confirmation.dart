@@ -21,6 +21,7 @@ class TicketConfirmationScreen extends StatefulWidget {
       required this.seatBookText,
       required this.user});
 
+
   @override
   State<TicketConfirmationScreen> createState() => _TicketConfirmationScreenState();
 }
@@ -677,7 +678,9 @@ class _TicketConfirmationScreenState extends State<TicketConfirmationScreen> {
       'price': widget.seatBookText.length * widget.flightData['ourPrice'],
       'bookedByName': user?.displayName ?? "User",
       'bookedByEmail': user?.email,
-      'userID': user?.email,
+      'userID': user?.uid,
+      // 'updatedData': widget.updatedData
+
     });
   }
 

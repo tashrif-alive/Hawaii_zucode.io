@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_svg/svg.dart';
@@ -14,6 +14,7 @@ class FlightBookedScreen extends StatefulWidget {
 }
 
 class _FlightBookedScreenState extends State<FlightBookedScreen> {
+  User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +26,7 @@ class _FlightBookedScreenState extends State<FlightBookedScreen> {
             children: [
               StreamBuilder(
                 stream: FirebaseFirestore.instance
-                    .collection('booking')
+                    .collection('booking').where('bookedByEmail', isEqualTo: user?.email)
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {

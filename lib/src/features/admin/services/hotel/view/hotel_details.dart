@@ -183,10 +183,16 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                               ),
                               const SizedBox(width: 5),
                               Text(
-                                '${widget.data['hotelType']}',
+                                '${widget.data['rating']}',
                                 style: GoogleFonts.ubuntu(
                                     fontSize: 16, fontWeight: FontWeight.w700),
                               ),
+                              Row(
+                                children: [
+                                  for(int i = 0; i<((widget.data['rating'] ?? 0) as double).toInt(); i++)
+                                    Icon(Icons.star)
+                                ],
+                              )
                             ],
                           ),
                           const SizedBox(height: 1),
