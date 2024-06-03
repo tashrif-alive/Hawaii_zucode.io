@@ -128,7 +128,7 @@ class _FlightApprovedListState extends State<FlightApprovedList> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 18.0),
                         child: Text(
-                            'Ongoing Flight (${filteredFlights.length})',
+                            'Reserved (${filteredFlights.length})',
                             style: GoogleFonts.ubuntu(
                                 fontSize: 12, fontWeight: FontWeight.w300)),
                       ),
@@ -162,7 +162,7 @@ class _FlightApprovedListState extends State<FlightApprovedList> {
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w600),
                                           ),
-                                          Divider(thickness: 1,),
+                                          const Divider(thickness: 1,),
                                           Row(
                                             children: [
                                               Text(
@@ -477,159 +477,178 @@ class _FlightApprovedListState extends State<FlightApprovedList> {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            "Traveller Details",
-                                            style: GoogleFonts.ubuntu(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                          Divider(thickness: 1,),
-                                          Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                'assets/icons/user.svg',
-                                                height: 25,
-                                              ),
-                                              const SizedBox(
-                                                width: 6,
-                                              ),
-                                              Text(
-                                                '${data['bookedByName']}',
-                                                style: GoogleFonts.ubuntu(
+                                          ExpansionTile(
+                                            title: Text(
+                                              "Traveller Details",
+                                              style: GoogleFonts.ubuntu(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            subtitle: Row(
+                                              children: [
+                                                SvgPicture.asset(
+                                                  'assets/icons/user.svg',
+                                                  height: 25,
+                                                ),
+                                                const SizedBox(
+                                                  width: 6,
+                                                ),
+                                                Text(
+                                                  '${data['bookedByName']}',
+                                                  style: GoogleFonts.ubuntu(
                                                     fontSize: 14,
-                                                    fontWeight: FontWeight.w500),
-                                              ),
-                                              const SizedBox(width: 5),
-                                              const Icon(Icons.circle, size: 5),
-                                              const SizedBox(width: 5),
-                                              Text(
-                                                '${data['bookedByEmail']}',
-                                                style: GoogleFonts.ubuntu(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w500),
-                                              ),
-                                            ],
-                                          ),
-                                          const Row(
-                                            children: [
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                  maxLines: 2,
+                                                  overflow: TextOverflow.ellipsis, // Optional: adds an ellipsis if the text overflows
+                                                ),
+                                                const SizedBox(width: 5),
+                                                const Icon(Icons.circle, size: 5),
+                                                const SizedBox(width: 5),
+                                                Flexible(
+                                                  child: Text(
+                                                    '${data['bookedByEmail']}',
+                                                    style: GoogleFonts.ubuntu(
+                                                      fontSize: 14,
+                                                      fontWeight: FontWeight.w500,
+                                                    ),
+                                                    maxLines: 2,
+                                                    overflow: TextOverflow.ellipsis, // Optional: adds an ellipsis if the text overflows
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+
+                                        children: [
                                               Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 4.0, horizontal: 3),
-                                                child: Icon(
-                                                  FontAwesomeIcons.map,
-                                                  size: 14,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 12,
-                                              ),
+                                                padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                                                child: Column(children: [
+                                                  const Row(
+                                                    children: [
+                                                      Padding(
+                                                        padding: EdgeInsets.symmetric(
+                                                            vertical: 4.0, horizontal: 3),
+                                                        child: Icon(
+                                                          FontAwesomeIcons.map,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 12,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const Row(
+                                                    children: [
+                                                      Padding(
+                                                        padding: EdgeInsets.symmetric(
+                                                            vertical: 4.0, horizontal: 3),
+                                                        child: Icon(
+                                                          FontAwesomeIcons.idCard,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 12,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      const Padding(
+                                                        padding: EdgeInsets.symmetric(
+                                                            vertical: 4.0, horizontal: 3),
+                                                        child: Icon(
+                                                          FontAwesomeIcons.chair,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 12,
+                                                      ),
+                                                      Text(
+                                                        'Seat',
+                                                        style: GoogleFonts.ubuntu(
+                                                            fontSize: 13,
+                                                            fontWeight: FontWeight.w400),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 8,
+                                                      ),
+                                                      Text(
+                                                        '${data['seatBookText']}',
+                                                        style: GoogleFonts.ubuntu(
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      const Padding(
+                                                        padding: EdgeInsets.symmetric(
+                                                            vertical: 4.0, horizontal: 3),
+                                                        child: Icon(
+                                                          FontAwesomeIcons.usd,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 12,
+                                                      ),
+                                                      Text(
+                                                        'Fare Cost',
+                                                        style: GoogleFonts.ubuntu(
+                                                            fontSize: 13,
+                                                            fontWeight: FontWeight.w400),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 8,
+                                                      ),
+                                                      Text(
+                                                        '${data['flightDataId']['ourPrice']}  USD',
+                                                        style: GoogleFonts.ubuntu(
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      const Padding(
+                                                        padding: EdgeInsets.symmetric(
+                                                            vertical: 4.0, horizontal: 3),
+                                                        child: Icon(
+                                                          FontAwesomeIcons.moneyBills,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 12,
+                                                      ),
+                                                      Text(
+                                                        'Payment Status',
+                                                        style: GoogleFonts.ubuntu(
+                                                            fontSize: 13,
+                                                            fontWeight: FontWeight.w400),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 8,
+                                                      ),
+                                                      Text(
+                                                        data['paymentStatus'] ? 'Paid' : 'Due',
+                                                        style: GoogleFonts.ubuntu(
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],),
+                                              )
                                             ],
                                           ),
-                                          const Row(
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 4.0, horizontal: 3),
-                                                child: Icon(
-                                                  FontAwesomeIcons.idCard,
-                                                  size: 14,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 12,
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              const Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 4.0, horizontal: 3),
-                                                child: Icon(
-                                                  FontAwesomeIcons.chair,
-                                                  size: 14,
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 12,
-                                              ),
-                                              Text(
-                                                'Seat',
-                                                style: GoogleFonts.ubuntu(
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.w400),
-                                              ),
-                                              const SizedBox(
-                                                width: 8,
-                                              ),
-                                              Text(
-                                                '${data['seatBookText']}',
-                                                style: GoogleFonts.ubuntu(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w500),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              const Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 4.0, horizontal: 3),
-                                                child: Icon(
-                                                  FontAwesomeIcons.usd,
-                                                  size: 14,
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 12,
-                                              ),
-                                              Text(
-                                                'Fare Cost',
-                                                style: GoogleFonts.ubuntu(
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.w400),
-                                              ),
-                                              const SizedBox(
-                                                width: 8,
-                                              ),
-                                              Text(
-                                                '${data['flightDataId']['ourPrice']}  USD',
-                                                style: GoogleFonts.ubuntu(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w500),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              const Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 4.0, horizontal: 3),
-                                                child: Icon(
-                                                  FontAwesomeIcons.moneyBills,
-                                                  size: 14,
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 12,
-                                              ),
-                                              Text(
-                                                'Payment Status',
-                                                style: GoogleFonts.ubuntu(
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.w400),
-                                              ),
-                                              const SizedBox(
-                                                width: 8,
-                                              ),
-                                              Text(
-                                                data['paymentStatus'] ? 'Paid' : 'Due',
-                                                style: GoogleFonts.ubuntu(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w500),
-                                              ),
-                                            ],
-                                          ),
+
+
                                         ],
                                       ),
                                     ),

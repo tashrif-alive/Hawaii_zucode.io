@@ -43,16 +43,47 @@ class _AdminServicesScreenState extends State<AdminServicesScreen> {
     {
       "backgroundImage": const AssetImage('assets/icons/category/package.png'),
       "title": "Package",
-      "screen": AddCarScreen(),
+      "screen": null,
       "color": Colors.black,
     },
     {
       "backgroundImage": const AssetImage('assets/icons/category/App icon-02.png'),
       "title": "E-Visa",
-      "screen": const AirLineServices(),
+      "screen": null,
       "color": Colors.black,
     },
   ];
+
+  void _showDevelopmentDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          elevation: 2,
+          title: const Center(child: Text('Information')),
+          content: const Text('This feature is under development'),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          actions: [
+            Center(
+              child: Container(
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
+                width: MediaQuery.of(context).size.width*0.6,
+                child: ElevatedButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -71,24 +102,26 @@ class _AdminServicesScreenState extends State<AdminServicesScreen> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-
               const SizedBox(
                 height: 12,
               ),
-
               GridView.builder(
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 18.0,
                   mainAxisSpacing: 18.0,
-                  childAspectRatio: 4/3
+                  childAspectRatio: 4 / 3,
                 ),
                 itemCount: services.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      Get.to(services[index]['screen']);
+                      if (services[index]['screen'] != null) {
+                        Get.to(services[index]['screen']);
+                      } else {
+                        _showDevelopmentDialog();
+                      }
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -114,14 +147,13 @@ class _AdminServicesScreenState extends State<AdminServicesScreen> {
                 },
               ),
               const SizedBox(height: 20),
-              Text(
-                "Companies",
-                style: GoogleFonts.ubuntu(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-
+              // Text(
+              //   "Companies",
+              //   style: GoogleFonts.ubuntu(
+              //     fontSize: 15,
+              //     fontWeight: FontWeight.w700,
+              //   ),
+              // ),
             ],
           ),
         ),

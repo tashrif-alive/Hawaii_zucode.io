@@ -2,8 +2,8 @@ class Flight {
   final String id;
   final String airlineName;
   final String date;
-  final String fromTime;
-  final String toTime;
+   String fromTime;
+   String toTime;
   final String duration;
   final String fromPlace;
   final String toPlace;
@@ -25,8 +25,8 @@ class Flight {
     required this.id,
     required this.airlineName,
     required this.date,
-    required this.fromTime,
-    required this.toTime,
+    this.fromTime='',
+    this.toTime='',
     required this.duration,
     required this.fromPlace,
     required this.toPlace,

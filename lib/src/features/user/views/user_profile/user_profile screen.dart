@@ -94,7 +94,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             child: ProfileWidget(
                               title: 'Location',
                               icon: Icons.location_on_sharp,
-                              subtitle: 'Uttara',
+                              subtitle: 'Sector-7,road-3,house-42,Uttara,\nDhaka-1230',
                               onTap: () {},
                             ),
                           ),
@@ -103,7 +103,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             child: ProfileWidget(
                               title: 'My Tickets',
                               icon: Icons.airplane_ticket_outlined,
-                              subtitle: 'Uttara',
+                              subtitle: 'No Booking yet',
                               onTap: () {},
                             ),
                           ),
@@ -112,7 +112,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             child: ProfileWidget(
                               title: 'Wishlist',
                               icon: Icons.favorite,
-                              subtitle: 'Uttara',
+                              subtitle: 'Nothing to Show',
                               onTap: () {},
                             ),
                           ),
@@ -130,7 +130,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             child: ProfileWidget(
                               title: 'Add Card',
                               icon: Icons.add_card,
-                              subtitle: 'Uttara',
+                              subtitle: 'Visa Card',
                               onTap: () {},
                             ),
                           ),

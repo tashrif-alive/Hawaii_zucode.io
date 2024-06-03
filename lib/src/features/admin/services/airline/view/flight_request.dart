@@ -691,33 +691,14 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                // data['isApproved'] == true
-                                //     ? const Text('Confirmed')
-                                //     : const Chip(
-                                //         backgroundColor: Colors.grey,
-                                //         label: Text('Pending'),
-                                //       ),
-                                OutlinedButton(
-                                    onPressed: () {
-                                      _updateApprovalStatus(item.id);
-                                    },
-                                    child: Text(
-                                      'Approve',
-                                      style: GoogleFonts.ubuntu(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500),
-                                    )),
-                                const SizedBox(
-                                  width: 12,
-                                ),
                                 OutlinedButton(
                                   onPressed: () {
                                     _updateApprovalStatusCancel(item.id);
                                   },
                                   style: ButtonStyle(
                                     backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.black),
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.black),
                                   ),
                                   child: Text(
                                     'Decline',
@@ -728,6 +709,21 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                     ),
                                   ),
                                 ),
+                                const SizedBox(
+                                  width: 12,
+                                ),
+                                OutlinedButton(
+                                    onPressed: () {
+                                      _updateApprovalStatus(item.id);
+                                    },
+                                    child: Text(
+                                      'Approve',
+                                      style: GoogleFonts.ubuntu(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500),
+                                    )),
+
+
                                 const SizedBox(
                                   width: 12,
                                 ),

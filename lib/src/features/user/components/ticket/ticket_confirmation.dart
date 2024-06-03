@@ -97,7 +97,7 @@ class _TicketConfirmationScreenState extends State<TicketConfirmationScreen> {
                           ),
                         ),
                         Text(
-                          'USD ${widget.flightData['ourPrice']}',
+                          'USD ${(widget.seatBookText.length * widget.flightData['ourPrice']).toString()}',
                           style: GoogleFonts.ubuntu(
                               fontSize: 14, fontWeight: FontWeight.w500),
                         ),
@@ -121,8 +121,8 @@ class _TicketConfirmationScreenState extends State<TicketConfirmationScreen> {
                           horizontal: 30, vertical: 10),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
-                            10), // Sets a border radius of 20
-                      ), // Button padding
+                            10),
+                      ),
                     ),
                     child: Text("Pay Now", style: GoogleFonts.ubuntu()),
                   ),
@@ -576,7 +576,8 @@ class _TicketConfirmationScreenState extends State<TicketConfirmationScreen> {
                               ),
                             ),
                             Text(
-                              "${widget.seatBookText.length} X 1200 = \$${widget.seatBookText.length * 1200}",
+
+                              "\$${(widget.seatBookText.length * widget.flightData['ourPrice']).toString()}",
                               style: GoogleFonts.ubuntu(
                                   fontSize: 13, fontWeight: FontWeight.w500),
                             ),
@@ -627,7 +628,7 @@ class _TicketConfirmationScreenState extends State<TicketConfirmationScreen> {
                               ),
                             ),
                             Text(
-                              '\$${widget.flightData['ourPrice']}',
+                              '\$${(widget.seatBookText.length * widget.flightData['ourPrice']).toString()}',
                               style: GoogleFonts.ubuntu(
                                   fontSize: 13, fontWeight: FontWeight.w500),
                             ),

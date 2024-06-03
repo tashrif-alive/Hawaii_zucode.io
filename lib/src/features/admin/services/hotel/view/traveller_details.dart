@@ -89,7 +89,7 @@ class _TravellerDetailsState extends State<TravellerDetails> {
         elevation: 0,
         backgroundColor: Colors.white,
         title: Text(
-          'Review Flight',
+          'Traveller Details',
           style: GoogleFonts.ubuntu(
             fontSize: 16,
             fontWeight: FontWeight.w700,
@@ -373,10 +373,12 @@ class _TravellerDetailsState extends State<TravellerDetails> {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 12,)
                   ],
                 ),
               ),
             ),
+            Container(color: Colors.grey.shade50,height: 12,),
             ExpansionTile(
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -419,36 +421,7 @@ class _TravellerDetailsState extends State<TravellerDetails> {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
                     children: [
-                      const Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 4.0, horizontal: 3),
-                            child: Icon(
-                              FontAwesomeIcons.map,
-                              size: 14,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                        ],
-                      ),
-                      const Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 4.0, horizontal: 3),
-                            child: Icon(
-                              FontAwesomeIcons.idCard,
-                              size: 14,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                        ],
-                      ),
+
                       AdminTextFormField(
                         controller: nidController,
                         hintText: 'NID no.',
@@ -460,10 +433,11 @@ class _TravellerDetailsState extends State<TravellerDetails> {
                           return null;
                         },
                       ),
+                      const SizedBox(height: 8,),
                       AdminTextFormField(
                         hintText: 'Phone no.',
                         controller: phoneController,
-                        prefixIcon: FontAwesomeIcons.idCard,
+                        prefixIcon: FontAwesomeIcons.phone,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter Departure Terminal';
@@ -471,10 +445,11 @@ class _TravellerDetailsState extends State<TravellerDetails> {
                           return null;
                         },
                       ),
+                      const SizedBox(height: 8,),
                       AdminTextFormField(
                         hintText: 'Address',
                         controller: addressController,
-                        prefixIcon: FontAwesomeIcons.idCard,
+                        prefixIcon: FontAwesomeIcons.locationArrow,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter Departure Terminal';

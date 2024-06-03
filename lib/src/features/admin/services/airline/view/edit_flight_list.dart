@@ -21,9 +21,9 @@ class _EditFlightFormState extends State<EditFlightForm> {
 
   late String _airlineName;
   DateTime _selectedDate = DateTime.now();
-  late String _fromTime;
-  late String _toTime;
-  late String _duration;
+  //late String _fromTime;
+  // late String _toTime;
+   late String _duration;
   late String _fromPlace;
   late String _toPlace;
   late String _planeModel;
@@ -72,20 +72,20 @@ class _EditFlightFormState extends State<EditFlightForm> {
         widget.flight.id,
         _airlineName,
         _selectedDate.toString(),
-        _fromTime.toString(),
-        _toTime.toString(),
+        // _fromTime.toString(),
+        // _toTime.toString(),
         _duration,
         _fromPlace,
         _toPlace,
         _planeModel,
-        _refundable,
-        _insurance,
-        _baggage,
-        _flightClass,
-        _regularPrice,
-        _ourPrice,
-        _imgUrl,
-        _stoppage,
+        _refundable as bool,
+        _insurance as bool,
+        _baggage as String,
+        _flightClass as String,
+        _regularPrice as double,
+        _ourPrice as double,
+        _imgUrl as String,
+        _stoppage as String,
         _departureTerminal,
         _departureAirport,
         _arrivalTerminal,
@@ -112,30 +112,30 @@ class _EditFlightFormState extends State<EditFlightForm> {
   }
 
   ///departure_time
-  Future<void> _selectDepartureTime(BuildContext context) async {
-    final TimeOfDay? picked = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-    if (picked != null) {
-      setState(() {
-        _fromTime = picked.format(context);
-      });
-    }
-  }
-
-  ///arrival_time
-  Future<void> _selectArrivalTime(BuildContext context) async {
-    final TimeOfDay? picked = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-    if (picked != null) {
-      setState(() {
-        _toTime = picked.format(context);
-      });
-    }
-  }
+  // Future<void> _selectDepartureTime(BuildContext context) async {
+  //   final TimeOfDay? picked = await showTimePicker(
+  //     context: context,
+  //     initialTime: TimeOfDay.now(),
+  //   );
+  //   if (picked != null) {
+  //     setState(() {
+  //       _fromTime = picked.format(context);
+  //     });
+  //   }
+  // }
+  //
+  // ///arrival_time
+  // Future<void> _selectArrivalTime(BuildContext context) async {
+  //   final TimeOfDay? picked = await showTimePicker(
+  //     context: context,
+  //     initialTime: TimeOfDay.now(),
+  //   );
+  //   if (picked != null) {
+  //     setState(() {
+  //       _toTime = picked.format(context);
+  //     });
+  //   }
+  // }
 
   Future<void> _editImage() async {
     String? newImageUrl = await _getImageFromPicker();
@@ -545,61 +545,61 @@ class _EditFlightFormState extends State<EditFlightForm> {
                   ),
                 ],
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () => _selectDepartureTime(context),
-                      child: TextFormField(
-                        initialValue: _fromTime,
-                        enabled: false,
-                        decoration: InputDecoration(
-                          hintText: 'Departure Time',
-                          hintStyle: GoogleFonts.poppins(
-                              fontSize: 14, fontWeight: FontWeight.w400),
-                          prefixIcon: const Icon(Icons.access_time),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide.none,
-                          ),
-                          filled: true,
-                          fillColor: Colors.grey.shade50,
-                        ),
-                        controller: TextEditingController(text: _fromTime),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter departure time';
-                          }
-                          return null;
-                        },
-                        onSaved: (newValue) => _fromTime = newValue!,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: InkWell(
-                      onTap: () => _selectArrivalTime(context),
-                      child: TextFormField(
-                        initialValue: _toTime,
-                        enabled: false,
-                        decoration: InputDecoration(
-                          hintText: 'Arrival Time',
-                          hintStyle: GoogleFonts.poppins(
-                              fontSize: 14, fontWeight: FontWeight.w400),
-                          prefixIcon: const Icon(Icons.access_time),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide.none,
-                          ),
-                          filled: true,
-                          fillColor: Colors.grey.shade50,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              // Row(
+              //   children: [
+              //     Expanded(
+              //       child: InkWell(
+              //         onTap: () => _selectDepartureTime(context),
+              //         child: TextFormField(
+              //           initialValue: _fromTime,
+              //           enabled: false,
+              //           decoration: InputDecoration(
+              //             hintText: 'Departure Time',
+              //             hintStyle: GoogleFonts.poppins(
+              //                 fontSize: 14, fontWeight: FontWeight.w400),
+              //             prefixIcon: const Icon(Icons.access_time),
+              //             border: OutlineInputBorder(
+              //               borderRadius: BorderRadius.circular(8),
+              //               borderSide: BorderSide.none,
+              //             ),
+              //             filled: true,
+              //             fillColor: Colors.grey.shade50,
+              //           ),
+              //           controller: TextEditingController(text: _fromTime),
+              //           validator: (value) {
+              //             if (value == null || value.isEmpty) {
+              //               return 'Please enter departure time';
+              //             }
+              //             return null;
+              //           },
+              //           onSaved: (newValue) => _fromTime = newValue!,
+              //         ),
+              //       ),
+              //     ),
+              //     const SizedBox(width: 8),
+              //     Expanded(
+              //       child: InkWell(
+              //         onTap: () => _selectArrivalTime(context),
+              //         child: TextFormField(
+              //           initialValue: _toTime,
+              //           enabled: false,
+              //           decoration: InputDecoration(
+              //             hintText: 'Arrival Time',
+              //             hintStyle: GoogleFonts.poppins(
+              //                 fontSize: 14, fontWeight: FontWeight.w400),
+              //             prefixIcon: const Icon(Icons.access_time),
+              //             border: OutlineInputBorder(
+              //               borderRadius: BorderRadius.circular(8),
+              //               borderSide: BorderSide.none,
+              //             ),
+              //             filled: true,
+              //             fillColor: Colors.grey.shade50,
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
               Row(
                 children: [
                   Expanded(

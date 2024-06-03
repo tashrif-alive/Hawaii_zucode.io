@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../model/add_flight_model.dart';
 import 'edit_flight_list.dart';
@@ -22,12 +24,24 @@ class _ManageFlightListScreenState extends State<ManageFlightListScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
         centerTitle: true,
         title: Text(
           'Manage Flights',
-          style: GoogleFonts.poppins(
+          style: GoogleFonts.ubuntu(
             fontSize: 16,
             fontWeight: FontWeight.w600,
+            color: Colors.black
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: const Icon(
+            Icons.arrow_back_rounded,
+            color: Colors.black,
           ),
         ),
       ),
@@ -242,8 +256,8 @@ class _ManageFlightListScreenState extends State<ManageFlightListScreen> {
                                               id: document.id,
                                               airlineName: data['airlineName'],
                                               date: data['date'],
-                                              fromTime: data['fromTime'],
-                                              toTime: data['toTime'],
+                                              // fromTime: data['fromTime'],
+                                              // toTime: data['toTime'],
                                               duration: data['duration'],
                                               fromPlace: data['fromPlace'],
                                               toPlace: data['toPlace'],

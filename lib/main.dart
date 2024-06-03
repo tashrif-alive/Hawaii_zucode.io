@@ -17,14 +17,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MaterialColor blackSwatch = const MaterialColor(
-      0xFF000000, // The primary value
+      0xFF000000,
       <int, Color>{
-        50: Colors.black, // You can define shades as needed
+        50: Colors.black,
         100: Colors.black,
         200: Colors.black,
         300: Colors.black,
         400: Colors.black,
-        500: Colors.black, // This is the primary color
+        500: Colors.black,
         600: Colors.black,
         700: Colors.black,
         800: Colors.black,
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: blackSwatch,
       ),
-      home: const AdminBottomBar(),
+      home: const NavigationMenu(),
     );
   }
 }

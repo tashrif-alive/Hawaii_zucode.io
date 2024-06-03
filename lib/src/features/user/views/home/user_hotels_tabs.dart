@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../components/alience_carousel.dart';
 import '../../components/flight/flight_fare_list.dart';
+import '../../components/hotel/hotel_for_user.dart';
 import '../../components/hotel/hotel_search_box.dart';
 
 class UserHotelTab extends StatefulWidget {
@@ -67,7 +68,7 @@ class _UserHotelTabState extends State<UserHotelTab> {
             const AliancesBannerCarousel(),
             const Padding(
               padding: EdgeInsets.all(15.0),
-              child: FlightFareList(),
+              child: HotelListScreenUser(),
             ),
           ],
         ),

@@ -49,17 +49,17 @@ class _UserFlightTabState extends State<UserFlightTab> {
               padding: EdgeInsets.only(top: 15.0, bottom: 8),
               child: ExtraServicesBar(),
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8, left: 15, right: 15),
-              child: Text(
-                'Your recent searches',
-                style: GoogleFonts.poppins(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(bottom: 8, left: 15, right: 15),
+            //   child: Text(
+            //     'Your recent searches',
+            //     style: GoogleFonts.poppins(
+            //       fontSize: 15,
+            //       fontWeight: FontWeight.w600,
+            //       color: Colors.black,
+            //     ),
+            //   ),
+            // ),
             const SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),

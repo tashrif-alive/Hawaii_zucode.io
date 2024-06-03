@@ -27,15 +27,16 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
     super.initState();
     getHotelByModel(widget.data['location']);
   }
-
   Future<void> getHotelByModel(String model) async {
     setState(() {
       isLoading = true;
     });
 
     try {
-      QuerySnapshot querySnapshot =
-          await FirebaseFirestore.instance.collection('hotelInformation').where('location', isEqualTo: model).get();
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('hotelInformation')
+          .where('location', isEqualTo: model)
+          .get();
 
       if (querySnapshot.docs.isNotEmpty) {
         DocumentSnapshot doc = querySnapshot.docs.first;
@@ -59,78 +60,7 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        bottomNavigationBar: SizedBox(
-          height: 60,
-          child: Material(
-            elevation: 1,
-            child: Container(
-              padding: const EdgeInsets.only(left: 12, right: 12, top: 5),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Starting From',
-                    style: GoogleFonts.ubuntu(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 2,
-                  ),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                    Row(
-                      children: [
-                        Text(
-                          '\$${widget.data['offeredHotelCost']}',
-                          style: GoogleFonts.ubuntu(fontSize: 17, fontWeight: FontWeight.w500),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          '\$${widget.data['regularHotelCost']}',
-                          style: GoogleFonts.ubuntu(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            decoration: TextDecoration.lineThrough,
-                            // Add line-through effect
-                            decorationColor: Colors.red,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ]),
-                  const FractionallySizedBox(
-                    widthFactor: 1,
-                    //child:
-                    // ElevatedButton(
-                    //   onPressed: () async {
-                    //     showProcessing();
-                    //     await insertBookingInfo();
-                    //     Get.offAll(() => const NavigationMenu());
-                    //     Get.snackbar("Success",
-                    //         "Payment Completed, Your Seat is Reserved");
-                    //   },
-                    //   style: ElevatedButton.styleFrom(
-                    //     primary: Colors.black, // Button color
-                    //     padding: const EdgeInsets.symmetric(
-                    //         horizontal: 30, vertical: 10),
-                    //     shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.circular(
-                    //           10), // Sets a border radius of 20
-                    //     ), // Button padding
-                    //   ),
-                    //   child: Text("Pay Now", style: GoogleFonts.ubuntu()),
-                    // ),
-                    //),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
+
         body: isLoading
             ? const Center(child: CircularProgressIndicator())
             : SingleChildScrollView(
@@ -139,13 +69,15 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                   children: [
                     Container(
                       decoration: const BoxDecoration(
-                        borderRadius:
-                            BorderRadius.only(bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(8),
+                            bottomRight: Radius.circular(8)),
                         color: Colors.white,
                       ),
                       child: ClipRRect(
-                        borderRadius:
-                            const BorderRadius.only(bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
+                        borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(8),
+                            bottomRight: Radius.circular(8)),
                         child: Image.network(
                           widget.data['imgUrl'] ?? '',
                           height: 200,
@@ -158,14 +90,16 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                       height: 6,
                     ),
                     Container(
-                      padding: const EdgeInsets.only(top: 12, left: 16, right: 16),
+                      padding:
+                          const EdgeInsets.only(top: 12, left: 16, right: 16),
                       child: Column(
                         children: [
                           Row(
                             children: [
                               Text(
                                 '${widget.data['hotelName']}',
-                                style: GoogleFonts.ubuntu(fontSize: 18, fontWeight: FontWeight.w700),
+                                style: GoogleFonts.ubuntu(
+                                    fontSize: 18, fontWeight: FontWeight.w700),
                               ),
                               const SizedBox(width: 5),
                               const Icon(
@@ -175,13 +109,16 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                               const SizedBox(width: 5),
                               Text(
                                 '${widget.data['rating']}',
-                                style: GoogleFonts.ubuntu(fontSize: 16, fontWeight: FontWeight.w700),
+                                style: GoogleFonts.ubuntu(
+                                    fontSize: 16, fontWeight: FontWeight.w700),
                               ),
                               Row(
                                 children: [
                                   for (int i = 0; i < 5; i++)
                                     Icon(
-                                      i < widget.data['rating'] ? Icons.star : Icons.star_border,
+                                      i < widget.data['rating']
+                                          ? Icons.star
+                                          : Icons.star_border,
                                       color: Colors.amber,
                                       size: 20,
                                     )
@@ -197,9 +134,13 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text('${widget.data['location']}',
-                                      style: GoogleFonts.ubuntu(fontSize: 14, fontWeight: FontWeight.w400)),
+                                      style: GoogleFonts.ubuntu(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400)),
                                   Text('${hotelData?['address'] ?? ''}',
-                                      style: GoogleFonts.ubuntu(fontSize: 13, fontWeight: FontWeight.w300)),
+                                      style: GoogleFonts.ubuntu(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w300)),
                                 ],
                               ),
                               Container(
@@ -241,7 +182,9 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                                     child: Text(
                                       '8.7',
                                       style: GoogleFonts.ubuntu(
-                                          fontSize: 16, fontWeight: FontWeight.w700, color: Colors.blue),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.blue),
                                     ),
                                   ),
                                 ),
@@ -249,19 +192,24 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                                 Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Excellent',
                                         style: GoogleFonts.ubuntu(
-                                            fontWeight: FontWeight.w400, fontSize: 14, color: Colors.blue),
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 14,
+                                            color: Colors.blue),
                                       ),
                                       const SizedBox(
                                         height: 2,
                                       ),
                                       Text(
                                         '23 Ratings',
-                                        style: GoogleFonts.ubuntu(fontWeight: FontWeight.w300, fontSize: 13),
+                                        style: GoogleFonts.ubuntu(
+                                            fontWeight: FontWeight.w300,
+                                            fontSize: 13),
                                       ),
                                     ],
                                   ),
@@ -291,74 +239,37 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                     ),
                     Container(height: 8, color: Colors.blueGrey.shade50),
                     Container(
-                      padding: const EdgeInsets.only(top: 12, left: 16, right: 16, bottom: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Travel Details',
-                            style: GoogleFonts.ubuntu(fontSize: 16, fontWeight: FontWeight.w500),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                child: _buildCalendarDialogButton(),
-                              ),
-                              Expanded(
-                                child: ElevatedButton(
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return CustomAlertDialog();
-                                      },
-                                    ).then((value) {
-                                      if (value != null) {
-                                        print('Returned values: $value');
-                                        setState(() {
-                                          roomNPersons = value;
-                                        });
-                                      }
-                                    });
-                                  },
-                                  child: Text(formatRoomNPersonText()),
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(height: 8, color: Colors.blueGrey.shade50),
-                    Container(
-                      padding: const EdgeInsets.only(top: 12, left: 16, right: 16, bottom: 12),
+                      padding: const EdgeInsets.only(
+                          top: 12, left: 16, right: 16, bottom: 12),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             'Facilities',
-                            style: GoogleFonts.ubuntu(fontSize: 16, fontWeight: FontWeight.w500),
+                            style: GoogleFonts.ubuntu(
+                                fontSize: 16, fontWeight: FontWeight.w500),
                           ),
                           const SizedBox(
                             height: 8,
                           ),
-                          facilityGridView((hotelData?['facilities'] as List<dynamic>?)?.cast<String>() ?? [])
+                          facilityGridView(
+                              (hotelData?['facilities'] as List<dynamic>?)
+                                      ?.cast<String>() ??
+                                  [])
                         ],
                       ),
                     ),
                     Container(height: 8, color: Colors.blueGrey.shade50),
                     Container(
-                      padding: const EdgeInsets.only(top: 12, left: 16, right: 16, bottom: 12),
+                      padding: const EdgeInsets.only(
+                          top: 12, left: 16, right: 16, bottom: 12),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             'User Reviews',
-                            style: GoogleFonts.ubuntu(fontSize: 16, fontWeight: FontWeight.w500),
+                            style: GoogleFonts.ubuntu(
+                                fontSize: 16, fontWeight: FontWeight.w500),
                           ),
                           const SizedBox(
                             height: 12,
@@ -381,7 +292,9 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                                   child: Text(
                                     '8.7',
                                     style: GoogleFonts.ubuntu(
-                                        fontSize: 16, fontWeight: FontWeight.w700, color: Colors.blue),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.blue),
                                   ),
                                 ),
                               ),
@@ -394,14 +307,18 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                                     Text(
                                       'Excellent',
                                       style: GoogleFonts.ubuntu(
-                                          fontWeight: FontWeight.w400, fontSize: 14, color: Colors.blue),
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                          color: Colors.blue),
                                     ),
                                     const SizedBox(
                                       height: 2,
                                     ),
                                     Text(
                                       '23 Ratings',
-                                      style: GoogleFonts.ubuntu(fontWeight: FontWeight.w300, fontSize: 13),
+                                      style: GoogleFonts.ubuntu(
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 13),
                                     ),
                                   ],
                                 ),
@@ -436,8 +353,10 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
   }
 
   _buildCalendarDialogButton() {
-    const dayTextStyle = TextStyle(color: Colors.black, fontWeight: FontWeight.w700);
-    final weekendTextStyle = TextStyle(color: Colors.black, fontWeight: FontWeight.w600);
+    const dayTextStyle =
+        TextStyle(color: Colors.black, fontWeight: FontWeight.w700);
+    final weekendTextStyle =
+        TextStyle(color: Colors.black, fontWeight: FontWeight.w600);
     final anniversaryTextStyle = TextStyle(
       color: Colors.red[400],
       fontWeight: FontWeight.w700,
@@ -465,7 +384,8 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
       selectedDayTextStyle: dayTextStyle.copyWith(color: Colors.white),
       dayTextStylePredicate: ({required date}) {
         TextStyle? textStyle;
-        if (date.weekday == DateTime.saturday || date.weekday == DateTime.sunday) {
+        if (date.weekday == DateTime.saturday ||
+            date.weekday == DateTime.sunday) {
           textStyle = weekendTextStyle;
         }
         if (DateUtils.isSameDay(date, DateTime(2021, 1, 25))) {
@@ -500,7 +420,9 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                       width: 4,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        color: isSelected == true ? Colors.white : Colors.grey[500],
+                        color: isSelected == true
+                            ? Colors.white
+                            : Colors.grey[500],
                       ),
                     ),
                   ),
@@ -606,16 +528,24 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
     CalendarDatePicker2Type datePickerType,
     List<DateTime?> values,
   ) {
-    values = values.map((e) => e != null ? DateUtils.dateOnly(e) : null).toList();
-    var valueText = (values.isNotEmpty ? values[0] : null).toString().replaceAll('00:00:00.000', '');
+    values =
+        values.map((e) => e != null ? DateUtils.dateOnly(e) : null).toList();
+    var valueText = (values.isNotEmpty ? values[0] : null)
+        .toString()
+        .replaceAll('00:00:00.000', '');
 
     if (datePickerType == CalendarDatePicker2Type.multi) {
-      valueText =
-          values.isNotEmpty ? values.map((v) => v.toString().replaceAll('00:00:00.000', '')).join(', ') : 'null';
+      valueText = values.isNotEmpty
+          ? values
+              .map((v) => v.toString().replaceAll('00:00:00.000', ''))
+              .join(', ')
+          : 'null';
     } else if (datePickerType == CalendarDatePicker2Type.range) {
       if (values.isNotEmpty) {
         final startDate = values[0].toString().replaceAll('00:00:00.000', '');
-        final endDate = values.length > 1 ? values[1].toString().replaceAll('00:00:00.000', '') : 'null';
+        final endDate = values.length > 1
+            ? values[1].toString().replaceAll('00:00:00.000', '')
+            : 'null';
         valueText = '$startDate to $endDate';
       } else {
         return 'null';
@@ -646,7 +576,8 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
   }
 
   Widget facilityGridView(List<String> facilities) {
-    final displayedFacilities = facilities.length > 6 ? facilities.sublist(0, 6) : facilities;
+    final displayedFacilities =
+        facilities.length > 6 ? facilities.sublist(0, 6) : facilities;
 
     return GridView.builder(
       shrinkWrap: true,
@@ -662,7 +593,8 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
         if (index == 5) {
           return GestureDetector(
             onTap: () {
-              HotelFacilitiesScreen.buildShowModalBottomSheet(context, hotelData!);
+              HotelFacilitiesScreen.buildShowModalBottomSheet(
+                  context, hotelData!);
             },
             child: Material(
               elevation: 1,
@@ -679,10 +611,13 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                   children: [
                     Text(
                       '+${facilities.length}',
-                      style: GoogleFonts.ubuntu(fontSize: 14, fontWeight: FontWeight.w700),
+                      style: GoogleFonts.ubuntu(
+                          fontSize: 14, fontWeight: FontWeight.w700),
                     ),
                     const SizedBox(height: 8.0),
-                    Text('Facilities', style: GoogleFonts.ubuntu(fontSize: 12, fontWeight: FontWeight.w400))
+                    Text('Facilities',
+                        style: GoogleFonts.ubuntu(
+                            fontSize: 12, fontWeight: FontWeight.w400))
                   ],
                 ),
               ),
@@ -708,7 +643,8 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                 Text(
                   facility,
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.ubuntu(fontSize: 12, fontWeight: FontWeight.w400),
+                  style: GoogleFonts.ubuntu(
+                      fontSize: 12, fontWeight: FontWeight.w400),
                 ),
               ],
             ),

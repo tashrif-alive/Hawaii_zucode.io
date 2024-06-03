@@ -90,380 +90,665 @@ class _AdminDashboardState extends State<AdminDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ///User
-            Material(
-              elevation: 2,
-              borderRadius: BorderRadius.circular(12),
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.blueGrey.shade50),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Text(
-                          "Users", // Display the user count
-                          style: GoogleFonts.ubuntu(
-                              fontSize: 16, fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          "$userCount", // Display the user count
-                          style: GoogleFonts.ubuntu(
-                              fontSize: 20, fontWeight: FontWeight.w700),
-                        ),
-                        OutlinedButton(
-                          onPressed: () {
-                            Get.to(const UserList());
-                          },
-                          style: OutlinedButton.styleFrom(
-                            minimumSize: const Size(50, 30),
-                            // Set the desired width and height
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  12), // Set the desired border radius
-                            ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ///User
+              Material(
+                elevation: 2,
+                borderRadius: BorderRadius.circular(12),
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.blueGrey.shade50),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 12,
                           ),
-                          child: Center(
-                            child: Text(
-                              'View all',
-                              style: GoogleFonts.ubuntu(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500,
+                          Text(
+                            "Users", // Display the user count
+                            style: GoogleFonts.ubuntu(
+                                fontSize: 16, fontWeight: FontWeight.w500),
+                          ),
+                          Text(
+                            "$userCount", // Display the user count
+                            style: GoogleFonts.ubuntu(
+                                fontSize: 20, fontWeight: FontWeight.w700),
+                          ),
+                          OutlinedButton(
+                            onPressed: () {
+                              Get.to(const UserList());
+                            },
+                            style: OutlinedButton.styleFrom(
+                              minimumSize: const Size(50, 30),
+                              // Set the desired width and height
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    12), // Set the desired border radius
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'View all',
+                                style: GoogleFonts.ubuntu(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
                           ),
+                        ],
+                      ),
+                      SvgPicture.asset(
+                        'assets/icons/user_dash.svg',
+                        width: MediaQuery.of(context).size.width * 0.25,
+                        height: MediaQuery.of(context).size.height * 0.10,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 4),
+                child: Text(
+                  "Services",
+                  style: GoogleFonts.ubuntu(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+              ///Flight&Hotels
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 7.0),
+                    child: Expanded(
+                      child: Material(
+                        elevation: 2,
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * .43,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.blueGrey.shade50),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  Text(
+                                    "Flights",
+                                    style: GoogleFonts.ubuntu(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  Text(
+                                    "$flightCount",
+                                    style: GoogleFonts.ubuntu(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  OutlinedButton(
+                                    onPressed: () {
+                                      Get.to(const FlightListScreenWidget());
+                                    },
+                                    style: OutlinedButton.styleFrom(
+                                      minimumSize: const Size(50, 30),
+                                      // Set the desired width and height
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            12), // Set the desired border radius
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'View all',
+                                        style: GoogleFonts.ubuntu(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
+                      ),
                     ),
-                    SvgPicture.asset(
-                      'assets/icons/user_dash.svg',
-                      width: MediaQuery.of(context).size.width * 0.25,
-                      height: MediaQuery.of(context).size.height * 0.10,
+                  ),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 7.0),
+                    child: Expanded(
+                      child: Material(
+                        elevation: 2,
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * .43,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.blueGrey.shade50),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  Text(
+                                    "Hotels",
+                                    style: GoogleFonts.ubuntu(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  Text(
+                                    "$hotelCount",
+                                    style: GoogleFonts.ubuntu(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  OutlinedButton(
+                                    onPressed: () {
+                                      Get.to(const HotelListScreenWidget());
+                                    },
+                                    style: OutlinedButton.styleFrom(
+                                      minimumSize: const Size(50, 30),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            12),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'View all',
+                                        style: GoogleFonts.ubuntu(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              ///Bus&Car_rental
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5.0),
+                    child: Expanded(
+                      child: Material(
+                        elevation: 2,
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * .43,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.blueGrey.shade50),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  Text(
+                                    "Bus", // Display the user count
+                                    style: GoogleFonts.ubuntu(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  Text(
+                                    "$busCount", // Display the user count
+                                    style: GoogleFonts.ubuntu(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  OutlinedButton(
+                                    onPressed: () {
+                                      Get.to(const BusListScreen());
+                                    },
+                                    style: OutlinedButton.styleFrom(
+                                      minimumSize: const Size(50, 30),
+                                      // Set the desired width and height
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            12), // Set the desired border radius
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'View all',
+                                        style: GoogleFonts.ubuntu(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5.0),
+                    child: Expanded(
+                      child: Material(
+                        elevation: 2,
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * .43,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.blueGrey.shade50),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  Text(
+                                    "Cabs",
+                                    style: GoogleFonts.ubuntu(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  Text(
+                                    "$cabCount",
+                                    style: GoogleFonts.ubuntu(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  OutlinedButton(
+                                    onPressed: () {
+                                      Get.to(const CarListScreen());
+                                    },
+                                    style: OutlinedButton.styleFrom(
+                                      minimumSize: const Size(50, 30),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            12),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'View all',
+                                        style: GoogleFonts.ubuntu(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Sells",
+                  style: GoogleFonts.ubuntu(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                      child: Expanded(
+                        child: Material(
+                          elevation: 2,
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * .43,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.blueGrey.shade50),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      height: 12,
+                                    ),
+                                    Text(
+                                      "Flights",
+                                      style: GoogleFonts.ubuntu(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    Text(
+                                      "$flightCount",
+                                      style: GoogleFonts.ubuntu(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    OutlinedButton(
+                                      onPressed: () {
+                                        Get.to(const FlightListScreenWidget());
+                                      },
+                                      style: OutlinedButton.styleFrom(
+                                        minimumSize: const Size(50, 30),
+                                        // Set the desired width and height
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              12), // Set the desired border radius
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'View all',
+                                          style: GoogleFonts.ubuntu(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                      child: Expanded(
+                        child: Material(
+                          elevation: 2,
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * .43,
+                            height: MediaQuery.of(context).size.height * .170,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.blueGrey.shade50),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      height: 12,
+                                    ),
+                                    Text(
+                                      "Hotels",
+                                      style: GoogleFonts.ubuntu(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    Text(
+                                      "$hotelCount",
+                                      style: GoogleFonts.ubuntu(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    OutlinedButton(
+                                      onPressed: () {
+                                        Get.to(const HotelListScreenWidget());
+                                      },
+                                      style: OutlinedButton.styleFrom(
+                                        minimumSize: const Size(50, 30),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              12),
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'View all',
+                                          style: GoogleFonts.ubuntu(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Services",
-                style: GoogleFonts.ubuntu(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500),
-              ),
-            ),
-            ///Flight&Hotels
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5.0),
-                  child: Expanded(
-                    child: Material(
-                      elevation: 2,
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * .435,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.blueGrey.shade50),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                      child: Expanded(
+                        child: Material(
+                          elevation: 2,
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * .43,
+                            height: MediaQuery.of(context).size.height * .170,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.blueGrey.shade50),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                const SizedBox(
-                                  height: 12,
-                                ),
-                                Text(
-                                  "Flights",
-                                  style: GoogleFonts.ubuntu(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Text(
-                                  "$flightCount",
-                                  style: GoogleFonts.ubuntu(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                OutlinedButton(
-                                  onPressed: () {
-                                    Get.to(const FlightListScreenWidget());
-                                  },
-                                  style: OutlinedButton.styleFrom(
-                                    minimumSize: const Size(50, 30),
-                                    // Set the desired width and height
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          12), // Set the desired border radius
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      height: 12,
                                     ),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'View all',
+                                    Text(
+                                      "Bus",
                                       style: GoogleFonts.ubuntu(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    Text(
+                                      "$flightCount",
+                                      style: GoogleFonts.ubuntu(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    OutlinedButton(
+                                      onPressed: () {
+                                        Get.to(const FlightListScreenWidget());
+                                      },
+                                      style: OutlinedButton.styleFrom(
+                                        minimumSize: const Size(50, 30),
+                                        // Set the desired width and height
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              12), // Set the desired border radius
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'View all',
+                                          style: GoogleFonts.ubuntu(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 16,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5.0),
-                  child: Expanded(
-                    child: Material(
-                      elevation: 2,
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * .435,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.blueGrey.shade50),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                      child: Expanded(
+                        child: Material(
+                          elevation: 2,
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * .43,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.blueGrey.shade50),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                const SizedBox(
-                                  height: 12,
-                                ),
-                                Text(
-                                  "Hotels",
-                                  style: GoogleFonts.ubuntu(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Text(
-                                  "$hotelCount",
-                                  style: GoogleFonts.ubuntu(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                OutlinedButton(
-                                  onPressed: () {
-                                    Get.to(const HotelListScreenWidget());
-                                  },
-                                  style: OutlinedButton.styleFrom(
-                                    minimumSize: const Size(50, 30),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          12),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      height: 12,
                                     ),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'View all',
+                                    Text(
+                                      "Cabs",
                                       style: GoogleFonts.ubuntu(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    Text(
+                                      "$hotelCount",
+                                      style: GoogleFonts.ubuntu(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    OutlinedButton(
+                                      onPressed: () {
+                                        Get.to(const HotelListScreenWidget());
+                                      },
+                                      style: OutlinedButton.styleFrom(
+                                        minimumSize: const Size(50, 30),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              12),
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'View all',
+                                          style: GoogleFonts.ubuntu(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-            ///Bus&Car_rental
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5.0),
-                  child: Expanded(
-                    child: Material(
-                      elevation: 2,
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * .435,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.blueGrey.shade50),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  height: 12,
-                                ),
-                                Text(
-                                  "Bus", // Display the user count
-                                  style: GoogleFonts.ubuntu(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Text(
-                                  "$busCount", // Display the user count
-                                  style: GoogleFonts.ubuntu(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                OutlinedButton(
-                                  onPressed: () {
-                                    Get.to(const BusListScreen());
-                                  },
-                                  style: OutlinedButton.styleFrom(
-                                    minimumSize: const Size(50, 30),
-                                    // Set the desired width and height
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          12), // Set the desired border radius
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'View all',
-                                      style: GoogleFonts.ubuntu(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 16,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5.0),
-                  child: Expanded(
-                    child: Material(
-                      elevation: 2,
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * .435,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.blueGrey.shade50),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  height: 12,
-                                ),
-                                Text(
-                                  "Cabs",
-                                  style: GoogleFonts.ubuntu(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Text(
-                                  "$cabCount",
-                                  style: GoogleFonts.ubuntu(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                OutlinedButton(
-                                  onPressed: () {
-                                    Get.to(const CarListScreen());
-                                  },
-                                  style: OutlinedButton.styleFrom(
-                                    minimumSize: const Size(50, 30),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          12),
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'View all',
-                                      style: GoogleFonts.ubuntu(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Sells",
-                style: GoogleFonts.ubuntu(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500),
-              ),
-            ),
-          ],
+              ],)
+            ],
+          ),
         ),
       ),
     );

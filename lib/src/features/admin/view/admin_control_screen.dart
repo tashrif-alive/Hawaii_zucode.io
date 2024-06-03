@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../controls/upload_banners/upload_destination_banner_form.dart';
-import '../services/bus/view/add_buses_screen.dart';
 import '../services/rent_a_car/view/add_car_screen.dart';
-import '../services/rent_a_car/view/add_driver_details screens.dart';
-import 'airline_services.dart';
 import 'aliances_banner_screen.dart';
 import 'destination_banner_screen.dart';
-import 'hotel_services.dart';
 
 class AdminControlsScreen extends StatefulWidget {
   const AdminControlsScreen({Key? key});
@@ -30,7 +25,7 @@ class _AdminControlsScreenState extends State<AdminControlsScreen> {
       "icon": Icons.local_offer_rounded,
       "color": Colors.brown,
       "title": "Alliance Banners",
-      "screen":  const AliancesBannerScreen(),
+      "screen": const AliancesBannerScreen(),
       "cardColor": Colors.brown.shade50,
     },
     {
@@ -38,35 +33,64 @@ class _AdminControlsScreenState extends State<AdminControlsScreen> {
       "color": Colors.cyan,
       "title": "News & Travel Stories",
       "cardColor": Colors.cyan.shade50,
-      "screen": AddBusView()
+      "screen": null,
     },
     {
       "icon": Icons.question_answer_rounded,
       "color": Colors.orange,
       "cardColor": Colors.orange.shade50,
       "title": "Help Chats",
-      "screen":  AddDriverView()
+      "screen": null,
     },
     {
       "icon": Icons.payment,
       "color": Colors.blueGrey,
       "cardColor": Colors.blueGrey.shade50,
       "title": "Payments Controls",
-      "screen": AddCarScreen()
+      "screen": AddCarScreen(),
     },
     {
       "icon": Icons.question_mark,
       "color": Colors.green,
       "cardColor": Colors.green.shade50,
       "title": "FAQs",
-      "screen": const AirLineServices()
+      "screen": null,
     },
   ];
+
+  void _showDevelopmentDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          elevation: 2,
+          title: const Center(child: Text('Information')),
+          content: const Text('This feature is under development'),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          actions: [
+            Center(
+              child: Container(
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
+                width: MediaQuery.of(context).size.width*0.6,
+                child: ElevatedButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
@@ -77,12 +101,13 @@ class _AdminControlsScreenState extends State<AdminControlsScreen> {
               Text(
                 "Controls",
                 style: GoogleFonts.ubuntu(
-                    fontSize: 18, fontWeight: FontWeight.w800),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                ),
               ),
               const SizedBox(
                 height: 12,
               ),
-              // ListView to display services
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -92,7 +117,6 @@ class _AdminControlsScreenState extends State<AdminControlsScreen> {
                     color: services[index]['cardColor'],
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     child: ListTile(
-
                       leading: Icon(
                         services[index]['icon'],
                         color: services[index]['color'],
@@ -105,16 +129,16 @@ class _AdminControlsScreenState extends State<AdminControlsScreen> {
                         ),
                       ),
                       onTap: () {
-                        Get.to(services[index]['screen']);
+                        if (services[index]['screen'] == null) {
+                          _showDevelopmentDialog();
+                        } else {
+                          Get.to(services[index]['screen']);
+                        }
                       },
                     ),
                   );
                 },
               ),
-              // const SizedBox(height: 12),
-              // const Divider(thickness: 1),
-              // const SizedBox(height: 20),
-
             ],
           ),
         ),

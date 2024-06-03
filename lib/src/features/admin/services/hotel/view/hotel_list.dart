@@ -122,7 +122,7 @@ class _HotelListScreenState extends State<HotelListScreen> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => HotelDetailAdmin(data: data)),
+                            MaterialPageRoute(builder: (context) => HotelDetailScreen(data: data)),
                           );
                         },
                         child: Padding(
