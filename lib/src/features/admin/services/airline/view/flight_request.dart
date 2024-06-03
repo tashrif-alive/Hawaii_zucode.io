@@ -213,7 +213,8 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                                 "${data['flightDataId']['fromPlace']}",
                                                 style: GoogleFonts.ubuntu(
                                                     fontSize: 15,
-                                                    fontWeight: FontWeight.w600),
+                                                    fontWeight:
+                                                        FontWeight.w600),
                                               ),
                                               const SizedBox(
                                                 width: 2,
@@ -229,7 +230,8 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                                 "${data['flightDataId']['toPlace']}",
                                                 style: GoogleFonts.ubuntu(
                                                     fontSize: 15,
-                                                    fontWeight: FontWeight.w600),
+                                                    fontWeight:
+                                                        FontWeight.w600),
                                               ),
                                             ],
                                           ),
@@ -240,7 +242,7 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                                 DateFormat('E, d MMM').format(
                                                     DateTime.parse(
                                                         data['flightDataId']
-                                                        ['date'])),
+                                                            ['date'])),
                                                 style: GoogleFonts.ubuntu(
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.w300,
@@ -289,14 +291,15 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                             Container(
                                               decoration: BoxDecoration(
                                                 borderRadius:
-                                                BorderRadius.circular(8.0),
+                                                    BorderRadius.circular(8.0),
                                                 color: Colors.white,
                                               ),
                                               child: ClipRRect(
                                                 borderRadius:
-                                                BorderRadius.circular(8.0),
+                                                    BorderRadius.circular(8.0),
                                                 child: Image.network(
-                                                  data['flightDataId']['imgUrl'] ??
+                                                  data['flightDataId']
+                                                          ['imgUrl'] ??
                                                       '',
                                                   height: 30,
                                                   width: 30,
@@ -334,13 +337,13 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
                                               DateFormat('E, d MMM').format(
                                                   DateTime.parse(
                                                       data['flightDataId']
-                                                      ['date'])),
+                                                          ['date'])),
                                               style: GoogleFonts.ubuntu(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -350,7 +353,7 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                               DateFormat('E, d MMM').format(
                                                   DateTime.parse(
                                                       data['flightDataId']
-                                                      ['date'])),
+                                                          ['date'])),
                                               style: GoogleFonts.ubuntu(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -363,7 +366,7 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
                                               '${data['flightDataId']['fromTime']}',
@@ -377,7 +380,8 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                                   '${data['flightDataId']['duration']}',
                                                   style: GoogleFonts.ubuntu(
                                                       fontSize: 12,
-                                                      fontWeight: FontWeight.w300),
+                                                      fontWeight:
+                                                          FontWeight.w300),
                                                 ),
                                                 Row(
                                                   children: [
@@ -386,10 +390,11 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                                       size: 5,
                                                     ),
                                                     SizedBox(
-                                                      width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                          0.15,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.15,
                                                       height: 5,
                                                       child: const Divider(
                                                           thickness: 1.5),
@@ -413,7 +418,7 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                         const SizedBox(height: 2),
                                         Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
                                               '${data['flightDataId']['fromPlace']}',
@@ -432,7 +437,7 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                         const SizedBox(height: 2),
                                         Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
                                               '${data['flightDataId']['departureTerminal']}',
@@ -451,7 +456,7 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                         const SizedBox(height: 2),
                                         Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
                                               'Terminal ${data['flightDataId']['departureAirport']}',
@@ -697,8 +702,8 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                   },
                                   style: ButtonStyle(
                                     backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.black),
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.black),
                                   ),
                                   child: Text(
                                     'Decline',
@@ -722,8 +727,6 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500),
                                     )),
-
-
                                 const SizedBox(
                                   width: 12,
                                 ),
