@@ -98,7 +98,7 @@ class _PlaneTicketState extends State<PlaneTicket> {
         ),
         elevation: 0,
         title: Text(
-          "Choose Ticket",
+          "Choose Seat",
           style: GoogleFonts.ubuntu(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.black),
         ),
         centerTitle: true,

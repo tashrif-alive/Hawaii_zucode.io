@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../admin/services/hotel/view/hotel_detail_admin.dart';
+import '../../../admin/services/hotel/view/hotel_detail_admin.dart'; // Importing HotelDetailAdmin
 
 class HotelListScreenUser extends StatefulWidget {
   const HotelListScreenUser({Key? key});
@@ -58,7 +58,7 @@ class _HotelListScreenUserState extends State<HotelListScreenUser> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => HotelDetailAdmin(data: data)),
+                            MaterialPageRoute(builder: (context) => HotelDetailAdmin(data: data)), // Using HotelDetailAdmin here
                           );
                         },
                         child: Material(

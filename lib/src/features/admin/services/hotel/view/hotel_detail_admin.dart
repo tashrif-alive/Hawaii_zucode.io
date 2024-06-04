@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hawaii_beta/src/features/admin/services/hotel/view/select_room.dart';
@@ -14,8 +15,8 @@ import 'hotel_facilities_veiw.dart';
 
 class HotelDetailAdmin extends StatefulWidget {
   final Map<String, dynamic> data;
-
-  const HotelDetailAdmin({Key? key, required this.data}) : super(key: key);
+  User? user = FirebaseAuth.instance.currentUser;
+   HotelDetailAdmin({Key? key, required this.data}) : super(key: key);
 
   @override
   State<HotelDetailAdmin> createState() => _HotelDetailAdminState();
@@ -24,6 +25,7 @@ class HotelDetailAdmin extends StatefulWidget {
 class _HotelDetailAdminState extends State<HotelDetailAdmin> {
   Map<String, dynamic>? hotelData;
   bool isLoading = true;
+  bool isFavorite = false;
 
   List<DateTime?> _dialogCalendarPickerValue = [];
   List<int>? roomNPersons = [1, 1, 0];
@@ -117,19 +119,34 @@ class _HotelDetailAdminState extends State<HotelDetailAdmin> {
                   ],
                 ),
                 ElevatedButton(
-                  onPressed: () async {
-                    //await processHotelBooking();
-                    Get.snackbar("Success", "Payment Completed, Your Seat is Reserved");
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black, // Button color
-                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10), // Sets a border radius of 20
-                    ), // Button padding
-                  ),
-                  child: Text("Continue", style: GoogleFonts.ubuntu()),
-                ),
+                    onPressed: () {
+                      if (kDebugMode) {
+                        print("Here is the date $hotelData");
+                      }
+                      final updatedData = {
+                        ...widget.data,
+                      };
+                      Get.to(() => BookingReviewHotel(
+                        data: updatedData,
+                        rooms: roomNPersons,
+                        dates: _dialogCalendarPickerValue ?? [],
+                        price:
+                        '\$${widget.data['offeredHotelCost'] * nightCount * (roomNPersons?[0] ?? 1)}',
+                        hotelData: hotelData,
+                        nightCount: nightCount,
+                        user: FirebaseAuth.instance.currentUser,
+                        
+                      ));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black, // Button color
+                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10), // Sets a border radius of 20
+                      ), // Button padding
+                    ),
+                    child: Text("Continue",
+                        style: GoogleFonts.ubuntu(fontSize: 13, fontWeight: FontWeight.w400)))
               ],
             ),
           ),
@@ -141,22 +158,77 @@ class _HotelDetailAdminState extends State<HotelDetailAdmin> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        borderRadius:
-                            BorderRadius.only(bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
-                        color: Colors.white,
-                      ),
-                      child: ClipRRect(
-                        borderRadius:
-                            const BorderRadius.only(bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
-                        child: Image.network(
-                          widget.data['imgUrl'] ?? '',
-                          height: 200,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
+                    Stack(
+                      children: [Container(
+                        decoration: const BoxDecoration(
+                          borderRadius:
+                          BorderRadius.only(bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
+                          color: Colors.white,
+                        ),
+                        child: ClipRRect(
+                          borderRadius:
+                          const BorderRadius.only(bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
+                          child: Image.network(
+                            widget.data['imgUrl'] ?? '',
+                            height: 200,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.4),
+                                  spreadRadius: 1,
+                                  blurRadius: 4,
+                                  offset: Offset(2, 2),
+                                ),
+                              ],
+                              shape: BoxShape.circle,
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              icon: const Icon(
+                                Icons.arrow_back_rounded,
+                                color: Colors.amber,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.4),
+                                  spreadRadius: 1,
+                                  blurRadius: 5,
+                                  offset: Offset(2, 2),
+                                ),
+                              ],
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  isFavorite = !isFavorite;
+                                });
+                              },
+                              icon: Icon(
+                                isFavorite ? Icons.favorite : Icons.favorite_border,
+                                color: Colors.amber,
+                              ),
+                            ),
+                          ),
+                        )
+
+                      ]
                     ),
                     const SizedBox(
                       height: 6,
@@ -409,26 +481,6 @@ class _HotelDetailAdminState extends State<HotelDetailAdmin> {
                               ),
                             ],
                           ),
-                          ElevatedButton(
-                              onPressed: () {
-                                if (kDebugMode) {
-                                  print("Here is the date $_dialogCalendarPickerValue");
-                                }
-                                final updatedData = {
-                                  ...widget.data,
-                                };
-                                Get.to(() => BookingReviewHotel(
-                                      data: updatedData,
-                                      rooms: roomNPersons,
-                                      dates: _dialogCalendarPickerValue ?? [],
-                                      price:
-                                          '\$${widget.data['offeredHotelCost'] * nightCount * (roomNPersons?[0] ?? 1)}',
-                                      hotelData: hotelData,
-                                      nightCount: nightCount,
-                                    ));
-                              },
-                              child: Text("Continue",
-                                  style: GoogleFonts.ubuntu(fontSize: 13, fontWeight: FontWeight.w400)))
                         ],
                       ),
                     )
