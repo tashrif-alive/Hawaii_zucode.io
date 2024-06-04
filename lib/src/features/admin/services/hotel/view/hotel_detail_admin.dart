@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hawaii_beta/src/features/admin/services/hotel/view/select_room.dart';
+import 'package:hawaii_beta/src/features/user/components/hotel/booking_review.dart';
 import 'package:intl/intl.dart';
 
 import 'hotel_facilities_veiw.dart';
@@ -26,6 +30,22 @@ class _HotelDetailAdminState extends State<HotelDetailAdmin> {
     1,
     0
   ]; // Default values: 1 room, 1 person, 0 children
+
+  int get nightCount {
+    if(_dialogCalendarPickerValue.length < 2) return 1;
+
+    DateTime checkInDateTime = _dialogCalendarPickerValue[0]!;
+    DateTime checkOutDateTime = _dialogCalendarPickerValue[1]!;
+
+// Calculate the duration between check-in and check-out dates
+    Duration duration = checkOutDateTime.difference(checkInDateTime);
+
+// Extract the number of nights from the duration
+    int nc = duration.inDays;
+    if(nc<1) nc = 1;
+
+    return nc;
+  }
 
   @override
   void initState() {
@@ -65,7 +85,7 @@ class _HotelDetailAdminState extends State<HotelDetailAdmin> {
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: SizedBox(
-          height: 60,
+          height: 100,
           child: Material(
             elevation: 1,
             child: Container(
@@ -90,7 +110,7 @@ class _HotelDetailAdminState extends State<HotelDetailAdmin> {
                         Row(
                           children: [
                             Text(
-                              '\$${widget.data['offeredHotelCost']}',
+                              '\$${widget.data['offeredHotelCost']*nightCount*(roomNPersons?[0] ??1)}',
                               style: GoogleFonts.ubuntu(
                                   fontSize: 17, fontWeight: FontWeight.w500),
                             ),
@@ -98,7 +118,7 @@ class _HotelDetailAdminState extends State<HotelDetailAdmin> {
                               width: 5,
                             ),
                             Text(
-                              '\$${widget.data['regularHotelCost']}',
+                              '\$${widget.data['regularHotelCost']*nightCount*(roomNPersons?[0] ?? 1)}',
                               style: GoogleFonts.ubuntu(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,
@@ -107,33 +127,27 @@ class _HotelDetailAdminState extends State<HotelDetailAdmin> {
                                 decorationColor: Colors.red,
                               ),
                             ),
+
                           ],
                         ),
                       ]),
-                  const FractionallySizedBox(
-                    widthFactor: 1,
-                    //child:
-                    // ElevatedButton(
-                    //   onPressed: () async {
-                    //     showProcessing();
-                    //     await insertBookingInfo();
-                    //     Get.offAll(() => const NavigationMenu());
-                    //     Get.snackbar("Success",
-                    //         "Payment Completed, Your Seat is Reserved");
-                    //   },
-                    //   style: ElevatedButton.styleFrom(
-                    //     primary: Colors.black, // Button color
-                    //     padding: const EdgeInsets.symmetric(
-                    //         horizontal: 30, vertical: 10),
-                    //     shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.circular(
-                    //           10), // Sets a border radius of 20
-                    //     ), // Button padding
-                    //   ),
-                    //   child: Text("Pay Now", style: GoogleFonts.ubuntu()),
-                    // ),
-                    //),
-                  )
+                  ElevatedButton(
+                    onPressed: () async {
+                      await processHotelBooking();
+                      Get.snackbar("Success",
+                          "Payment Completed, Your Seat is Reserved");
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.black, // Button color
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 10),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            10), // Sets a border radius of 20
+                      ), // Button padding
+                    ),
+                    child: Text("Pay Now", style: GoogleFonts.ubuntu()),
+                  ),
                 ],
               ),
             ),
@@ -410,7 +424,12 @@ class _HotelDetailAdminState extends State<HotelDetailAdmin> {
                      SizedBox(height: 5,),
                      Row(children: [ Text('Check-in: 13:00',style: GoogleFonts.ubuntu(fontSize: 13,fontWeight: FontWeight.w400),),SizedBox(width: 8,),
                        Text('Check-out: 11:00',style: GoogleFonts.ubuntu(fontSize: 13,fontWeight: FontWeight.w400),),
-                     ],)
+                     ],),
+                        ElevatedButton(onPressed: () {
+                          final upddatedData = {...widget.data, };
+                          Get.to(BookingReviewHotel(data: upddatedData,));
+
+                          }, child: Text("Continue"))
                     ],),)
                   ],
                 ),
@@ -758,6 +777,30 @@ class _HotelDetailAdminState extends State<HotelDetailAdmin> {
         );
       },
     );
+  }
+
+  processHotelBooking() async{
+    if(_dialogCalendarPickerValue.length<2) {
+      Get.snackbar("Error",
+          "Please select checkin-checkout date");
+    }
+    final CollectionReference booking =
+    FirebaseFirestore.instance.collection('hotelBooking');
+
+    DateTime checkInDateTime = _dialogCalendarPickerValue[0]!;
+    DateTime checkOutDateTime = _dialogCalendarPickerValue[1]!;
+
+    final user = FirebaseAuth.instance.currentUser;
+    DocumentReference bookingRef = await booking.add({
+      "widget_data": widget.data,
+      "hotel_data": hotelData,
+      "checkIn": Timestamp.fromDate(checkInDateTime),
+      "checkOut": Timestamp.fromDate(checkOutDateTime),
+      "night_count": nightCount,
+      'userID': user?.uid,
+      // 'updatedData': widget.updatedData
+
+    });
   }
 
 }

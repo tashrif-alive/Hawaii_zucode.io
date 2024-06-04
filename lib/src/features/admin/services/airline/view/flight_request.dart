@@ -48,9 +48,12 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
       await FirebaseFirestore.instance
           .collection('booking')
           .doc(documentId)
-          .update({
-        'bookingCancel': true,
-      });
+          .set(
+            {
+              'bookingCancel': true,
+            },
+            SetOptions(merge: true), // Merge with existing document
+          );
       if (kDebugMode) {
         print('Document updated successfully');
       }
@@ -139,6 +142,7 @@ class _FlightRequestListScreenState extends State<FlightRequestListScreen> {
                 stream: FirebaseFirestore.instance
                     .collection('booking')
                     .where('bookingStatus', isEqualTo: false)
+                    .where('bookingCancel', isEqualTo: false)
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
